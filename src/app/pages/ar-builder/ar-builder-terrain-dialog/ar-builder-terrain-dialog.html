@@ -1,0 +1,5 @@
+<div class="map_container" *ngFor="let map of this.maps">
+    <img [src]="'assets/ui/'+map+'.png'" (click)="setTerrain(map)">
+    <img src="assets/ui/checkmark.png" class="checkmark" *ngIf="map === this.currentlySelected">
+    <p>{{mapDisplay[map]}}</p>
+</div>

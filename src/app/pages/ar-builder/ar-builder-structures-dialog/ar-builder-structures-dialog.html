@@ -1,0 +1,25 @@
+<h1>Buildings</h1>
+<hr />
+<div class="ar-structures-table">
+    <div class="building-container" *ngFor="let building of this.buildings; let i = index">
+        <img class="ar_building_checkmark" src="assets/ui/checkmark.png" *ngIf="building.selected">
+        <img (click)="selectBuilding(i)" [src]="'assets/'+building.folder+'/'+building.image+'.png'" class='ar_building' [matTooltip]="building.display">
+    </div>
+</div>
+<h1>Traps</h1>
+<hr />
+<div class="ar-structures-table">
+    <div class="building-container" *ngFor="let trap of this.traps; let i = index">
+        <img class="ar_building_checkmark" src="assets/ui/checkmark.png" *ngIf="trap.selected">
+        <img (click)="selectTrap(i)" [src]="'assets/'+trap.folder+'/'+trap.image+'.png'" class='ar_building' [matTooltip]="trap.display">
+    </div>
+</div>
+<h1>Decorations</h1>
+<hr />
+<div class="ar-structures-table">
+    <div class="building-container" *ngFor="let decoration of this.decorations; let i = index">
+        <img class="ar_building_checkmark" src="assets/ui/checkmark.png" *ngIf="decoration.selected">
+        <img (click)="selectDecoration(i)" [src]="'assets/'+decoration.folder+'/'+decoration.image+'.png'" class='ar_building' [matTooltip]="decoration.display">
+    </div>
+</div>
+<button mat-raised-button (click)="close()">Close</button>

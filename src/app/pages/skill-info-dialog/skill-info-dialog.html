@@ -1,0 +1,30 @@
+<span id="dialog_close" (click)="this.close()" class="material-icons">close</span>
+<app-skill-info [data]='data'></app-skill-info>
+<!-- <h2 class="image_title"><img class="skill_icon_small" [src]="'assets/skills/'+data.image+'.png'" [matTooltip]="data.name" [alt]="data.name"> {{data.name}}</h2>
+<hr />
+<p>{{data.description}}</p>
+<p>Inheritable?:&nbsp;<span *ngIf="data.inheritable">Yes</span><span *ngIf="!data.inheritable">No</span></p>
+<p *ngIf="data.cooldown > 0">Special Charge:&nbsp;{{data.cooldown}}</p>
+<hr />
+<p>Units that have this skill:</p>
+<!-- <img *ngFor="let hero of data.fodder" class="unit_icon_small" [src]="'assets/units/'+hero+'.png'" [matTooltip]="hero.unitFinder.getUnitNameById(hero) + ': ' + hero.unitFinder.getUnitTitleById(hero)"> -->
+<!-- <div *ngIf="data.fodder[0].length != 0">
+    <p>At 1 star (<img src="assets/ui/star_bronze.png">):</p>
+    <img *ngFor="let hero of data.fodder[0]" class="unit_icon_small" [src]="'assets/units/'+hero+'.png'" [matTooltip]="unitFinder.getUnitNameById(hero) + ': ' + unitFinder.getUnitTitleById(hero)">
+</div>
+<div *ngIf="data.fodder[1].length != 0">
+    <p>At 2 stars (<img src="assets/ui/star_bronze.png">):</p>
+    <img *ngFor="let hero of data.fodder[1]" class="unit_icon_small" [src]="'assets/units/'+hero+'.png'" [matTooltip]="unitFinder.getUnitNameById(hero) + ': ' + unitFinder.getUnitTitleById(hero)">
+</div>
+<div *ngIf="data.fodder[2].length != 0">
+    <p>At 3 stars (<img src="assets/ui/star_bronze.png">):</p>
+    <img *ngFor="let hero of data.fodder[2]" class="unit_icon_small" [src]="'assets/units/'+hero+'.png'" [matTooltip]="unitFinder.getUnitNameById(hero) + ': ' + unitFinder.getUnitTitleById(hero)">
+</div>
+<div *ngIf="data.fodder[3].length != 0">
+    <p>At 4 stars (<img src="assets/ui/star_silver.png">):</p>
+    <img *ngFor="let hero of data.fodder[3]" class="unit_icon_small" [src]="'assets/units/'+hero+'.png'" [matTooltip]="unitFinder.getUnitNameById(hero) + ': ' + unitFinder.getUnitTitleById(hero)">
+</div>
+<div *ngIf="data.fodder[4].length != 0">
+    <p>At 5 stars (<img src="assets/ui/star_gold.png">):</p>
+    <img *ngFor="let hero of data.fodder[4]" class="unit_icon_small" [src]="'assets/units/'+hero+'.png'" [matTooltip]="unitFinder.getUnitNameById(hero) + ': ' + unitFinder.getUnitTitleById(hero)">
+</div> -->

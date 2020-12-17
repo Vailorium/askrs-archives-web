@@ -1,0 +1,28 @@
+.map_container{
+    margin: 0 auto;
+    width: 90%;
+    padding-left: 10%;
+    position: relative;
+    p{
+        position: absolute;
+        line-height: 75px;
+        top: 0;
+        height: 75px;
+        margin: 0;
+        font-size: 25px;
+        color: black;
+        font-weight: bold;
+        // -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+        // -webkit-text-stroke-width: .5px;
+        // -webkit-text-stroke-color: black;
+    }
+    img{
+        width: 100%;
+    }
+    img.checkmark{
+        width: 20px;
+        position: absolute;
+        top: -2px;
+        right: -2px;
+    }
+}

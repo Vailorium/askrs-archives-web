@@ -1,0 +1,39 @@
+mat-card{
+    height: 70%;
+    width: 65%;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+    img{
+        height: 100%;
+        float: left;
+        border-right: 2px solid lightgrey;
+        padding-right: 50px;
+        margin-right: 20px;
+    }
+
+    .card-float-right{
+        overflow: auto;
+        height: 100%;
+        color: grey;
+        // float: left;
+        h2{
+            color: grey;
+            font-size: 3.6em;
+            text-align: center;
+        }
+
+        p{
+            width: 80%;
+            margin: auto;
+        }
+
+        button{
+            margin: 0 auto;
+            display: block;
+            margin-top: 50px;
+        }
+    }
+}

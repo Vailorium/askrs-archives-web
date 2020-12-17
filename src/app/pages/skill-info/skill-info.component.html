@@ -1,0 +1,33 @@
+<h2 class="image_title"><img class="skill_icon_small" [src]="'assets/skills/'+data.image+'.png'" [matTooltip]="data.name" [alt]="data.name"> {{data.name}}</h2>
+<hr />
+<h3>Skill Description</h3>
+<p>{{data.description}}</p>
+<p *ngIf="data.might > 0">Weapon MT: {{data.might}}</p>
+<p *ngIf="data.cooldown > 0">Special Cooldown: {{data.cooldown}}</p>
+<p>Inheritable?: {{data.inheritable}}</p>
+<hr />
+<div *ngIf="refines">
+    <h3>Weapon Refines</h3>
+    <table>
+        <tr>
+            <th>Refine Type</th>
+            <th>Refine Description</th>
+        </tr>
+        <tr *ngFor="let refine of refines">
+            <td><img class="skill_icon_small" [src]="'assets/skills/'+refine.image+'.png'" [matTooltip]="refine.name" [alt]="refine.name"> {{refine.name}}</td>
+            <td>{{refine.description}}</td>
+        </tr>
+    </table>
+    <hr />
+</div>
+<div *ngIf="hasFodder">
+    <h3>Units that have this Skill</h3>
+    <table>
+        <div *ngFor="let fodder of data.fodder; let i = index">
+            <tr *ngIf="fodder.length > 0">
+                <th>{{i + 1}} Star</th>
+                <td><img *ngFor="let hero of fodder" class="unit_icon_small" [src]="'assets/units/'+hero+'.png'" [matTooltip]="units.getUnitNameById(hero) + ': ' + units.getUnitTitleById(hero)"></td>
+            </tr>
+        </div>
+    </table>
+</div>

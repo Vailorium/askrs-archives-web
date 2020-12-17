@@ -1,0 +1,109 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body{
+    background: url('assets/ui/background.jpg');
+    background-repeat: repeat;
+}
+
+div.page_content{
+    padding: 25px;
+    box-sizing: border-box;
+    min-height: calc(100% - 50px);
+    width: 100%;
+    // overflow: hidden;
+    padding-bottom: 75px;
+    &.tab{
+        min-height: 100%;
+    }
+}
+
+.unit_full_medium{
+    height: 300px;
+    width: 250px;
+}
+
+.unit_full_fill{
+    height: 100%;
+    width: auto;
+}
+
+.unit_icon_tiny{
+    height: 30px;
+    width: 30px;
+}
+
+.unit_icon_small{
+    height: 50px;
+    width: 50px;
+}
+
+.skill_icon_tiny{
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
+}
+
+.skill_icon_small{
+    height: 36px;
+    width: 36px;
+}
+
+.movement_icon_small{
+    height: 28px;
+    width: 28px;
+    vertical-align: middle;
+}
+
+.bold_boon{
+    color: rgb(51, 193, 240);
+    font-weight: bold;
+}
+
+.bold_bane{
+    color: rgb(253, 79, 60);
+    font-weight: bold;
+}
+
+.bold_neutral{
+    color: rgb(84, 233, 39);
+    font-weight: bold;
+}
+
+.image_title{
+    margin: 3px;
+    img{
+        vertical-align: middle;
+    }
+}
+
+.star_icon_max{
+    vertical-align: middle;
+}
+
+.asset{
+    color: #9ED5E4;
+    color: rgb(51, 193, 240);
+    font-weight: bold;
+}
+
+.flaw{
+    color: #D796A4;
+    color: rgb(253, 79, 60);
+    font-weight: bold;
+}
+
+.ar_building{
+    cursor: all-scroll;
+    height: 75px;
+    width: 75px;
+}
+
+
+.ar_building[src$="blank.png"]{
+    cursor: default;
+}

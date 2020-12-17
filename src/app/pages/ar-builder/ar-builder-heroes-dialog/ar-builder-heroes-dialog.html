@@ -1,0 +1,54 @@
+<div class="selected_heroes_container">
+    <div class="selected_hero" *ngFor="let i of [0,1,2,3,4,5]">
+        <img src="assets/ui/hero-selector.png">
+        <img class="hero" [src]="'assets/units/'+this.selectedHeroes[i].id+'.png'" *ngIf="this.selectedHeroes.length > i">
+        <img class="remove_icon" src="assets/ui/x.png" *ngIf="this.selectedHeroes.length > i" (click)="removeHero(i)">
+    </div>
+    <!-- <div class="selected_hero">
+        <img src="assets/ui/hero-selector.png">
+        <img class="hero" [src]="'assets/units/'+this.selectedHeroes[1].id+'.png'" *ngIf="this.selectedHeroes.length > 1">
+        <img class="remove_icon" src="assets/ui/x.png" *ngIf="this.selectedHeroes.length > 1" (click)=>
+    </div>
+    <div class="selected_hero">
+        <img src="assets/ui/hero-selector.png">
+        <img class="hero" [src]="'assets/units/'+this.selectedHeroes[2].id+'.png'" *ngIf="this.selectedHeroes.length > 2">
+        <img class="remove_icon" src="assets/ui/x.png" *ngIf="this.selectedHeroes.length > 2" (click)=>
+    </div>
+    <div class="selected_hero">
+        <img src="assets/ui/hero-selector.png">
+        <img class="hero" [src]="'assets/units/'+this.selectedHeroes[3].id+'.png'" *ngIf="this.selectedHeroes.length > 3">
+        <img class="remove_icon" src="assets/ui/x.png" *ngIf="this.selectedHeroes.length > 3" (click)=>
+    </div>
+    <div class="selected_hero">
+        <img src="assets/ui/hero-selector.png">
+        <img class="hero" [src]="'assets/units/'+this.selectedHeroes[4].id+'.png'" *ngIf="this.selectedHeroes.length > 4">
+        <img class="remove_icon" src="assets/ui/x.png" *ngIf="this.selectedHeroes.length > 4" (click)=>
+    </div>
+    <div class="selected_hero">
+        <img src="assets/ui/hero-selector.png">
+        <img class="hero" [src]="'assets/units/'+this.selectedHeroes[5].id+'.png'" *ngIf="this.selectedHeroes.length > 5">
+        <img class="remove_icon" src="assets/ui/x.png" *ngIf="this.selectedHeroes.length > 5" (click)=>
+    </div> -->
+</div>
+<hr />
+<form [formGroup]="heroFilter">
+    <mat-form-field>
+        <input matInput name="name" formControlName="name" placeholder="Hero Name" (keyup)="updateFilter()">
+    </mat-form-field>
+    <br />
+    <mat-button-toggle-group formControlName="blessing" value="0" aria-label="Blessing" (change)="updateFilter()">
+        <mat-button-toggle value="0" matTooltip="No Blessing"><div class="blank_filler"></div></mat-button-toggle>
+        <mat-button-toggle value="6" matTooltip="Dark Mythic"><img src="assets/ui/dark_blessing.png"></mat-button-toggle>
+        <mat-button-toggle value="8" matTooltip="Anima Mythic"><img src="assets/ui/anima_blessing.png"></mat-button-toggle>
+        <mat-button-toggle value="2" matTooltip="Water Legendary"><img src="assets/ui/water_blessing.png"></mat-button-toggle>
+        <mat-button-toggle value="3" matTooltip="Wind Legendary"><img src="assets/ui/wind_blessing.png"></mat-button-toggle>
+        <mat-button-toggle value="4" matTooltip="Earth Legendary"><img src="assets/ui/earth_blessing.png"></mat-button-toggle>
+        <mat-button-toggle value="1" matTooltip="Fire Legendary"><img src="assets/ui/fire_blessing.png"></mat-button-toggle>
+    </mat-button-toggle-group>
+</form>
+<div class="hero_icons_container">
+    <div *ngFor="let hero of heroList[pageNumber]">
+        <img [src]="'assets/units/'+hero.id+'.png'" [matTooltip]='hero.name + ": " + hero.title' (click)="addHero(hero)">
+    </div>
+    <mat-paginator (page)="changePage($event)" [pageIndex]="pageNumber" [length]="baseList.length" pageSize="25"></mat-paginator>
+</div>

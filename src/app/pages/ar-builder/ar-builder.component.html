@@ -1,0 +1,86 @@
+<div class="page_content">
+    <div class="ar_builder_container" cdkDropListGroup>
+        <div class="ar_builder_child_container">
+            <mat-card>
+                <mat-card-title>AR Defense Builder</mat-card-title>
+                <p>Map: Springwater</p>
+                <p>Defense Structures: {{this.counts.defense}}/6</p>
+                <p>Traps: {{this.counts.traps}}/4</p>
+                <p>Decorations: {{this.counts.decorations}}/4</p>
+                <p>Heroes: {{this.units.length}}/6</p>
+                <button mat-raised-button color="primary">Save/Load</button>
+                <button mat-raised-button color="primary" (click)="exportData()">Export/Share</button>
+                <mat-button-toggle-group aria-label="Blessing" value="6" [formControl]="season">
+                    <mat-button-toggle value="6" matTooltip="Dark Season"><img src="assets/ui/dark_blessing.png"></mat-button-toggle>
+                    <mat-button-toggle value="8" matTooltip="Anima Season"><img src="assets/ui/anima_blessing.png"></mat-button-toggle>
+                </mat-button-toggle-group>
+                <p>Max Lift Loss: -{{this.currentLiftLoss}}</p>
+            </mat-card>
+        </div>
+        <div class="ar_builder_left_container ar_builder_child_container">
+            <div class="ar_builder_map_container">
+                <!-- <canvas id="ar_builder_map" height="600" width="450" #ARBuilderMap>
+    
+                </canvas> -->
+                <img class="ar_builder_map" [src]="'assets/maps/AR/'+this.currentMap+'.png'">
+                <div class="ar_builder_overlay"> <!-- AR Defense Map -->
+                    <ng-container *ngFor="let tile of map; let i = index">
+                        <div class="map-item" cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="{item:tile, index:i}" (cdkDropListDropped)="drop($event)" (click)="openDescription(tile)">
+                            <div class="inner" cdkDrag [cdkDragDisabled]="tile.type === 'blank'">
+                                <div class="placeholder" *cdkDragPlaceholder></div>
+                                <img [src]="'assets/'+tile.folder+'/'+tile.image+'.png'" class="ar_building">
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <mat-card>
+                <button mat-raised-button color="primary" (click)="openHeroesDialog()">Add Heroes</button>
+                <button mat-raised-button color="primary" (click)="openStructuresDialog()">Edit Structures</button>
+                <button mat-raised-button color="primary" (click)="openTerrainDialog()">Change Terrain</button>
+            </mat-card>
+        </div>
+        <div class="ar_builder_right_container ar_builder_child_container">
+            <mat-card class="hero_info_card" *ngIf="this.currentlyDisplayedHero">
+                <div class="hero_info_title">
+                    <div class="hero_info_title_image">
+                        <img [src]="'assets/units/'+this.currentlyDisplayedHero.id+'.png'">
+                    </div>
+                    <div class="hero_info_title_title">
+                        <mat-card-title>{{this.currentlyDisplayedHero.name}}: {{this.currentlyDisplayedHero.title}}</mat-card-title>
+                        <img src="assets/ui/star_gold.png" *ngFor="let i of [0,0,0,0,0]">
+                    </div>
+                </div>
+                <hr />
+                <div class="hero_info_tables">
+                    <table>
+                        <tr><td colspan="2">Level 40<span *ngIf="this.currentlyDisplayedHero.build.merges > 0">+{{this.currentlyDisplayedHero.build.merges}}</span></td></tr>
+                        <tr><td>HP: {{this.currentlyDisplayedHeroStats.hp}}</td><td>DF: {{this.currentlyDisplayedHero.build.dragonflowers}}</td></tr>
+                        <tr><td>ATK: {{this.currentlyDisplayedHeroStats.atk}}</td><td>SPD: {{this.currentlyDisplayedHeroStats.spd}}</td></tr>
+                        <tr><td>DEF: {{this.currentlyDisplayedHeroStats.def}}</td><td>RES: {{this.currentlyDisplayedHeroStats.res}}</td></tr>
+                        <tr><td colspan="2">Blessing: {{BlessingEnum[this.currentlyDisplayedHero.build.blessing]|titlecase}}</td></tr>
+                    </table>
+                    <table>
+                        <tr><td>{{this.currentlyDisplayedHero.build.skills.weapon ? this.currentlyDisplayedHero.build.skills.weapon.name : "None"}}</td></tr>
+                        <tr><td>{{this.currentlyDisplayedHero.build.skills.assist ? this.currentlyDisplayedHero.build.skills.assist.name : "None"}}</td></tr>
+                        <tr><td>{{this.currentlyDisplayedHero.build.skills.special ? this.currentlyDisplayedHero.build.skills.special.name : "None"}}</td></tr>
+                        <tr><td>{{this.currentlyDisplayedHero.build.skills.a ? this.currentlyDisplayedHero.build.skills.a.name : "None"}}</td></tr>
+                        <tr><td>{{this.currentlyDisplayedHero.build.skills.b ? this.currentlyDisplayedHero.build.skills.b.name : "None"}}</td></tr>
+                        <tr><td>{{this.currentlyDisplayedHero.build.skills.c ? this.currentlyDisplayedHero.build.skills.c.name : "None"}}</td></tr>
+                        <tr><td>{{this.currentlyDisplayedHero.build.skills.s ? this.currentlyDisplayedHero.build.skills.s.name : "None"}}</td></tr>
+                    </table>
+                </div>
+                <hr />
+                <button mat-raised-button color="primary" (click)="openEditBuildDialog()">Edit Build</button>
+                <hr>
+                <p>Note*: Stats include bonuses from skills and current mythic/legendary allies.</p>
+            </mat-card>
+            <mat-card *ngIf="currentlyDisplayedStructure">
+                <mat-card-title><img class="unit_icon_tiny" [src]="'assets/aether_raids/'+this.currentlyDisplayedStructure.image+'.png'"> {{this.currentlyDisplayedStructure.display}}</mat-card-title>
+                <hr />
+                <p>Description: {{this.currentlyDisplayedStructure.description}}</p>
+                <p>Build/Upgrade Cost: <span *ngFor="let cost of this.currentlyDisplayedStructure.cost; let i = index">{{cost}}<span *ngIf="i + 1 < this.currentlyDisplayedStructure.cost.length">/</span></span> <img class="unit_icon_tiny" [src]="'assets/ui/'+this.currentlyDisplayedStructure.costType+'.png'"></p>
+            </mat-card>
+        </div>
+    </div>
+</div>
