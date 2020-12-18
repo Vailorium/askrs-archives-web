@@ -19,6 +19,8 @@ import { ARBuilderHeroesDialog } from './pages/ar-builder/ar-builder-heroes-dial
 import { ARBuilderTerrainDialog } from './pages/ar-builder/ar-builder-terrain-dialog/ar-builder-terrain-dialog';
 import { AREditBuildDialog } from './pages/ar-builder/ar-edit-build-dialog/ar-edit-build-dialog';
 import { EditBuild } from './pages/edit-build/edit-build';
+import { ReportBugDialog } from './pages/report-bug-dialog/report-bug-dialog';
+import { ContributionsDialog } from './pages/contributions-dialog/contributions-dialog';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { EditBuild } from './pages/edit-build/edit-build';
     ARBuilderHeroesDialog,
     ARBuilderTerrainDialog,
     AREditBuildDialog,
-    EditBuild
+    EditBuild,
+    ReportBugDialog,
+    ContributionsDialog
   ],
   imports: [
     ReactiveFormsModule,
@@ -68,6 +72,6 @@ import { EditBuild } from './pages/edit-build/edit-build';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, ARBuilderTerrainDialog, AREditBuildDialog]
+  entryComponents: [SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, ARBuilderTerrainDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog]
 })
 export class AppModule { }

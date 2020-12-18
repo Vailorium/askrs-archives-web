@@ -6,8 +6,8 @@
 <footer>
     <p>v{{version}}</p>
     <div class="footer_buttons">
-        <button mat-button>Report a Bug / Request a Feature</button>
+        <button mat-button (click)="openContributionsDialog()">Contributions</button>
         <button mat-button><a href="https://discord.gg/z9YSeEqzg4" target="_blank"><img src="assets/ui/discord.png" alt="Discord"></a></button>
+        <button mat-button (click)="openReportBugDialog()">Report a Bug / Provide Feedback</button>
     </div>
-    <!-- <button mat-button routerLink="https://discord.gg/z9YSeEqzg4"><img src="assets/ui/discord.png" alt="Discord"></button> -->
 </footer>
