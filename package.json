@@ -1,11 +1,10 @@
 {
-  "name": "feh-builds",
+  "name": "askrs-archives",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "start https://trello.com/b/d0vzFAc1/askrs-archives && ng serve --o",
+    "start": "start https://trello.com/b/pfpkZtzL/askrs-archives-bug-feature-tracking && ng serve --o",
     "build": "ng build --watch",
-    "deploy": "ng deploy --base-href=/feh-builds/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

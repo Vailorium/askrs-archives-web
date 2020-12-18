@@ -9,6 +9,8 @@ import { MatDialogRef, MatDialog } from '@angular/material';
 export class AppComponent {
   title = 'Askr\'s Archives';
 
+  version = "0.1";
+
   constructor(){ }
 
 }
