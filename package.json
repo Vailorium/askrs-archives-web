@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "start https://trello.com/b/d0vzFAc1/feh-builds && ng serve --o",
+    "start": "start https://trello.com/b/d0vzFAc1/askrs-archives && ng serve --o",
     "build": "ng build --watch",
     "deploy": "ng deploy --base-href=/feh-builds/",
     "test": "ng test",
