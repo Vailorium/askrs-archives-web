@@ -33,7 +33,13 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "baseHref": "http://www.askrsarchives.com/"
+            "baseHref": "http://www.askrsarchives.com/",
+            "sourceMap": {
+              "scripts": false,
+              "styles": false,
+              "hidden": false,
+              "vendor": false
+            }
           },
           "configurations": {
             "production": {
