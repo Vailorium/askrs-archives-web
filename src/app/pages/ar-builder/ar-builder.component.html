@@ -3,18 +3,28 @@
         <div class="ar_builder_child_container">
             <mat-card>
                 <mat-card-title>AR Defense Builder</mat-card-title>
+                <hr />
                 <p>Map: Springwater</p>
                 <p>Defense Structures: {{this.counts.defense}}/6</p>
                 <p>Traps: {{this.counts.traps}}/4</p>
                 <p>Decorations: {{this.counts.decorations}}/4</p>
                 <p>Heroes: {{this.units.length}}/6</p>
-                <button mat-raised-button color="primary" (click)="openSaveDialog()">Save/Load</button>
-                <button mat-raised-button color="primary" (click)="exportData()">Export/Share</button>
-                <mat-button-toggle-group aria-label="Blessing" value="6" [formControl]="season">
-                    <mat-button-toggle value="6" matTooltip="Dark Season"><img src="assets/ui/dark_blessing.png"></mat-button-toggle>
-                    <mat-button-toggle value="8" matTooltip="Anima Season"><img src="assets/ui/anima_blessing.png"></mat-button-toggle>
-                </mat-button-toggle-group>
                 <p>Max Lift Loss: -{{this.currentLiftLoss}}</p>
+                <hr />
+                <p>Defense Season: 
+                    <mat-button-toggle-group aria-label="Blessing" value="6" [formControl]="season">
+                        <mat-button-toggle value="6" matTooltip="Dark Season"><img src="assets/ui/dark_blessing.png"></mat-button-toggle>
+                        <mat-button-toggle value="8" matTooltip="Anima Season"><img src="assets/ui/anima_blessing.png"></mat-button-toggle>
+                    </mat-button-toggle-group>
+                </p>
+            </mat-card>
+            <mat-card class="save_actions">
+                <h3>Actions</h3>
+                <hr />
+                <div class="action-buttons">
+                    <button mat-raised-button color="primary" (click)="openSaveDialog()">Save/Load</button>
+                    <button mat-raised-button color="primary" (click)="exportData()">Export/Share</button>
+                </div>
             </mat-card>
         </div>
         <div class="ar_builder_left_container ar_builder_child_container">
@@ -41,7 +51,7 @@
             </mat-card>
         </div>
         <div class="ar_builder_right_container ar_builder_child_container">
-            <mat-card class="hero_info_card" *ngIf="this.currentlyDisplayedHero">
+            <mat-card class="hero_info_card" *ngIf="this.currentlyDisplayedHero" style="margin-bottom: 10px;">
                 <div class="hero_info_title">
                     <div class="hero_info_title_image">
                         <img [src]="'assets/units/'+this.currentlyDisplayedHero.id+'.png'">

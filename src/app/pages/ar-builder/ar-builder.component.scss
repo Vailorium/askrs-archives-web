@@ -172,3 +172,15 @@ mat-button-toggle div{
     height: 30px;
     width: 30px;
 }
+
+.action-buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.save_actions{
+    margin-top: 10px;
+    h3{
+        margin: 3px;
+    }
+}
