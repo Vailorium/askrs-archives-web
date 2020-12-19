@@ -32,6 +32,7 @@
                 <!-- <canvas id="ar_builder_map" height="600" width="450" #ARBuilderMap>
     
                 </canvas> -->
+                <canvas id="dangerRange" height="600" width="450" #rangeCanvas></canvas>
                 <img class="ar_builder_map" [src]="'assets/maps/AR/'+this.currentMap+'.png'">
                 <div class="ar_builder_overlay"> <!-- AR Defense Map -->
                     <ng-container *ngFor="let tile of map; let i = index">

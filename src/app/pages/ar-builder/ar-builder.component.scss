@@ -49,6 +49,11 @@
     }
 }
 
+#dangerRange{
+    position: absolute;
+    z-index: 1;
+}
+
 .ar_builder_data{
     background-color: white;
     width: 100%;
@@ -109,10 +114,12 @@
 }
 
 .ar_builder_overlay{
+    position: absolute;
     width: 450px;
     height: 450px;
     display: flex;
     flex-wrap: wrap;
+    z-index: 2;
 }
 
 .map-item{
