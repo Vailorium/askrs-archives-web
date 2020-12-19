@@ -1,14 +1,16 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ThrowStmt } from '@angular/compiler';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatGridTileFooterCssMatStyler } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { link } from 'fs';
-import { Blessing, Dictionary, Stats } from 'src/app/models';
+import { Blessing, Dictionary, SaveDataModel, Stats } from 'src/app/models';
 import { HeroInfoModel } from 'src/app/models/HeroInfoModel';
 import { MapFinderService } from 'src/app/services/map-finder.service';
 import { StatsCalcualator } from 'src/app/services/stats-calculator.service';
 import { ARBuilderHeroesDialog } from './ar-builder-heroes-dialog/ar-builder-heroes-dialog';
+import { ARBuilderSaveDialog } from './ar-builder-save-dialog/ar-builder-save-dialog';
 import { ARBuilderStructuresDialog } from './ar-builder-structures-dialog/ar-builder-structures-dialog';
 import { ARBuilderTerrainDialog } from './ar-builder-terrain-dialog/ar-builder-terrain-dialog';
 import { AREditBuildDialog } from './ar-edit-build-dialog/ar-edit-build-dialog';
@@ -308,5 +310,29 @@ export class ArBuilderComponent implements OnInit {
 
     document.body.appendChild(a);
     a.click();
+  }
+
+  openSaveDialog(){
+    let save = this.dialog.open(ARBuilderSaveDialog, {
+      height: "80%",
+      width: "450px",
+      data: {map: this.currentMap, mapData: this.map, unitData: this.units, season: this.season.value}
+    });
+
+    save.afterClosed().subscribe((res?: SaveDataModel) => {
+      save = null;
+      if(res){
+        this.currentMap = res.map;
+        this.map = res.mapData;
+        this.units = res.unitData;
+        this.season.setValue(res.season);
+
+        this.counts.defense = res.mapData.filter(a => a.type === "building" || a.display === "Fortress").length;
+        this.counts.traps = res.mapData.filter(a => a.type === "trap").length;
+        this.counts.decorations = res.mapData.filter(a => a.type === "decoration").length;
+
+        this.currentLiftLoss = this.calculateLiftLoss();
+      }
+    });
   }
 }

@@ -1,0 +1,19 @@
+<span id="dialog_close" (click)="this.close()" class="material-icons">close</span>
+<h2>Save/Load</h2>
+<hr />
+<p>Load from File: <button mat-raised-button color="primary" (click)="fileInput.click()">Load From File
+    <input #fileInput type="file" (change)="loadFromFile($event)" style="display:none;" accept=".json" />
+</button></p>
+<hr />
+<p>Saves are stored locally on your device.</p>
+<p>Save data can be transferred across devices using the Export/Share and Load from File functions. This can also be used to share defense builds with friends.</p>
+<hr />
+<div *ngFor="let i of [1,2,3,4,5,6,7,8,9]">
+    Save Data {{i}}
+    <div *ngIf="saveData[i-1]">Map: {{saveData[i-1].map|titlecase}} | Time: {{saveData[i-1].timestamp|date:'medium'}}</div>
+    <div *ngIf="!saveData[i-1]">Empty</div>
+    <button mat-raised-button color="primary" (click)="save(i-1)" style="margin-right: 5px; margin-top: 5px;">Save</button>
+    <button mat-raised-button color="primary" (click)="load(i-1)" *ngIf="saveData[i-1]" style="margin-right: 5px;">Load</button>
+    <button mat-raised-button color="warn" (click)="delete(i-1)" *ngIf="saveData[i-1]">Delete</button>
+    <hr />
+</div>

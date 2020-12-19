@@ -8,7 +8,7 @@
                 <p>Traps: {{this.counts.traps}}/4</p>
                 <p>Decorations: {{this.counts.decorations}}/4</p>
                 <p>Heroes: {{this.units.length}}/6</p>
-                <button mat-raised-button color="primary">Save/Load</button>
+                <button mat-raised-button color="primary" (click)="openSaveDialog()">Save/Load</button>
                 <button mat-raised-button color="primary" (click)="exportData()">Export/Share</button>
                 <mat-button-toggle-group aria-label="Blessing" value="6" [formControl]="season">
                     <mat-button-toggle value="6" matTooltip="Dark Season"><img src="assets/ui/dark_blessing.png"></mat-button-toggle>
