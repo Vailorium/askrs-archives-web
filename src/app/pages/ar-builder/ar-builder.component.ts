@@ -2,6 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatGridTileFooterCssMatStyler } from '@angular/material';
+import { Title } from '@angular/platform-browser';
 import { link } from 'fs';
 import { Blessing, Dictionary, Stats } from 'src/app/models';
 import { HeroInfoModel } from 'src/app/models/HeroInfoModel';
@@ -55,9 +56,10 @@ export class ArBuilderComponent implements OnInit {
   // Enum
   public BlessingEnum = Blessing;
 
-  constructor(private dialog: MatDialog, private mapFinder: MapFinderService, private stat: StatsCalcualator) { }
+  constructor(private dialog: MatDialog, private mapFinder: MapFinderService, private stat: StatsCalcualator, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle("AR-D Builder")
     this.maps = this.mapFinder.getARMaps();
 
     // Needs to be assigned so doesn't override map data

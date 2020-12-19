@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -70,7 +70,7 @@ import { ContributionsDialog } from './pages/contributions-dialog/contributions-
     DragDropModule,
     MatButtonToggleModule
   ],
-  providers: [],
+  providers: [Title],
   bootstrap: [AppComponent],
   entryComponents: [SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, ARBuilderTerrainDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog]
 })
