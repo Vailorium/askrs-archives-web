@@ -22,7 +22,7 @@ import { EditBuild } from './pages/edit-build/edit-build';
 import { ReportBugDialog } from './pages/report-bug-dialog/report-bug-dialog';
 import { ContributionsDialog } from './pages/contributions-dialog/contributions-dialog';
 import { ARBuilderSaveDialog } from './pages/ar-builder/ar-builder-save-dialog/ar-builder-save-dialog';
-import { ARBuilderSaveConfirmDialog } from './pages/ar-builder/ar-builder-save-dialog/ar-builder-save-confirm-dialog/ar-builder-save-confirm-dialog';
+import { ConfirmDialog } from './pages/confirm-dialog/confirm-dialog';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { ARBuilderSaveConfirmDialog } from './pages/ar-builder/ar-builder-save-d
     EditBuild,
     ReportBugDialog,
     ContributionsDialog,
-    ARBuilderSaveConfirmDialog
+    ConfirmDialog
   ],
   imports: [
     ReactiveFormsModule,
@@ -76,6 +76,6 @@ import { ARBuilderSaveConfirmDialog } from './pages/ar-builder/ar-builder-save-d
   ],
   providers: [Title],
   bootstrap: [AppComponent],
-  entryComponents: [SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, ARBuilderTerrainDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog, ARBuilderSaveDialog, ARBuilderSaveConfirmDialog]
+  entryComponents: [SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, ARBuilderTerrainDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog, ARBuilderSaveDialog, ConfirmDialog]
 })
 export class AppModule { }

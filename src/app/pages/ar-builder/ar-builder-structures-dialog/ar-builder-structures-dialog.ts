@@ -8,8 +8,6 @@ import { ARTile } from 'src/app/models';
     styleUrls: ['./ar-builder-structures-dialog.scss']
 })
 export class ARBuilderStructuresDialog {
-    
-    st: string = "Hello world";
 
     public buildings: ARTile[] = [{image: "aether_amphorae", display: "Aether Amphorae", folder: "aether_raids", type: "other", permanent: false, selected: true, isSchool: false}, {image: "aether_fountain", display: "Aether Fountain", folder: "aether_raids", type: "other", permanent: false, selected: true, isSchool: false}, {image: "armor_school", display: "Armor School", folder: "aether_raids", type: "building", permanent: false, selected: false, isSchool: true}, {image: "bolt_tower", display: "Bolt Tower", folder: "aether_raids", type: "building", permanent: false, selected: false, isSchool: false}, {image: "bright_shrine", display: "Bright Shrine", folder: "aether_raids", type: "building", permanent: false, selected: false, isSchool: false},{image: "catapult", display: "Catapult", folder: "aether_raids", type: "building", permanent: false, selected: false, isSchool: false}, {image: "cavalry_school", display: "Cavalry School", folder: "aether_raids", type:"building", permanent: false, selected: false, isSchool: true}, {image: "dark_shrine", display: "Dark Shrine", folder: "aether_raids", type: "building", permanent: false, selected: false, isSchool: false}, {image: "duos_hindrance", display: "Duo's Hindrance", folder: "aether_raids", type: "building", permanent: false, selected: false, isSchool: false}, {image: "flier_school", display: "Flier School", folder: "aether_raids", type: "building", permanent: false, selected: false, isSchool: true}, {image: "fortress", display: "Fortress", folder: "aether_raids", type: "other", permanent: false, selected: true, isSchool: false}, {image: "healing_tower", display: "Healing Tower", folder: "aether_raids", type: "building", permanent: false, selected: false, isSchool: false}, {image: "infantry_school", display: "Infantry School", folder: "aether_raids", type: "building", permanent: false, selected: false, isSchool: true}, {image: "panic_manor", display: "Panic Manor", folder: "aether_raids", type: "building", permanent: false, selected: false, isSchool: false}, {image: "tactics_room", display: "Tactics Room", folder: "aether_raids", type: "building", permanent: false, selected: false, isSchool: false}];
     public buildingCount: number = 1;
@@ -101,6 +99,18 @@ export class ARBuilderStructuresDialog {
                 this.snackBar.open("Max of 4 decorations allowed", "Close", {duration: 2000});
             }
         }
+    }
+
+    getCount(structureType: string){
+        switch(structureType){
+            case "buildings":
+                return this.buildings.filter(a => a.selected).length;
+            case "traps":
+                return this.traps.filter(a => a.selected).length;
+            case "decorations":
+                return this.decorations.filter(a => a.selected).length;
+        }
+        return 0;
     }
 
     onNoClick() {

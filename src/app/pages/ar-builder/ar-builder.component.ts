@@ -9,6 +9,7 @@ import { Blessing, Dictionary, SaveDataModel, Stats } from 'src/app/models';
 import { HeroInfoModel } from 'src/app/models/HeroInfoModel';
 import { MapFinderService } from 'src/app/services/map-finder.service';
 import { StatsCalcualator } from 'src/app/services/stats-calculator.service';
+import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
 import { ARBuilderHeroesDialog } from './ar-builder-heroes-dialog/ar-builder-heroes-dialog';
 import { ARBuilderSaveDialog } from './ar-builder-save-dialog/ar-builder-save-dialog';
 import { ARBuilderStructuresDialog } from './ar-builder-structures-dialog/ar-builder-structures-dialog';
@@ -418,4 +419,35 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  deleteCurrentData(){
+    let confirm = this.dialog.open(ConfirmDialog, {data: {message: "Are you sure you want to clear the current map?", title: "Confirm Clearing", default: false, options: [{display: "Cancel", color: "", value: false}, {display: "Yes", color: "warn", value: true}]}});
+  
+    confirm.afterClosed().subscribe((res) => {
+      if(res){
+        this.map = Object.assign([], this.maps[this.currentMap]);
+        this.units = [];
+        this.updateMapStructures([{image: "aether_amphorae", display: "Aether Amphorae", folder: "aether_raids", type: "other", permanent: false, isSchool: false}, {image: "aether_fountain", display: "Aether Fountain", folder: "aether_raids", type: "other", permanent: false, isSchool: false}, {image: "fortress", display: "Fortress", folder: "aether_raids", type: "other", permanent: false, isSchool: false}]);
+        this.updateCounts();
+        this.currentLiftLoss = this.MAX_LIFT_LOSS;
+      }
+    });
+  }
+
+
+  updateCounts(): {defense: number, traps: number, decorations: number}{
+    let total = {defense: 0, traps: 0, decorations: 0};
+    for(let tile of this.map){
+      if(tile.type === "building" || tile.image === "fortress"){
+        total.defense++;
+      } else if(tile.type === "trap"){
+        total.traps++;
+      } else if(tile.type === "decoration"){
+        total.decorations++;
+      }
+    }
+    this.counts = total;
+    return total;
+  };
+  
 }

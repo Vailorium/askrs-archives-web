@@ -1,3 +1,6 @@
+<span id="dialog_close" (click)="this.close()" class="material-icons">close</span>
+<h2>Change Terrain</h2>
+<hr />
 <div class="map_container" *ngFor="let map of this.maps">
     <img [src]="'assets/ui/'+map+'.png'" (click)="setTerrain(map)">
     <img src="assets/ui/checkmark.png" class="checkmark" *ngIf="map === this.currentlySelected">

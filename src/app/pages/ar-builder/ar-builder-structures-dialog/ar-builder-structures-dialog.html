@@ -1,4 +1,5 @@
-<h1>Buildings</h1>
+<span id="dialog_close" (click)="this.close()" class="material-icons">close</span>
+<h2>Buildings ({{getCount("buildings")}}/6)</h2>
 <hr />
 <div class="ar-structures-table">
     <div class="building-container" *ngFor="let building of this.buildings; let i = index">
@@ -6,7 +7,7 @@
         <img (click)="selectBuilding(i)" [src]="'assets/'+building.folder+'/'+building.image+'.png'" class='ar_building' [matTooltip]="building.display">
     </div>
 </div>
-<h1>Traps</h1>
+<h2>Traps ({{getCount("traps")}}/4)</h2>
 <hr />
 <div class="ar-structures-table">
     <div class="building-container" *ngFor="let trap of this.traps; let i = index">
@@ -14,7 +15,7 @@
         <img (click)="selectTrap(i)" [src]="'assets/'+trap.folder+'/'+trap.image+'.png'" class='ar_building' [matTooltip]="trap.display">
     </div>
 </div>
-<h1>Decorations</h1>
+<h2>Decorations ({{getCount("decorations")}}/4)</h2>
 <hr />
 <div class="ar-structures-table">
     <div class="building-container" *ngFor="let decoration of this.decorations; let i = index">
@@ -22,4 +23,3 @@
         <img (click)="selectDecoration(i)" [src]="'assets/'+decoration.folder+'/'+decoration.image+'.png'" class='ar_building' [matTooltip]="decoration.display">
     </div>
 </div>
-<button mat-raised-button (click)="close()">Close</button>

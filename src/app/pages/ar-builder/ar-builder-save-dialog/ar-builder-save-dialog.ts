@@ -1,7 +1,7 @@
 import { Component, Inject, ViewChild } from "@angular/core";
 import { MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from "@angular/material";
 import { ARTile, HeroInfoModel, SaveDataModel } from "src/app/models";
-import { ARBuilderSaveConfirmDialog } from "./ar-builder-save-confirm-dialog/ar-builder-save-confirm-dialog";
+import { ConfirmDialog } from "../../confirm-dialog/confirm-dialog";
 
 @Component({
     selector: 'ar-builder-save-dialog',
@@ -31,7 +31,7 @@ export class ARBuilderSaveDialog{
 
     save(slot: number){
         if(this.saveData[slot]){
-            let confirm = this.dialog.open(ARBuilderSaveConfirmDialog, {data: "overwrite"});
+            let confirm = this.dialog.open(ConfirmDialog, {data: {message: "Do you want to overwrite existing data?", title: "Overwrite Save Data", default: false, options: [{display: "Cancel", value: false, color: ""}, {display: "Yes", value: true, color: "warn"}]}});
             confirm.afterClosed().subscribe(res => {
                 if(res){
                     try{
@@ -85,7 +85,7 @@ export class ARBuilderSaveDialog{
     }
 
     delete(slot: number){
-        let confirm = this.dialog.open(ARBuilderSaveConfirmDialog, {data: "delete"});
+        let confirm = this.dialog.open(ConfirmDialog, {data: {message: "Do you want to delete existing data?", title: "Delete Save Data", default: false, options: [{display: "Cancel", value: false, color: ""}, {display: "Yes", value: true, color: "warn"}]}});
 
         confirm.afterClosed().subscribe((res) => {
             if(res){

@@ -6,6 +6,16 @@ header{
     height: 50px;
     width: 100%;
     background-color: $header_footer;
+    p{
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0;
+    }
+    display: flex;
+    align-items: center;
+    color: white;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 
 footer{
@@ -45,7 +55,6 @@ footer{
     }
 }
 header {
-    padding-left: 10px;
     box-sizing: border-box;
     button{
         margin-top: 7px;
