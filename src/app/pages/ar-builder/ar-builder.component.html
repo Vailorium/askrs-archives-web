@@ -19,23 +19,17 @@
                 </p>
             </mat-card>
             <mat-card class="save_actions">
-                <h3>Actions</h3>
-                <hr />
                 <div class="action-buttons">
                     <button mat-raised-button color="primary" (click)="openSaveDialog()">Save/Load</button>
                     <button mat-raised-button color="primary" (click)="exportData()">Export/Share</button>
                 </div>
-                <hr />
-                <div class="action-buttons">
+                <div class="action-buttons" style="margin-top: 8px;">
                     <button mat-raised-button color="warn" (click)="deleteCurrentData()" style="width:80%">Clear</button>
                 </div>
             </mat-card>
         </div>
         <div class="ar_builder_left_container ar_builder_child_container">
             <div class="ar_builder_map_container">
-                <!-- <canvas id="ar_builder_map" height="600" width="450" #ARBuilderMap>
-    
-                </canvas> -->
                 <canvas id="dangerRange" height="600" width="450" #rangeCanvas></canvas>
                 <img class="ar_builder_map" [src]="'assets/maps/AR/'+this.currentMap+'.png'">
                 <div class="ar_builder_overlay"> <!-- AR Defense Map -->
@@ -69,25 +63,103 @@
                 <hr />
                 <div class="hero_info_tables">
                     <table>
-                        <tr><td colspan="2">Level 40<span *ngIf="this.currentlyDisplayedHero.build.merges > 0">+{{this.currentlyDisplayedHero.build.merges}}</span></td></tr>
-                        <tr><td>HP: {{this.currentlyDisplayedHeroStats.hp}}</td><td>DF: {{this.currentlyDisplayedHero.build.dragonflowers}}</td></tr>
-                        <tr><td>ATK: {{this.currentlyDisplayedHeroStats.atk}}</td><td>SPD: {{this.currentlyDisplayedHeroStats.spd}}</td></tr>
-                        <tr><td>DEF: {{this.currentlyDisplayedHeroStats.def}}</td><td>RES: {{this.currentlyDisplayedHeroStats.res}}</td></tr>
-                        <tr><td colspan="2">Blessing: {{BlessingEnum[this.currentlyDisplayedHero.build.blessing]|titlecase}}</td></tr>
+                        <colgroup>
+                            <col class="col_1" />
+                            <col class="col_2" />
+                        </colgroup>
+                        <tr>
+                            <td>Level 40<span *ngIf="this.currentlyDisplayedHero.build.merges > 0">+{{this.currentlyDisplayedHero.build.merges}}</span></td>
+                            <td style="background-color:#ff859a">
+                                <div class="skill_box">
+                                    <div class="skill_container_small">
+                                        <img src="assets/ui/generic_weapon.png" class="skill_icon_small skill_icon_small_empty" *ngIf="!this.currentlyDisplayedHero.build.skills.weapon">
+                                        <img [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.weapon.image+'.png'" class="skill_icon_small skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.weapon">
+                                    </div>
+                                    &nbsp;{{this.currentlyDisplayedHero.build.skills.weapon ? this.currentlyDisplayedHero.build.skills.weapon.name : "-"}}    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>DF: {{this.currentlyDisplayedHero.build.dragonflowers}}</td>
+                            <td style="background-color:#7dff88">
+                                <div class="skill_box">
+                                    <div class="skill_container_small">
+                                        <img src="assets/ui/generic_assist.png" class="skill_icon_small skill_icon_small_empty">
+                                    </div>
+                                    &nbsp;{{this.currentlyDisplayedHero.build.skills.assist ? this.currentlyDisplayedHero.build.skills.assist.name : "-"}}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>HP: {{this.currentlyDisplayedHeroStats.hp}}</td>
+                            <td style="background-color:#df7dff">
+                                <div class="skill_box">
+                                    <div class="skill_container_small">
+                                        <img src="assets/ui/generic_special.png" class="skill_icon_small skill_icon_small_empty">
+                                    </div>
+                                    &nbsp;{{this.currentlyDisplayedHero.build.skills.special ? this.currentlyDisplayedHero.build.skills.special.name : "-"}}    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ATK: {{this.currentlyDisplayedHeroStats.atk}}</td>
+                            <td>
+                                <div class="skill_box">
+                                    <div class="skill_container_small">
+                                        <img src="assets/ui/empty_skill.png" class="skill_icon_small skill_icon_small_empty" *ngIf="!this.currentlyDisplayedHero.build.skills.a">
+                                        <img [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.a.image+'.png'" class="skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.a">
+                                        <img src="assets/ui/a.png" class="skill_icon_small_type">
+                                    </div>
+                                    &nbsp;{{this.currentlyDisplayedHero.build.skills.a ? this.currentlyDisplayedHero.build.skills.a.name : "-"}}    
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>SPD: {{this.currentlyDisplayedHeroStats.spd}}</td>
+                            <td>
+                                <div class="skill_box">
+                                    <div class="skill_container_small">
+                                        <img src="assets/ui/empty_skill.png" class="skill_icon_small skill_icon_small_empty" *ngIf="!this.currentlyDisplayedHero.build.skills.b">
+                                        <img [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.b.image+'.png'" class="skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.b">
+                                        <img src="assets/ui/b.png" class="skill_icon_small_type">
+                                    </div>
+                                    &nbsp;{{this.currentlyDisplayedHero.build.skills.b ? this.currentlyDisplayedHero.build.skills.b.name : "-"}}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>DEF: {{this.currentlyDisplayedHeroStats.def}}</td>
+                            <td>
+                                <div class="skill_box">
+                                    <div class="skill_container_small">
+                                        <img src="assets/ui/empty_skill.png" class="skill_icon_small skill_icon_small_empty" *ngIf="!this.currentlyDisplayedHero.build.skills.c">
+                                        <img [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.c.image+'.png'" class="skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.c">
+                                        <img src="assets/ui/c.png" class="skill_icon_small_type">
+                                    </div>
+                                    &nbsp;{{this.currentlyDisplayedHero.build.skills.c ? this.currentlyDisplayedHero.build.skills.c.name : "-"}}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>RES: {{this.currentlyDisplayedHeroStats.res}}</td>
+                            <td>
+                                <div class="skill_box">
+                                    <div class="skill_container_small">
+                                        <img src="assets/ui/empty_seal.png" class="skill_icon_small skill_icon_small_empty" *ngIf="!this.currentlyDisplayedHero.build.skills.s">
+                                        <img [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.s.image+'.png'" class="skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.s">
+                                        <img src="assets/ui/s.png" class="skill_icon_small_type">
+                                    </div>
+                                    &nbsp;{{this.currentlyDisplayedHero.build.skills.s ? this.currentlyDisplayedHero.build.skills.s.name : "-"}}   
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Blessing: {{BlessingEnum[this.currentlyDisplayedHero.build.blessing]|titlecase}}</td>
+                        </tr>
                     </table>
-                    <table>
-                        <tr><td><img src="assets/skills/fury_3.png" class="skill_icon_tiny"> {{this.currentlyDisplayedHero.build.skills.weapon ? this.currentlyDisplayedHero.build.skills.weapon.name : "-"}}</td></tr>
-                        <tr><td>{{this.currentlyDisplayedHero.build.skills.assist ? this.currentlyDisplayedHero.build.skills.assist.name : "-"}}</td></tr>
-                        <tr><td>{{this.currentlyDisplayedHero.build.skills.special ? this.currentlyDisplayedHero.build.skills.special.name : "-"}}</td></tr>
-                        <tr><td>{{this.currentlyDisplayedHero.build.skills.a ? this.currentlyDisplayedHero.build.skills.a.name : "-"}}</td></tr>
-                        <tr><td>{{this.currentlyDisplayedHero.build.skills.b ? this.currentlyDisplayedHero.build.skills.b.name : "-"}}</td></tr>
-                        <tr><td>{{this.currentlyDisplayedHero.build.skills.c ? this.currentlyDisplayedHero.build.skills.c.name : "-"}}</td></tr>
-                        <tr><td>{{this.currentlyDisplayedHero.build.skills.s ? this.currentlyDisplayedHero.build.skills.s.name : "-"}}</td></tr>
-                    </table>
+                    <button class="edit_build_button" mat-raised-button color="primary" (click)="openEditBuildDialog()">Edit Build</button>
                 </div>
                 <hr />
-                <button mat-raised-button color="primary" (click)="openEditBuildDialog()">Edit Build</button>
-                <hr>
                 <p>Note*: Stats include bonuses from skills and current mythic/legendary allies.</p>
             </mat-card>
             <mat-card *ngIf="currentlyDisplayedStructure">

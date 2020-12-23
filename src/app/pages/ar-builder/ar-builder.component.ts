@@ -110,6 +110,8 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
           return;
         }
       }
+      // hide hero
+      this.currentlyDisplayedHero = undefined;
       // show
       this.currentlyDisplayedStructure = STRUCTURE_DATA[tile.image];
       this.showRange(tile, STRUCTURE_DATA[tile.image]);
@@ -120,6 +122,11 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
           return;
         }
       }
+      // hide structure
+      if(this.currentlyDisplayedStructure){
+        this.hideRange();
+      }
+      this.currentlyDisplayedStructure = undefined;
       // show
       this.currentlyDisplayedHero = this.units.filter(a => a.uid === tile.uid)[0];
       this.currentlyDisplayedHeroStats = this.stat.calculateAllStats(Object.assign({}, this.currentlyDisplayedHero), {season: [parseInt(this.season.value)], allies: this.units});  
@@ -319,8 +326,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
 
   openEditBuildDialog(){
     let editBuildDialog = this.dialog.open(AREditBuildDialog, {
-      width: '30%',
-      height: '80%',
+      width: '450px',
       data: this.currentlyDisplayedHero
     });
 
@@ -430,6 +436,9 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
         this.updateMapStructures([{image: "aether_amphorae", display: "Aether Amphorae", folder: "aether_raids", type: "other", permanent: false, isSchool: false}, {image: "aether_fountain", display: "Aether Fountain", folder: "aether_raids", type: "other", permanent: false, isSchool: false}, {image: "fortress", display: "Fortress", folder: "aether_raids", type: "other", permanent: false, isSchool: false}]);
         this.updateCounts();
         this.currentLiftLoss = this.MAX_LIFT_LOSS;
+        this.currentlyDisplayedHero = undefined;
+        this.currentlyDisplayedStructure = undefined;
+        this.hideRange();
       }
     });
   }

@@ -1,0 +1,51 @@
+table,tr,td{
+    border: 1px solid grey;
+}
+td{
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 30px;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+
+    .col_1{
+        width: 120px;
+    }
+    .col_2{
+        width: calc(100% - 120px);
+    }
+
+    tr{
+        td:nth-child(2){
+            text-align: left;
+        }
+    }
+}
+
+.hero_info_title{
+    height: 50px;
+    margin-bottom: 5px;
+    .hero_info_title_image{
+        float: left;
+        img{
+            height: 50px;
+            width: 50px;
+        }
+    }
+    .hero_info_title_title{
+        float: left;
+        mat-card-title{
+            margin-bottom: 0px;
+        }
+    }
+}
+
+form{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

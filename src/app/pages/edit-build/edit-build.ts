@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Blessing, Dictionary, HeroDataModel, HeroTableModel, IVS, SkillModel, Stats } from 'src/app/models';
 import { BuildModel } from 'src/app/models/BuildModel';
@@ -12,7 +12,7 @@ import { UnitFinderService } from 'src/app/services/unit-finder.service';
     templateUrl: './edit-build.html',
     styleUrls: ['./edit-build.scss']
 })
-export class EditBuild implements OnInit{
+export class EditBuild implements OnInit, AfterViewInit{
 
     @Input() public heroData: HeroInfoModel;
     @Input() public settings: {heroEnabled: boolean, blessingEnabled: boolean, summonerSupportEnabled: boolean, allySupportEnabled: boolean} = {heroEnabled: true, blessingEnabled: true, summonerSupportEnabled: true, allySupportEnabled: true};
@@ -45,6 +45,8 @@ export class EditBuild implements OnInit{
 
     stats: Stats;
 
+    rarities = [[], [], [], ["bronze", "bronze", "bronze"], ["silver", "silver", "silver", "silver"], ["gold", "gold", "gold", "gold", "gold"]];
+
 
     constructor(private unitFinder: UnitFinderService, private fb: FormBuilder, private skill: SkillsService, public statCalculator: StatsCalcualator){
         this.skills = this.skill.getAllMaxSkillsCategories().map(a => a.sort((x, y) => x.name < y.name ? -1 : 0));
@@ -57,8 +59,8 @@ export class EditBuild implements OnInit{
     ngOnInit(){
         this.stats = this.statCalculator.calculateAllStats(this.heroData);
 
+        console.log(this.heroData.blessing === 0 ? this.heroData.build.blessing : this.heroData.blessing);
         this.dragonflowers = Array(this.heroData.max_dragonflowers + 1).fill(0).map((x, i) => i);
-
         this.heroBuild = this.fb.group({
             hero: [{value: this.heroData.id, disabled: !this.settings.heroEnabled}, Validators.required],
             merges: [this.heroData.build.merges, Validators.required],
@@ -68,21 +70,20 @@ export class EditBuild implements OnInit{
             blessing: [{value: this.heroData.blessing === 0 ? this.heroData.build.blessing : this.heroData.blessing, disabled: (!this.settings.blessingEnabled || this.heroData.blessing !== 0)}, Validators.required],
             boon: [this.heroData.build.ivs.boon, Validators.required],
             bane: [{value: this.heroData.build.ivs.bane, disabled: this.heroData.build.merges > 0}, Validators.required],
-            weapon: [this.heroData.build.skills.weapon],
-            refine: [{value: this.heroData.build.skills.weapon ? (this.heroData.build.skills.weapon.refined ? this.heroData.build.skills.weapon : null) : null, disabled: this.refines.length === 0}],
-            assist: [this.heroData.build.skills.assist],
-            special: [this.heroData.build.skills.special],
-            a: [this.heroData.build.skills.a],
-            b: [this.heroData.build.skills.b],
-            c: [this.heroData.build.skills.c],
-            seal: [this.heroData.build.skills.s],
+            weapon: [this.heroData.build.skills.weapon ? (this.heroData.build.skills.weapon.refined ? this.skill.getBaseForm(this.heroData.build.skills.weapon.id).id : this.heroData.build.skills.weapon.id) : null],
+            refine: [{value: this.heroData.build.skills.weapon ? (this.heroData.build.skills.weapon.refined ? this.heroData.build.skills.weapon.id : null) : null, disabled: this.refines.length === 0}],
+            assist: [this.heroData.build.skills.assist ? this.heroData.build.skills.assist.id : null],
+            special: [this.heroData.build.skills.special ? this.heroData.build.skills.special.id : null],
+            a: [this.heroData.build.skills.a ? this.heroData.build.skills.a.id : null],
+            b: [this.heroData.build.skills.b ? this.heroData.build.skills.b.id : null],
+            c: [this.heroData.build.skills.c ? this.heroData.build.skills.c.id : null],
+            seal: [this.heroData.build.skills.s ? this.heroData.build.skills.s.id : null],
         });
         this.updateRefines();
-
+        this.heroBuild.patchValue({blessing: this.heroData.blessing === 0 ? this.heroData.build.blessing : this.heroData.blessing});
         this.heroBuild.valueChanges.subscribe((data) => {
             data = this.heroBuild.getRawValue();
-            console.log(data);
-            let build: BuildModel = {rarity: data.rarity, merges: data.merges, resplendent: data.resplendent, ivs: {boon: data.boon, bane: data.bane}, dragonflowers: data.dragonflowers, blessing: data.blessing, skills: {weapon: data.refine ? data.refine : data.weapon, assist: data.assist, special: data.special, a: data.a, b: data.b, c: data.c, s: data.seal}};
+            let build: BuildModel = {rarity: data.rarity, merges: data.merges, resplendent: data.resplendent, ivs: {boon: data.boon, bane: data.bane}, dragonflowers: data.dragonflowers, blessing: data.blessing, skills: {weapon: data.refine ? this.skill.getSkillById(data.refine) : this.skill.getSkillById(data.weapon), assist: this.skill.getSkillById(data.assist), special: this.skill.getSkillById(data.special), a: this.skill.getSkillById(data.a), b: this.skill.getSkillById(data.b), c: this.skill.getSkillById(data.c), s: this.skill.getSkillById(data.seal)}};
             console.log(build);
             let uid = this.heroData.uid;
             this.heroData = {...this.unitsDic[data.hero], uid: uid, build: build};
@@ -90,6 +91,10 @@ export class EditBuild implements OnInit{
             this.stats = this.statCalculator.calculateAllStats(this.heroData);
             this.heroDataChange.emit(this.heroData);
         });
+    }
+
+    ngAfterViewInit(){
+
     }
 
     updateMerges(){
@@ -103,7 +108,7 @@ export class EditBuild implements OnInit{
     
     updateRefines(){
         if(this.heroBuild.value['weapon']){
-            this.refines = this.skill.getRefinesById(this.heroBuild.value['weapon'].id);
+            this.refines = this.skill.getRefinesById(this.heroBuild.value['weapon']);
             if(this.refines){
                 if(this.refines.length > 0){
                     this.heroBuild.get('refine').enable();

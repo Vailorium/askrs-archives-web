@@ -53,6 +53,12 @@ export class SkillsService {
     return REFINE_SKILLS;
   }
 
+  getBaseForm = (refine_id: string): SkillModel => {
+    let nameArray = refine_id.split('_');
+    nameArray.pop();
+    return SKILLS_DICTIONARY[nameArray.join('_')];
+  }
+
   openSkillDialog(skill: SkillModel): MatDialogRef<SkillInfoDialog>{
     return this.dialog.open(SkillInfoDialog, {
       width: '50%',

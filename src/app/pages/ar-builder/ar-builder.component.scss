@@ -157,17 +157,36 @@ table{
         }
     }
     .hero_info_tables{
-        display: flex;
         table,tr,td{
-            // border: 1px solid grey;
+            border: 1px solid grey;
         }
         td{
+            padding: 5px;
             padding-left: 10px;
             padding-right: 10px;
+            height: 30px;
         }
         table{
             border-collapse: collapse;
+            width: 100%;
+
+            .col_1{
+                width: 120px;
+            }
+            .col_2{
+                width: calc(100% - 120px);
+            }
+
+            tr{
+                td:nth-child(2){
+                    text-align: left;
+                }
+            }
         }
+    }
+    .edit_build_button{
+        margin-top: 5px;
+        width: 100%;
     }
 }
 
