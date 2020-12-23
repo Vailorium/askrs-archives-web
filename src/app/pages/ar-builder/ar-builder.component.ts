@@ -287,7 +287,8 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   openHeroesDialog(){
     let heroesDialog = this.dialog.open(ARBuilderHeroesDialog, {
       width: '450px',
-      height: '80%',
+      height: '800px',
+      maxHeight: '80%',
       data: this.units
     });
 

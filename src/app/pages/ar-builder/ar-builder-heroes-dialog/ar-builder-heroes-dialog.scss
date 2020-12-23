@@ -8,19 +8,37 @@ mat-button-toggle div{
 }
 
 .hero_icons_container{
-    display: flex;
-    flex-wrap: wrap;
-    div{
-        height: 50px;
-        width: 50px;
-        margin: 3px;
-        img{
+    .hero_icons{
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        div{
             height: 50px;
             width: 50px;
-            // box-sizing: border-box;
+            margin: 3px;
+            img{
+                height: 50px;
+                width: 50px;
+                // box-sizing: border-box;
+            }
         }
     }
 }
+
+#dialog_close{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 24px;
+    &:hover{
+        background-color: lightgrey;
+    }
+}
+
+::ng-deep mat-dialog-container{
+    position: relative !important;
+}
+
 
 .selected_heroes_container{
     display: flex;

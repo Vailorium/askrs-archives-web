@@ -73,7 +73,7 @@
                                 <div class="skill_box">
                                     <div class="skill_container_small">
                                         <img src="assets/ui/generic_weapon.png" class="skill_icon_small skill_icon_small_empty" *ngIf="!this.currentlyDisplayedHero.build.skills.weapon">
-                                        <img [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.weapon.image+'.png'" class="skill_icon_small skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.weapon">
+                                        <img [matTooltip]="this.currentlyDisplayedHero.build.skills.weapon.name" [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.weapon.image+'.png'" class="skill_icon_small skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.weapon">
                                     </div>
                                     &nbsp;{{this.currentlyDisplayedHero.build.skills.weapon ? this.currentlyDisplayedHero.build.skills.weapon.name : "-"}}    
                                 </div>
@@ -85,6 +85,7 @@
                                 <div class="skill_box">
                                     <div class="skill_container_small">
                                         <img src="assets/ui/generic_assist.png" class="skill_icon_small skill_icon_small_empty">
+                                        <img [matTooltip]="this.currentlyDisplayedHero.build.skills.assist.name" *ngIf="this.currentlyDisplayedHero.build.skills.assist" src="assets/ui/generic_assist.png" class="skill_icon_small skill_icon_small_empty">
                                     </div>
                                     &nbsp;{{this.currentlyDisplayedHero.build.skills.assist ? this.currentlyDisplayedHero.build.skills.assist.name : "-"}}
                                 </div>
@@ -96,6 +97,7 @@
                                 <div class="skill_box">
                                     <div class="skill_container_small">
                                         <img src="assets/ui/generic_special.png" class="skill_icon_small skill_icon_small_empty">
+                                        <img [matTooltip]="this.currentlyDisplayedHero.build.skills.special.name" *ngIf="this.currentlyDisplayedHero.build.skills.special" src="assets/ui/generic_special.png" class="skill_icon_small skill_icon_small_empty">
                                     </div>
                                     &nbsp;{{this.currentlyDisplayedHero.build.skills.special ? this.currentlyDisplayedHero.build.skills.special.name : "-"}}    
                                 </div>
@@ -107,7 +109,7 @@
                                 <div class="skill_box">
                                     <div class="skill_container_small">
                                         <img src="assets/ui/empty_skill.png" class="skill_icon_small skill_icon_small_empty" *ngIf="!this.currentlyDisplayedHero.build.skills.a">
-                                        <img [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.a.image+'.png'" class="skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.a">
+                                        <img [matTooltip]="this.currentlyDisplayedHero.build.skills.a.name" [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.a.image+'.png'" class="skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.a">
                                         <img src="assets/ui/a.png" class="skill_icon_small_type">
                                     </div>
                                     &nbsp;{{this.currentlyDisplayedHero.build.skills.a ? this.currentlyDisplayedHero.build.skills.a.name : "-"}}    
@@ -120,7 +122,7 @@
                                 <div class="skill_box">
                                     <div class="skill_container_small">
                                         <img src="assets/ui/empty_skill.png" class="skill_icon_small skill_icon_small_empty" *ngIf="!this.currentlyDisplayedHero.build.skills.b">
-                                        <img [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.b.image+'.png'" class="skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.b">
+                                        <img [matTooltip]="this.currentlyDisplayedHero.build.skills.b.name" [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.b.image+'.png'" class="skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.b">
                                         <img src="assets/ui/b.png" class="skill_icon_small_type">
                                     </div>
                                     &nbsp;{{this.currentlyDisplayedHero.build.skills.b ? this.currentlyDisplayedHero.build.skills.b.name : "-"}}
@@ -133,7 +135,7 @@
                                 <div class="skill_box">
                                     <div class="skill_container_small">
                                         <img src="assets/ui/empty_skill.png" class="skill_icon_small skill_icon_small_empty" *ngIf="!this.currentlyDisplayedHero.build.skills.c">
-                                        <img [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.c.image+'.png'" class="skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.c">
+                                        <img [matTooltip]="this.currentlyDisplayedHero.build.skills.c.name" [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.c.image+'.png'" class="skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.c">
                                         <img src="assets/ui/c.png" class="skill_icon_small_type">
                                     </div>
                                     &nbsp;{{this.currentlyDisplayedHero.build.skills.c ? this.currentlyDisplayedHero.build.skills.c.name : "-"}}
@@ -146,7 +148,7 @@
                                 <div class="skill_box">
                                     <div class="skill_container_small">
                                         <img src="assets/ui/empty_seal.png" class="skill_icon_small skill_icon_small_empty" *ngIf="!this.currentlyDisplayedHero.build.skills.s">
-                                        <img [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.s.image+'.png'" class="skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.s">
+                                        <img [matTooltip]="this.currentlyDisplayedHero.build.skills.s.name" [src]="'assets/skills/'+this.currentlyDisplayedHero.build.skills.s.image+'.png'" class="skill_icon_small" *ngIf="this.currentlyDisplayedHero.build.skills.s">
                                         <img src="assets/ui/s.png" class="skill_icon_small_type">
                                     </div>
                                     &nbsp;{{this.currentlyDisplayedHero.build.skills.s ? this.currentlyDisplayedHero.build.skills.s.name : "-"}}   

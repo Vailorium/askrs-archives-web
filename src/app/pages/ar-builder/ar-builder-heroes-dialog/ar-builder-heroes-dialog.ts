@@ -82,4 +82,8 @@ export class ARBuilderHeroesDialog {
     removeHero(index: number){
         this.selectedHeroes.splice(index, 1);
     }
+
+    close(){
+        this.dialogRef.close();
+    }
 }
