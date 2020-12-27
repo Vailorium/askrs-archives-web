@@ -1,12 +1,11 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ThrowStmt } from '@angular/compiler';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatGridTileFooterCssMatStyler } from '@angular/material';
 import { Title } from '@angular/platform-browser';
-import { link } from 'fs';
-import { Blessing, Dictionary, SaveDataModel, Stats } from 'src/app/models';
+import { ARTile, Blessing, Dictionary, SaveDataModel, Stats } from 'src/app/models';
 import { HeroInfoModel } from 'src/app/models/HeroInfoModel';
+import { ARDService } from 'src/app/services/ar-d.service';
 import { MapFinderService } from 'src/app/services/map-finder.service';
 import { StatsCalcualator } from 'src/app/services/stats-calculator.service';
 import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
@@ -15,8 +14,8 @@ import { ARBuilderSaveDialog } from './ar-builder-save-dialog/ar-builder-save-di
 import { ARBuilderStructuresDialog } from './ar-builder-structures-dialog/ar-builder-structures-dialog';
 import { ARBuilderTerrainDialog } from './ar-builder-terrain-dialog/ar-builder-terrain-dialog';
 import { AREditBuildDialog } from './ar-edit-build-dialog/ar-edit-build-dialog';
-
-type ARTile = {slot?: number, uid?: string, image: string, display: string, folder: "aether_raids" | "units", type: "blank" | "building" | "trap" | "decoration" | "unit" | "hero" | "other", permanent: boolean, isSchool: boolean};
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ARURLShareDialog } from './ar-url-share-dialog/ar-url-share-dialog';
 
 interface ARStructureData{
   image: string;
@@ -67,7 +66,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   @ViewChild('rangeCanvas') rangeCanvas: ElementRef<HTMLCanvasElement>;
   ctx: CanvasRenderingContext2D;
 
-  constructor(private dialog: MatDialog, private mapFinder: MapFinderService, private stat: StatsCalcualator, private titleService: Title) {
+  constructor(private router: Router, private dialog: MatDialog, private mapFinder: MapFinderService, private stat: StatsCalcualator, private titleService: Title, private ard: ARDService, private route: ActivatedRoute) {
 
   }
 
@@ -75,12 +74,33 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     this.titleService.setTitle("AR-D Builder")
     this.maps = this.mapFinder.getARMaps();
 
-    // Needs to be assigned so doesn't override map data
-    this.map = Object.assign([], this.maps[this.currentMap]);
+    let data = this.route.snapshot.queryParams['data'];
+    if(data){
+      let arData = this.ard.getDataFromLink(data);
+      
+      this.currentMap = arData.mapName;
+      this.season.patchValue(arData.season);
+      this.map = arData.map;
+      this.units = arData.heroesData;
 
-    // Compulsory structures
-    this.updateMapStructures([{image: "aether_amphorae", display: "Aether Amphorae", folder: "aether_raids", type: "other", permanent: false, isSchool: false}, {image: "aether_fountain", display: "Aether Fountain", folder: "aether_raids", type: "other", permanent: false, isSchool: false}, {image: "fortress", display: "Fortress", folder: "aether_raids", type: "other", permanent: false, isSchool: false}]);
-    
+      this.updateCounts();
+      this.currentLiftLoss = this.calculateLiftLoss();
+
+      // Remove query params
+    this.router.navigate([], {
+      queryParams: {
+        'data': null,
+      },
+      queryParamsHandling: 'merge'
+    })
+    } else {
+          // Needs to be assigned so doesn't override map data
+      this.map = Object.assign([], this.maps[this.currentMap]);
+
+      // Compulsory structures
+      this.updateMapStructures([{image: "aether_amphorae", display: "Aether Amphorae", folder: "aether_raids", type: "other", permanent: false, isSchool: false}, {image: "aether_fountain", display: "Aether Fountain", folder: "aether_raids", type: "other", permanent: false, isSchool: false}, {image: "fortress", display: "Fortress", folder: "aether_raids", type: "other", permanent: false, isSchool: false}]);
+
+    }    
     this.season.valueChanges.subscribe((data) => {
       for(let i = 0; i < this.units.length; i++){
         if(!this.units[i].blessing){
@@ -154,7 +174,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
       let drawY = structureData.rows > 0 ? (y - ((structureData.rows - 1) / 2)) * 75 : 0;
 
       let width = structureData.columns * 75 ? structureData.columns * 75 : structureData.rows > 0 ? 450 : 0;
-      let height = structureData.rows * 75 ? structureData.rows * 75 : structureData.columns > 0 ? 450 : 0;
+      let height = structureData.rows * 75 ? structureData.rows * 75 : structureData.columns > 0 ? 600 : 0;
 
       this.ctx.fillStyle = structureData.color;
       this.ctx.fillRect(drawX, drawY, width, height);
@@ -445,19 +465,13 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   }
 
 
-  updateCounts(): {defense: number, traps: number, decorations: number}{
-    let total = {defense: 0, traps: 0, decorations: 0};
-    for(let tile of this.map){
-      if(tile.type === "building" || tile.image === "fortress"){
-        total.defense++;
-      } else if(tile.type === "trap"){
-        total.traps++;
-      } else if(tile.type === "decoration"){
-        total.decorations++;
-      }
-    }
-    this.counts = total;
-    return total;
-  };
+  updateCounts(){
+    this.counts = this.ard.updateCounts(this.map);
+  }
+
+  getLink(){
+    let link = this.dialog.open(ARURLShareDialog, {data: {map: this.currentMap, mapData: this.map, unitData: this.units, season: this.season.value}, maxHeight: "80%", width: "450px"});
+    // console.log(this.ard.getLink(this.currentMap, this.map, this.units, this.season.value));
+  }
   
 }

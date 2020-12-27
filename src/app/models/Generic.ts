@@ -8,4 +8,4 @@ export type AssetFlaw = "hp" | "atk" | "spd" | "def" | "res" | "neutral";
 export type Stats = {hp: number, atk: number, spd: number, def: number, res: number};
 export type Blessings = null | "fire" | "water" | "earth" | "wind" | "light" | "dark" | "astra" | "anima";
 // Aether Raids
-export type ARTile = {image: string, display: string, folder: "aether_raids" | "units", type: "blank" | "building" | "trap" | "decoration" | "unit" | "other", permanent: boolean, isSchool: boolean, selected?: boolean};
+export type ARTile = {selected?: boolean, slot?: number, uid?: string, image: string, display: string, folder: "aether_raids" | "units", type: "blank" | "building" | "trap" | "decoration" | "unit" | "hero" | "other", permanent: boolean, isSchool: boolean};

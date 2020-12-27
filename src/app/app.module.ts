@@ -23,6 +23,7 @@ import { ReportBugDialog } from './pages/report-bug-dialog/report-bug-dialog';
 import { ContributionsDialog } from './pages/contributions-dialog/contributions-dialog';
 import { ARBuilderSaveDialog } from './pages/ar-builder/ar-builder-save-dialog/ar-builder-save-dialog';
 import { ConfirmDialog } from './pages/confirm-dialog/confirm-dialog';
+import { ARURLShareDialog } from './pages/ar-builder/ar-url-share-dialog/ar-url-share-dialog';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ConfirmDialog } from './pages/confirm-dialog/confirm-dialog';
     EditBuild,
     ReportBugDialog,
     ContributionsDialog,
-    ConfirmDialog
+    ConfirmDialog,
+    ARURLShareDialog
   ],
   imports: [
     ReactiveFormsModule,
@@ -76,6 +78,6 @@ import { ConfirmDialog } from './pages/confirm-dialog/confirm-dialog';
   ],
   providers: [Title],
   bootstrap: [AppComponent],
-  entryComponents: [SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, ARBuilderTerrainDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog, ARBuilderSaveDialog, ConfirmDialog]
+  entryComponents: [SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, ARBuilderTerrainDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog, ARBuilderSaveDialog, ConfirmDialog, ARURLShareDialog]
 })
 export class AppModule { }

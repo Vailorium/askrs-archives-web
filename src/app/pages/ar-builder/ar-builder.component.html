@@ -20,11 +20,12 @@
             </mat-card>
             <mat-card class="save_actions">
                 <div class="action-buttons">
-                    <button mat-raised-button color="primary" (click)="openSaveDialog()">Save/Load</button>
-                    <button mat-raised-button color="primary" (click)="exportData()">Export/Share</button>
+                    <button mat-raised-button color="primary" (click)="openSaveDialog()" style="width:40%;">Save/Load</button>
+                    <button mat-raised-button color="primary" (click)="exportData()" style="width:40%;">Export</button>
                 </div>
                 <div class="action-buttons" style="margin-top: 8px;">
-                    <button mat-raised-button color="warn" (click)="deleteCurrentData()" style="width:80%">Clear</button>
+                    <button mat-raised-button color="primary" (click)="getLink()" style="width:40%;">Share Link</button>
+                    <button mat-raised-button color="warn" (click)="deleteCurrentData()" style="width:40%;">Clear</button>
                 </div>
             </mat-card>
         </div>

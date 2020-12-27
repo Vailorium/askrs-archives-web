@@ -27,6 +27,7 @@ export class ARBuilderStructuresDialog {
         );
         
         for(let i = 0; i < this.buildings.length; i++){
+            console.log(this.buildingCount);
             if(data.includes(this.buildings[i].image) && this.buildings[i].type !== "other"){
                 this.buildings[i].selected = true;
                 this.buildingCount += 1;
@@ -102,13 +103,26 @@ export class ARBuilderStructuresDialog {
     }
 
     getCount(structureType: string){
+        let count = 0;
         switch(structureType){
             case "buildings":
-                return this.buildings.filter(a => a.selected).length;
+                for(let i = 0; i < this.buildings.length; i++){
+                    let a = this.buildings[i];
+                    if(a.selected && (a.type !== "other" || a.display === "Fortress")) count++;
+                }
+                return count;
             case "traps":
-                return this.traps.filter(a => a.selected).length;
+                for(let i = 0; i < this.traps.length; i++){
+                    let a = this.traps[i];
+                    if(a.selected) count++;
+                }
+                return count;
             case "decorations":
-                return this.decorations.filter(a => a.selected).length;
+                for(let i = 0; i < this.decorations.length; i++){
+                    let a = this.decorations[i];
+                    if(a.selected) count++;
+                }
+                return count;
         }
         return 0;
     }

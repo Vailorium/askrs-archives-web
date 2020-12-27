@@ -69,3 +69,48 @@ export enum Origin{
     houses,
     mirage
 };
+
+export enum Buildings{
+    aether_amphorae,
+    aether_fountain,
+    armor_school,
+    bolt_tower,
+    bright_shrine,
+    catapult,
+    cavalry_school,
+    dark_shrine,
+    duos_hindrance,
+    flier_school,
+    fortress,
+    healing_tower,
+    infantry_school,
+    panic_manor,
+    tactics_room
+};
+
+export enum Traps{
+    bolt_trap,
+    fake_bolt_trap,
+    heavy_trap,
+    fake_heavy_trap
+};
+
+export enum Decorations{
+    dining_hall,
+    field,
+    hot_spring,
+    inn
+};
+
+export enum Maps{
+    springwater,
+    wintry,
+    abandoned_castle,
+    snowdust,
+    desert,
+    spring_breeze,
+    leafy_canopy,
+    lost_castle,
+    bright_grassland,
+    lava_floes
+}

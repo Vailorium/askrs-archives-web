@@ -49,10 +49,14 @@ export class EditBuild implements OnInit, AfterViewInit{
 
 
     constructor(private unitFinder: UnitFinderService, private fb: FormBuilder, private skill: SkillsService, public statCalculator: StatsCalcualator){
-        this.skills = this.skill.getAllMaxSkillsCategories().map(a => a.sort((x, y) => x.name < y.name ? -1 : 0));
+        this.skills = JSON.parse(JSON.stringify(this.skill.getAllMaxSkillsCategories())); //.map(a => a.sort((x, y) => x.name < y.name ? -1 : 0));
+        for(let i = 0; i < this.skills.length; i++){
+            this.skills[i] = this.skills[i].sort((x, y) => x.name < y.name ? -1 : 0);
+        }
+        console.log(this.skills, this.skill.getAllMaxSkillsCategories())
         this.skills[0] = this.skills[0].filter(a => !a.refined);
 
-        this.units = this.unitFinder.getHeroList().sort((a,b) => {if(a.id < b.id){return -1;}return 0;});
+        this.units = Object.assign([], this.unitFinder.getHeroList()).sort((a,b) => {if(a.id < b.id){return -1;}return 0;});
         this.unitsDic = this.unitFinder.getHeroDictionary();
     }
 

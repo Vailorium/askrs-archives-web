@@ -12,4 +12,8 @@ export class MapFinderService {
     public getARMaps = (): Dictionary<ARTile[]> => {
         return AR_MAPS;
     }
+
+    public getARMapById = (id: string): ARTile[] => {
+        return AR_MAPS[id];
+    }
 }
