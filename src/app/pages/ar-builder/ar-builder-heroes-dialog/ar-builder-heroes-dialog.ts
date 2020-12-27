@@ -30,6 +30,7 @@ export class ARBuilderHeroesDialog {
             name: [''],
             blessing: ['0']
         });
+        console.log("hi");
         this.unfilteredList = Object.assign([], this.heroes.getHeroList()).sort((a, b) => {
             if(a.id < b.id){
                 return -1
