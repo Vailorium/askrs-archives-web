@@ -6,6 +6,7 @@ export interface HeroDataModel{
     name: string;
     title: string;
     id: string;
+    image: string;
     max_dragonflowers: number;
     base_stats: Stats;
     growth_rates: Stats;
