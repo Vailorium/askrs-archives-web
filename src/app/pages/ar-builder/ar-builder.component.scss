@@ -210,3 +210,22 @@ mat-button-toggle div{
         margin: 3px;
     }
 }
+
+@media only screen and (max-width: 768px){
+    .page_content{
+        display: flex;
+        justify-content: center;
+    }
+    .ar_builder_container{
+        width: 450px;
+        flex-wrap: wrap;
+        .ar_builder_child_container{
+            width: 450px;
+            margin-bottom: 10px;
+        }
+        .ar_builder_left_container{
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+    }
+}

@@ -13,7 +13,6 @@ export class SkillInfoDialog{
     fodderAt = [];
 
     constructor(public dialogRef: MatDialogRef<SkillInfoDialog>, @Inject(MAT_DIALOG_DATA) public data: SkillModel, public unitFinder: UnitFinderService){
-        console.log(this.data);
         this.dialogRef.afterClosed().subscribe(
             () => {
                 this.dialogRef = null

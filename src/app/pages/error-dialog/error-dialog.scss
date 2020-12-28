@@ -1,0 +1,12 @@
+.error-container{
+    display: flex;
+    .child-container{
+        text-align: center;
+        img{
+            width: 200px;
+        }
+        p{
+            white-space: pre-line
+        }
+    }
+}

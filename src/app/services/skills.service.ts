@@ -45,7 +45,6 @@ export class SkillsService {
   }
 
   getRefinesById = (id: string): SkillModel[] => {
-    console.log(id);
     return REFINE_SKILLS[id];
   }
 

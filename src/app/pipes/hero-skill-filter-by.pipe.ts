@@ -10,7 +10,6 @@ export class HeroSkillFilterByPipe implements PipeTransform {
   unit: UnitFinderService = new UnitFinderService();
 
   transform(arr: SkillModel[], heroId: string): any {
-    console.log(heroId);
     let hero = this.unit.getHeroById(heroId);
     if(!hero){
       return [];

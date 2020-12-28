@@ -16,6 +16,7 @@ import { ARBuilderTerrainDialog } from './ar-builder-terrain-dialog/ar-builder-t
 import { AREditBuildDialog } from './ar-edit-build-dialog/ar-edit-build-dialog';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ARURLShareDialog } from './ar-url-share-dialog/ar-url-share-dialog';
+import { ErrorDialog } from '../error-dialog/error-dialog';
 
 interface ARStructureData{
   image: string;
@@ -76,23 +77,43 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
 
     let data = this.route.snapshot.queryParams['data'];
     if(data){
-      let arData = this.ard.getDataFromLink(data);
+      try{
+        let arData = this.ard.getDataFromLink(data);
       
-      this.currentMap = arData.mapName;
-      this.season.patchValue(arData.season);
-      this.map = arData.map;
-      this.units = arData.heroesData;
+        this.currentMap = arData.mapName;
+        this.season.patchValue(arData.season);
+        this.map = arData.map;
+        this.units = arData.heroesData;
+  
+        this.updateCounts();
+        this.currentLiftLoss = this.calculateLiftLoss();
+  
+        // Remove query params
+        this.router.navigate([], {
+          queryParams: {
+            'data': null,
+          },
+          queryParamsHandling: 'merge'
+        });
+      } catch(e) {
+        let err = this.dialog.open(ErrorDialog, {maxWidth: "450px", data: {title: "Uh-oh!", default: false, message: "Something went wrong when trying to load the defense!\n\nIf you think this is an issue on our end, please submit a bug report (and provide the URL you used).", options: [{display: "OK", color: "primary", value: false}]}})
+      
+        err.afterClosed().subscribe(() => {
+          this.router.navigate([], {
+            queryParams: {
+              'data': null,
+            },
+            queryParamsHandling: 'merge'
+          });
 
-      this.updateCounts();
-      this.currentLiftLoss = this.calculateLiftLoss();
+          // Needs to be assigned so doesn't override map data
+          this.map = Object.assign([], this.maps[this.currentMap]);
 
-      // Remove query params
-    this.router.navigate([], {
-      queryParams: {
-        'data': null,
-      },
-      queryParamsHandling: 'merge'
-    })
+          // Compulsory structures
+          this.updateMapStructures([{image: "aether_amphorae", display: "Aether Amphorae", folder: "aether_raids", type: "other", permanent: false, isSchool: false}, {image: "aether_fountain", display: "Aether Fountain", folder: "aether_raids", type: "other", permanent: false, isSchool: false}, {image: "fortress", display: "Fortress", folder: "aether_raids", type: "other", permanent: false, isSchool: false}]);
+
+        });
+      }
     } else {
           // Needs to be assigned so doesn't override map data
       this.map = Object.assign([], this.maps[this.currentMap]);
@@ -165,7 +186,6 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
       for(let tileY = y - structureData.radius; tileY <= y + structureData.radius; tileY++){
         let currentDisplacement = Math.abs(tileY - y);
         let tileX = x - (structureData.radius - currentDisplacement);
-        console.log(tileX, tileY, structureData.radius, currentDisplacement);
         this.ctx.fillRect(tileX * 75, tileY * 75, 75 + (2 * (structureData.radius - currentDisplacement) * 75), 75)
       }
       // 1 === 1
@@ -271,7 +291,6 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
           }
         }
       } else { // is hero update
-        console.log("hero update");
         let currentHeroes = this.map.map((a, i) => {return {...a, ...{index: i}}}).filter(a => a.uid);
         let currentUID = this.map.filter(a => a.uid).map(b => b.uid);
         let newUID = structures.map(a => a.uid);
@@ -282,7 +301,6 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
         }
         
         let removalPriority = this.map.filter((a, i) => i < 12).map((b, i) => {return {...b, ...{index: i}}}).filter((c, i) => c.display !== "" && c.type !== "hero");
-        console.log(this.map.filter((a, i) => i < 12));
         for(let hero of structures){
           if(!currentUID.includes(hero.uid)){
             for(let i = 0; i < this.map.length; i++){
@@ -352,7 +370,6 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     });
 
     editBuildDialog.afterClosed().subscribe((res: HeroInfoModel) => {
-      console.log(res);
       this.currentlyDisplayedHero = res;
       for(let i = 0; i < this.units.length; i++){
         if(this.units[i].uid === res.uid){
@@ -393,7 +410,6 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     let numMythics = 0;
     let numBlessed = 0;
     for(let unit of this.units){
-      console.log(unit.blessing, this.season.value);
       if(this.season.value == unit.blessing){ // == as season.value is string, unit.blessing is int
         max -= unit.build.merges;
         if(numMythics < 2){
@@ -404,7 +420,6 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
       }
     }
     max -= numMythics * numBlessed * 5;
-    console.log(max, numMythics, numBlessed);
     return max;
   }
 
@@ -471,7 +486,6 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
 
   getLink(){
     let link = this.dialog.open(ARURLShareDialog, {data: {map: this.currentMap, mapData: this.map, unitData: this.units, season: this.season.value}, maxHeight: "80%", width: "450px"});
-    // console.log(this.ard.getLink(this.currentMap, this.map, this.units, this.season.value));
   }
   
 }

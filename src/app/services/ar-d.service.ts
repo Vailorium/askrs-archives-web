@@ -84,7 +84,6 @@ export class ARDService{
                 link += "$";
                 break;
             }
-            console.log(building.tile.image, Buildings[building.tile.image]);
             link += this.system.base36Encode(building ? Buildings[building.tile.image] + 1 : 0, 1);
             link += this.system.base36Encode(building ? building.index : 0, 1); // will never be > 35, 0 means multiple things here but no worry
         }
@@ -114,7 +113,6 @@ export class ARDService{
             // let tile = map.map((a, i) => {return {tile: a, index: i}}).filter(a => {if(a.tile.uid){a.tile.uid === hero.uid}})[0];
 
             // encode hero index first
-            console.log(this.heroes.findIndex((a) => {return a.id === hero.id}), hero.id, this.heroes);
             let index = this.heroes.findIndex((a) => {return a.id === hero.id});
             link += this.system.base36Encode(index, 2);
 
@@ -124,7 +122,6 @@ export class ARDService{
             //encode build next
             let build = hero.build;
 
-            console.log(build.skills.weapon)
             let listToAdd = [build.merges, build.dragonflowers, build.rarity, build.resplendent === true ? 1 : 0, build.ivs.boon, build.ivs.bane, build.skills.weapon ? (build.skills.weapon.refined ? 1 : 0) : 0,
                 build.skills.weapon ? (build.skills.weapon.refined ? this.allSkillsByCategory[0].findIndex(a => {return a.id === this.skill.getBaseForm(build.skills.weapon.id).id}) + 1 : this.allSkillsByCategory[0].findIndex(a => {return a.id === build.skills.weapon.id}) + 1) : 0,
                 build.skills.weapon ? (build.skills.weapon.refined ? this.skill.getRefinesById(this.skill.getBaseForm(build.skills.weapon.id).id).findIndex(a => {return a.id === build.skills.weapon.id}) + 1: 0) : 0,
@@ -136,21 +133,16 @@ export class ARDService{
                 build.skills.s ? this.allSkillsByCategory[6].findIndex(a => {return a.id === build.skills.s.id}) + 1 : 0
             ];
 
-            console.log(this.allSkillsByCategory[4]);
-
             for(let i = 0; i < listToAdd.length; i++){
                 if(listToAdd.slice(i, listToAdd.length).reduce((a,b) => a + b) === 0){
                     link += "$";
                     break;
                 }
                 let length = (i < 7 || i == 8) ? 1 : 2;
-                console.log(length);
-                console.log(listToAdd);
                 link += this.system.base36Encode(listToAdd[i], length);
             }
         }
 
-        console.log(mapName, map, units, season);
         return encodeURIComponent(link);
     }
 
@@ -218,7 +210,6 @@ export class ARDService{
                     //{"slot":0,"uid":"8qQ2HRfeGiJ3VcG8kapPHQ","image":"bernadetta_2","display":"Bernadetta: Frosty Shut-In","folder":"units","type":"hero","permanent":false,"isSchool":false}
 
                     heroData = this.heroes[this.system.base36Decode(data.splice(0, 2).join(''))];
-                    console.log(this.heroes.findIndex((a) => {return a.id === heroData.id}), heroData.id);
                     uid = short.generate();
 
                     loc = this.system.base36Decode(data.splice(0,1).join(''))
@@ -243,7 +234,6 @@ export class ARDService{
 
                     if(data[0] === "$") continue;
                     if(refined){
-                        // console.log(this.skill.getAllRefines())
                         weapon = this.skill.getAllRefines()[weapon.id][this.system.base36Decode(data.splice(0,1).join('')) - 1];
                     } else {
                         data.splice(0,1);
@@ -276,15 +266,13 @@ export class ARDService{
                     map[loc] = {slot: heroesData.length, uid: uid, image: heroData.image, display: heroData.name + ": " + heroData.title, folder: "units", type: "hero", permanent: false, isSchool: false};
                 }
 
-                console.log(mapName, map, heroesData, season);
                 return {mapName, map, heroesData, season};
             } else {
                 throw "Unaccepted version of encoding";
             }
         } catch (err){
             // TODO: ERROR HANDLING
-            console.log("Unknown error occured");
-            console.log(err);
+            throw "Unknown error!";
         }
     }
 }

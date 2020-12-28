@@ -12,10 +12,8 @@ export class AREditBuildDialog {
     public settings: {heroEnabled: boolean, blessingEnabled: boolean, summonerSupportEnabled: boolean, allySupportEnabled: boolean} = {heroEnabled: false, blessingEnabled: false, summonerSupportEnabled: false, allySupportEnabled: false};
 
     constructor(public dialogRef: MatDialogRef<AREditBuildDialog>, @Inject(MAT_DIALOG_DATA) public data: HeroInfoModel){
-        console.log(this.data);
         this.dialogRef.beforeClosed().subscribe( // overwrites default exiting behaviour - important if user clicks outside of dialog to close
             () => {
-                console.log(this.data);
                 this.dialogRef.close(this.data);
             }
         );

@@ -53,7 +53,6 @@ export class EditBuild implements OnInit, AfterViewInit{
         for(let i = 0; i < this.skills.length; i++){
             this.skills[i] = this.skills[i].sort((x, y) => x.name < y.name ? -1 : 0);
         }
-        console.log(this.skills, this.skill.getAllMaxSkillsCategories())
         this.skills[0] = this.skills[0].filter(a => !a.refined);
 
         this.units = Object.assign([], this.unitFinder.getHeroList()).sort((a,b) => {if(a.id < b.id){return -1;}return 0;});
@@ -63,7 +62,6 @@ export class EditBuild implements OnInit, AfterViewInit{
     ngOnInit(){
         this.stats = this.statCalculator.calculateAllStats(this.heroData);
 
-        console.log(this.heroData.blessing === 0 ? this.heroData.build.blessing : this.heroData.blessing);
         this.dragonflowers = Array(this.heroData.max_dragonflowers + 1).fill(0).map((x, i) => i);
         this.heroBuild = this.fb.group({
             hero: [{value: this.heroData.id, disabled: !this.settings.heroEnabled}, Validators.required],
@@ -88,7 +86,6 @@ export class EditBuild implements OnInit, AfterViewInit{
         this.heroBuild.valueChanges.subscribe((data) => {
             data = this.heroBuild.getRawValue();
             let build: BuildModel = {rarity: data.rarity, merges: data.merges, resplendent: data.resplendent, ivs: {boon: data.boon, bane: data.bane}, dragonflowers: data.dragonflowers, blessing: data.blessing, skills: {weapon: data.refine ? this.skill.getSkillById(data.refine) : this.skill.getSkillById(data.weapon), assist: this.skill.getSkillById(data.assist), special: this.skill.getSkillById(data.special), a: this.skill.getSkillById(data.a), b: this.skill.getSkillById(data.b), c: this.skill.getSkillById(data.c), s: this.skill.getSkillById(data.seal)}};
-            console.log(build);
             let uid = this.heroData.uid;
             this.heroData = {...this.unitsDic[data.hero], uid: uid, build: build};
 

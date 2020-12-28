@@ -27,7 +27,6 @@ export class ARBuilderStructuresDialog {
         );
         
         for(let i = 0; i < this.buildings.length; i++){
-            console.log(this.buildingCount);
             if(data.includes(this.buildings[i].image) && this.buildings[i].type !== "other"){
                 this.buildings[i].selected = true;
                 this.buildingCount += 1;

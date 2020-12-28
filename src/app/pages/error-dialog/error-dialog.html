@@ -1,0 +1,12 @@
+<div class="error-container">
+    <div class="child-container" style="margin-right: 5px; width: 200px;">
+        <a tabindex="-1" href="https://twitter.com/TlayoliStudio/status/1309199198563241984" target="_blank"><img src="assets/ui/veronica-not-found.png" matTooltip="Link to post (click)"/></a>
+        <p style="width: 200px; margin: 0px;">Art by <a href="https://twitter.com/TlayoliStudio" target="_blank">@TlayoliStudio</a></p>
+    </div>
+    <div class="child-container">
+        <h3>{{title}}</h3>
+        <p>{{message}}</p>
+        <div class="action-buttons">
+        <button mat-raised-button *ngFor="let button of buttons" [color]="button.color" (click)="close(button.value)">{{button.display}}</button>
+    </div>
+</div>

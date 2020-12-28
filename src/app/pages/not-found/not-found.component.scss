@@ -1,17 +1,21 @@
 mat-card{
-    height: 70%;
-    width: 65%;
+    height: auto;
+    width: 800px;
     top: 50%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
-
-    img{
-        height: 100%;
-        float: left;
-        border-right: 2px solid lightgrey;
-        padding-right: 50px;
-        margin-right: 20px;
+    display: flex;
+    align-items: center;
+    a{
+        width: auto;
+        img{
+            width: 400px;
+            // float: left;
+            border-right: 2px solid lightgrey;
+            padding-right: 50px;
+            margin-right: 20px;
+        }
     }
 
     .card-float-right{
@@ -21,7 +25,7 @@ mat-card{
         // float: left;
         h2{
             color: grey;
-            font-size: 3.6em;
+            font-size: 2em;
             text-align: center;
         }
 
@@ -30,10 +34,31 @@ mat-card{
             margin: auto;
         }
 
-        button{
+        .mat-raised-button{
             margin: 0 auto;
             display: block;
             margin-top: 50px;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px){
+    mat-card{
+        width: 450px;
+        a{
+            img{
+                width: 240px;
+                padding-right: 10px;
+            }
+        }
+        .card-float-right{
+            h2{
+                font-size: 1.2em;
+            }
+
+            .mat-raised-button{
+                margin-top: 20px;
+            }
         }
     }
 }
