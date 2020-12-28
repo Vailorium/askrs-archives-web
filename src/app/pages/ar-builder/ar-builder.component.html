@@ -54,7 +54,7 @@
             <mat-card class="hero_info_card" *ngIf="this.currentlyDisplayedHero" style="margin-bottom: 10px;">
                 <div class="hero_info_title">
                     <div class="hero_info_title_image">
-                        <img [src]="'assets/units/'+this.currentlyDisplayedHero.id+'.png'">
+                        <img [src]="'assets/units/'+this.currentlyDisplayedHero.image+'.png'">
                     </div>
                     <div class="hero_info_title_title">
                         <mat-card-title>{{this.currentlyDisplayedHero.name}}: {{this.currentlyDisplayedHero.title}}</mat-card-title>

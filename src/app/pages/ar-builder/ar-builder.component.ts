@@ -319,7 +319,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
         if(!res[i].blessing){
           res[i].build.blessing = parseInt(this.season.value);
         }
-        heroes.push({slot: i, uid: res[i].uid, image: res[i].id, display: res[i].name + ": " + res[i].title, folder: "units", type: "hero", permanent: false, isSchool: false});
+        heroes.push({slot: i, uid: res[i].uid, image: res[i].image, display: res[i].name + ": " + res[i].title, folder: "units", type: "hero", permanent: false, isSchool: false});
       }
       if(this.currentlyDisplayedHero){
         this.currentlyDisplayedHeroStats = this.stat.calculateAllStats(this.currentlyDisplayedHero, {season: [parseInt(this.season.value)], allies: this.units});

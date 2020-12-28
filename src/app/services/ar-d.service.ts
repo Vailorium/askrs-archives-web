@@ -212,7 +212,7 @@ export class ARDService{
                         ivs: {boon: boon ? boon : 0, bane: bane ? bane : 0}, blessing: heroData.blessing ? heroData.blessing : parseInt(season), skills: {
                             weapon: weapon, assist: assist, special: special, a: a, b: b, c: c, s: seal
                         }}});
-                        map[loc] = {slot: i - 1, uid: uid, image: heroData.id, display: heroData.name + ": " + heroData.title, folder: "units", type: "hero", permanent: false, isSchool: false};
+                        map[loc] = {slot: i - 1, uid: uid, image: heroData.image, display: heroData.name + ": " + heroData.title, folder: "units", type: "hero", permanent: false, isSchool: false};
                         heroData = uid = loc = merges = df = rarity = resplendent = boon = bane = refined = weapon = assist = special = a = b = c = seal = undefined;    
                     }
                     //{"slot":0,"uid":"8qQ2HRfeGiJ3VcG8kapPHQ","image":"bernadetta_2","display":"Bernadetta: Frosty Shut-In","folder":"units","type":"hero","permanent":false,"isSchool":false}
@@ -273,7 +273,7 @@ export class ARDService{
                     ivs: {boon: boon ? boon : 0, bane: bane ? bane : 0}, blessing: heroData.blessing ? heroData.blessing : parseInt(season), skills: {
                         weapon: weapon, assist: assist, special: special, a: a, b: b, c: c, s: seal
                     }}});
-                    map[loc] = {slot: heroesData.length, uid: uid, image: heroData.id, display: heroData.name + ": " + heroData.title, folder: "units", type: "hero", permanent: false, isSchool: false};
+                    map[loc] = {slot: heroesData.length, uid: uid, image: heroData.image, display: heroData.name + ": " + heroData.title, folder: "units", type: "hero", permanent: false, isSchool: false};
                 }
 
                 console.log(mapName, map, heroesData, season);

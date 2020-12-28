@@ -112,6 +112,11 @@ export class EditBuild implements OnInit, AfterViewInit{
     
     updateRefines(){
         if(this.heroBuild.value['weapon']){
+            if(this.heroBuild.value['refine']){
+                if(this.heroBuild.value['weapon'] !== this.skill.getBaseForm(this.heroBuild.value['refine'])){
+                    this.heroBuild.patchValue({refine: null})
+                }
+            }
             this.refines = this.skill.getRefinesById(this.heroBuild.value['weapon']);
             if(this.refines){
                 if(this.refines.length > 0){

@@ -15,4 +15,5 @@ export class SkillModel{
     score: number;
     cooldown: number; // for special skills only
     stats: Dictionary<number>;
+    base?: string;
 }
