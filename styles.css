@@ -586,6 +586,7 @@ div.page_content.tab {
 .unit_icon_tiny {
   height: 30px;
   width: 30px;
+  vertical-align: middle;
 }
 .unit_icon_small {
   height: 50px;
