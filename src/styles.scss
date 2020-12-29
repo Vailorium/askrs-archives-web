@@ -134,3 +134,9 @@ div.page_content{
 .ar_building[src$="blank.png"]{
     cursor: default;
 }
+
+@media only screen and (max-width: 600px){
+    div.page_content{
+        padding-bottom: 0px;
+    }
+}

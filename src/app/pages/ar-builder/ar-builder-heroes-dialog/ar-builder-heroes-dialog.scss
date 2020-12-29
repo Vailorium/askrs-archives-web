@@ -13,13 +13,54 @@ mat-button-toggle div{
         display: flex;
         flex-wrap: wrap;
         div{
-            height: 50px;
-            width: 50px;
+            height: 45px;
+            width: 45px;
             margin: 3px;
             img{
-                height: 50px;
-                width: 50px;
+                height: 45px;
+                width: 45px;
                 // box-sizing: border-box;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px){
+    mat-button-toggle{
+        height: 35px;
+        width: 35px;
+    }
+
+    ::ng-deep .mat-button-toggle-label-content {
+        line-height: 35px !important;
+        padding: 0 7.5px !important;
+    }
+
+    mat-button-toggle button{
+        height: 35px;
+        width: 35px;
+    }
+    mat-button-toggle img{
+        width: 20px;
+        height: auto;
+    }
+    
+    mat-button-toggle div{
+        height: 20px;
+        width: 20px;
+    }
+
+    .hero_icons_container{
+        .hero_icons{
+            div{
+                height: 40px;
+                width: 40px;
+                margin: 3px;
+                img{
+                    height: 40px;
+                    width: 40px;
+                    // box-sizing: border-box;
+                }
             }
         }
     }

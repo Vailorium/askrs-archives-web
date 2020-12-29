@@ -49,3 +49,15 @@ form{
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+
+@media only screen and (max-width: 600px){
+    hr{
+        margin-bottom: 10px;
+    }
+    form{
+        justify-content:space-between;
+    }
+    mat-form-field{
+        width: 120px;
+    }
+}

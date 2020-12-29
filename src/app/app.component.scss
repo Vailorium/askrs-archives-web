@@ -63,20 +63,31 @@ header {
         margin-left: 10px;
     }
 }
-// a{
-//     $padding: 10px;
-//     user-select: none;
-//     text-decoration: none;
-//     color: white;
-//     font-family: 'roboto', 'sans-serif';
-//     height: 50px;
-//     line-height: 50px - ($padding * 2);
-//     padding: 10px;
-//     padding-left: 25px;
-//     padding-right: 25px;
-//     box-sizing: border-box;
-//     display: inline-block;
-//     &:hover{
-//         background-color: rgba(255, 255, 255, 0.158);
-//     }
-// }
+
+@media only screen and (max-width: 600px){
+    footer{
+        position: initial;
+        padding: 0;
+        align-items: initial;
+        height: auto;
+        p{
+            display: none;
+        }
+        .footer_buttons{
+            width: 100%;
+            flex-wrap: wrap;
+            button{
+                height: 50px;
+                width: 100%;
+                margin-left: 0px;
+                a{
+                    width: 100%;
+                    img{
+                        height: 36px;
+                        margin-top: 7px;
+                    }   
+                }
+            }
+        }
+    }
+}

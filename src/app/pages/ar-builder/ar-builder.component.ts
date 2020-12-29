@@ -366,6 +366,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   openEditBuildDialog(){
     let editBuildDialog = this.dialog.open(AREditBuildDialog, {
       width: '450px',
+      height: '80%',
       data: this.currentlyDisplayedHero
     });
 

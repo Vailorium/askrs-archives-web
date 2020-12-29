@@ -29,4 +29,8 @@ export class AppComponent {
     contributions.afterClosed().subscribe(() => {contributions = null;}); 
   }
 
+  openDiscordLink(){
+    window.open("https://discord.gg/z9YSeEqzg4", "_blank");
+  }
+
 }
