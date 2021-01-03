@@ -45,7 +45,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   public units: HeroInfoModel[] = [];
 
   // AR Map Metadata
-  public MAX_LIFT_LOSS = 100;
+  public readonly MAX_LIFT_LOSS = 100;
   public currentLiftLoss = 100;
   public counts = {defense: 1, traps: 0, decorations: 0};
 
@@ -66,6 +66,19 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   // Canvas
   @ViewChild('rangeCanvas') rangeCanvas: ElementRef<HTMLCanvasElement>;
   ctx: CanvasRenderingContext2D;
+
+  @ViewChild('gridCanvas') gridCanvas: ElementRef<HTMLCanvasElement>;
+  gridCtx: CanvasRenderingContext2D;
+
+  @ViewChild('dragCanvas') dragCanvas: ElementRef<HTMLCanvasElement>;
+  dragCtx: CanvasRenderingContext2D;
+
+  // Canvas Colors
+  public readonly gridLineWidth = 2;
+  public readonly gridColor = "rgb(64, 64, 64)";
+
+  public readonly dragRangeColor = "rgba(0, 0, 255, 0.3)";
+  public readonly dragRangeEnteredColor = "rgba(0, 0, 255, 0.7)";
 
   constructor(private router: Router, private dialog: MatDialog, private mapFinder: MapFinderService, private stat: StatsCalcualator, private titleService: Title, private ard: ARDService, private route: ActivatedRoute) {
 
@@ -138,6 +151,33 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(){
     // if put into ngOnInit throws error
     this.ctx = this.rangeCanvas.nativeElement.getContext("2d");
+
+    this.dragCtx = this.dragCanvas.nativeElement.getContext("2d");
+    this.dragCtx.fillStyle = this.dragRangeColor;
+
+    this.gridCtx = this.gridCanvas.nativeElement.getContext("2d");
+    this.gridCtx.lineWidth = this.gridLineWidth;
+    this.gridCtx.strokeStyle = this.gridColor;
+
+    this.showGrid();
+  }
+
+  showGrid(){
+    for(let x = 1; x <= 5; x++){
+      this.gridCtx.moveTo(75 * x, 0);
+      this.gridCtx.lineTo(75 * x, 450);
+      this.gridCtx.stroke();
+    }
+
+    for(let y = 0; y <= 6; y++){
+      this.gridCtx.moveTo(0, 75 * y);
+      this.gridCtx.lineTo(450, 75 * y);
+      this.gridCtx.stroke();
+    }
+  }
+
+  hideGrid(){
+    this.gridCtx.clearRect(0, 0, 450, 600);
   }
 
   openDescription(tile: ARTile) {
@@ -383,6 +423,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   }
 
   drop(event: CdkDragDrop<any>){
+    this.hideDragRange();
     if(!event.container.data.item.permanent){
       if(event.previousContainer.data.item.type === "hero"){
         if(event.container.data.index < 12){
@@ -487,6 +528,76 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
 
   getLink(){
     let link = this.dialog.open(ARURLShareDialog, {data: {map: this.currentMap, mapData: this.map, unitData: this.units, season: this.season.value}, maxHeight: "80%", width: "450px"});
+  }
+
+  // Dragging heroes & structures visual indicators 
+  dragTimer;
+  startDragRange(tile: ARTile, index: number){
+    // show drag range after 100ms
+    if(tile.type !== "blank"){
+      this.dragTimer = setTimeout(() => {
+        this.showDragRange(tile, index);
+      }, 100);
+    }
+  }
+
+  stopDragRange(){
+    clearTimeout(this.dragTimer);
+
+    this.hideDragRange();
+  }
+
+  hideDragRange(){
+    this.currentDragIndex = 0;
+    this.dragCtx.clearRect(0, 0, 450, 600);
+  }
+
+  currentDragIndex: number;
+  currentHeight: number;
+  showDragRange(tile: ARTile, index: number){
+    this.currentDragIndex = index;
+
+    let w = 0;
+    let h = 0;
+    if(tile.type === "hero"){
+      w = 6;
+      h = 2;
+      this.currentHeight = h;
+    } else {
+      w = 6;
+      h = 6;
+      this.currentHeight = h;
+    }
+
+    for(let x = 0; x < w; x++){
+      for(let y = 0; y < h; y++){
+        if(this.map[(y * 6) + x].permanent === false && (y * 6) + x !== index){
+          this.dragCtx.fillRect(75 * x, 75 * y, 75, 75);
+        }
+      }
+    }
+  }
+
+  dragEnter(tile: ARTile, index: number){
+    let x = index % 6;
+    let y = Math.floor(index / 6);
+    
+    if(index !== this.currentDragIndex && tile.permanent === false && y < this.currentHeight){
+      this.dragCtx.clearRect(x * 75, y * 75, 75, 75);
+      this.dragCtx.fillStyle = this.dragRangeEnteredColor;
+      this.dragCtx.fillRect(x * 75, y * 75, 75, 75);
+      this.dragCtx.fillStyle = this.dragRangeColor;
+    }
+  }
+
+  dragExit(tile: ARTile, index: number){
+    let x = index % 6;
+    let y = Math.floor(index / 6);
+    
+    if(index !== this.currentDragIndex && tile.permanent === false && y < this.currentHeight){
+      this.dragCtx.clearRect(x * 75, y * 75, 75, 75);
+      this.dragCtx.fillRect(x * 75, y * 75, 75, 75);
+    }
   }
   
 }
