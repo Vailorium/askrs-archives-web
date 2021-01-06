@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatGridTileFooterCssMatStyler } from '@angular/material';
 import { Title } from '@angular/platform-browser';
-import { ARTile, Blessing, Dictionary, SaveDataModel, Stats } from 'src/app/models';
+import { ARSettingsModel, ARTile, Blessing, Dictionary, MovementType, SaveDataModel, Stats, WeaponType } from 'src/app/models';
 import { HeroInfoModel } from 'src/app/models/HeroInfoModel';
 import { ARDService } from 'src/app/services/ar-d.service';
 import { MapFinderService } from 'src/app/services/map-finder.service';
@@ -17,6 +17,7 @@ import { AREditBuildDialog } from './ar-edit-build-dialog/ar-edit-build-dialog';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ARURLShareDialog } from './ar-url-share-dialog/ar-url-share-dialog';
 import { ErrorDialog } from '../error-dialog/error-dialog';
+import { ARSettingsDialog } from './ar-settings-dialog/ar-settings-dialog';
 
 interface ARStructureData{
   image: string;
@@ -38,6 +39,9 @@ const STRUCTURE_DATA: Dictionary<ARStructureData> = {"fortress":{image:"fortress
   styleUrls: ['./ar-builder.component.scss']
 })
 export class ArBuilderComponent implements OnInit, AfterViewInit {
+
+  // AR Settings
+  private settings: ARSettingsModel;
 
   // AR Map Data
   public map: ARTile[] = [{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:true,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:true,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:true,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false}];
@@ -62,6 +66,8 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
 
   // Enum
   public BlessingEnum = Blessing;
+  public MovementEnum = MovementType;
+  public WeaponEnum = WeaponType;
 
   // Canvas
   @ViewChild('rangeCanvas') rangeCanvas: ElementRef<HTMLCanvasElement>;
@@ -134,7 +140,13 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
       // Compulsory structures
       this.updateMapStructures([{image: "aether_amphorae", display: "Aether Amphorae", folder: "aether_raids", type: "other", permanent: false, isSchool: false}, {image: "aether_fountain", display: "Aether Fountain", folder: "aether_raids", type: "other", permanent: false, isSchool: false}, {image: "fortress", display: "Fortress", folder: "aether_raids", type: "other", permanent: false, isSchool: false}]);
 
-    }    
+    }
+    
+    try{
+      this.settings = JSON.parse(localStorage.getItem("ar-settings"));
+    } catch(e) {
+      this.settings = {t: 0};
+    }
     this.season.valueChanges.subscribe((data) => {
       for(let i = 0; i < this.units.length; i++){
         if(!this.units[i].blessing){
@@ -160,6 +172,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     this.gridCtx.strokeStyle = this.gridColor;
 
     this.showGrid();
+    // this.hideGrid();
   }
 
   showGrid(){
@@ -572,7 +585,11 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     for(let x = 0; x < w; x++){
       for(let y = 0; y < h; y++){
         if(this.map[(y * 6) + x].permanent === false && (y * 6) + x !== index){
+          this.dragCtx.fillStyle = this.gridColor;
           this.dragCtx.fillRect(75 * x, 75 * y, 75, 75);
+          this.dragCtx.clearRect(75 * x + 1, 75 * y + 1, 73, 73);
+          this.dragCtx.fillStyle = this.dragRangeColor;
+          this.dragCtx.fillRect(75 * x + 1, 75 * y + 1, 73, 73);
         }
       }
     }
@@ -596,8 +613,27 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     
     if(index !== this.currentDragIndex && tile.permanent === false && y < this.currentHeight){
       this.dragCtx.clearRect(x * 75, y * 75, 75, 75);
-      this.dragCtx.fillRect(x * 75, y * 75, 75, 75);
+      this.dragCtx.fillStyle = this.gridColor;
+      this.dragCtx.fillRect(75 * x, 75 * y, 75, 75);
+      this.dragCtx.clearRect(75 * x + 1, 75 * y + 1, 73, 73);
+      this.dragCtx.fillStyle = this.dragRangeColor;
+      this.dragCtx.fillRect(75 * x + 1, 75 * y + 1, 73, 73);
     }
   }
   
+  // Settings Dialog
+  openSettingsDialog(){
+    let settingsDialog = this.dialog.open(ARSettingsDialog, {data: this.settings, width: '450px', height: '80%'});
+  }
+
+  // Getters for movement/unit type icons
+  getWeaponType(uid: string){
+    let hero = this.units.find(x => x.uid === uid);
+    return WeaponType[hero.unit_type];
+  }
+
+  getMovementType(uid: string){
+    let hero = this.units.find(x => x.uid === uid);
+    return MovementType[hero.movement_type];
+  }
 }

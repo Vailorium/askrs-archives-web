@@ -22,12 +22,16 @@
             </mat-card>
             <mat-card class="save_actions">
                 <div class="action-buttons">
-                    <button mat-raised-button color="primary" (click)="openSaveDialog()" style="width:40%;">Save/Load</button>
-                    <button mat-raised-button color="primary" (click)="exportData()" style="width:40%;">Export</button>
+                    <button mat-raised-button color="primary" (click)="openSaveDialog()" style="width:40%;"><mat-icon>save icon</mat-icon> Save/Load</button>
+                    <button mat-raised-button color="primary" (click)="exportData()" style="width:40%;"><mat-icon>save_alt</mat-icon> Export</button>
                 </div>
                 <div class="action-buttons" style="margin-top: 8px;">
-                    <button mat-raised-button color="primary" (click)="getLink()" style="width:40%;">Share Link</button>
-                    <button mat-raised-button color="warn" (click)="deleteCurrentData()" style="width:40%;">Clear</button>
+                    <button mat-raised-button color="primary" (click)="getLink()" style="width:40%;"><mat-icon>link</mat-icon> Share Link</button>
+                    <button mat-raised-button color="primary" style="width:40%;"><mat-icon>image</mat-icon> Save Image</button>
+                </div>
+                <div class="action-buttons" style="margin-top: 8px;">
+                    <button mat-raised-button color="primary" (click)="openSettingsDialog()" style="width:40%;"><mat-icon>settings icon</mat-icon> Settings</button>
+                    <button mat-raised-button color="warn" (click)="deleteCurrentData()" style="width:40%;"><mat-icon>clear</mat-icon> Clear</button>
                 </div>
             </mat-card>
         </div>
@@ -40,9 +44,11 @@
                 <div class="ar_builder_overlay"> <!-- AR Defense Map -->
                     <ng-container *ngFor="let tile of map; let i = index">
                         <div class="map-item" cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="{item:tile, index:i}" (cdkDropListDropped)="drop($event)" (cdkDropListEntered)="dragEnter(tile, i)" (cdkDropListExited)="dragExit(tile, i)" (click)="openDescription(tile)">
-                            <div class="inner" cdkDrag [cdkDragDisabled]="tile.type === 'blank'">
+                            <div class="inner" cdkDrag [cdkDragDisabled]="tile.type === 'blank'" (pointerdown)="startDragRange(tile, i)" (pointerup)="stopDragRange()">
                                 <div class="placeholder" *cdkDragPlaceholder></div>
-                                <img [src]="'assets/'+tile.folder+'/'+tile.image+'.png'" class="ar_building"  (mousedown)="startDragRange(tile, i)" (mouseup)="stopDragRange()">
+                                <img [src]="'assets/ui/weapon/'+getWeaponType(tile.uid)+'.png'" class="ar_building_unit_type" *ngIf="tile.type === 'hero'">
+                                <img [src]="'assets/ui/movement/'+getMovementType(tile.uid)+'.png'" class="ar_building_movement_type" *ngIf="tile.type === 'hero'">
+                                <img [src]="'assets/'+tile.folder+'/'+tile.image+'.png'" class="ar_building">
                             </div>
                         </div>
                     </ng-container>
@@ -85,7 +91,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>DF: {{this.currentlyDisplayedHero.build.dragonflowers}}</td>
+                            <td>
+                                <div class="dragonflower_box">
+                                    DF: {{this.currentlyDisplayedHero.build.dragonflowers}}
+                                    <img class="dragonflower_icon" [src]="'assets/ui/'+MovementEnum[this.currentlyDisplayedHero.movement_type]+'_dragonflower.png'">
+                                </div>
+                            </td>
                             <td style="background-color:#7dff88">
                                 <div class="skill_box">
                                     <div class="skill_container_small">
@@ -97,7 +108,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>HP: {{this.currentlyDisplayedHeroStats.hp}}</td>
+                            <td [ngClass]="{'bold_boon': this.currentlyDisplayedHero.build.ivs.boon === 1, 'bold_bane': this.currentlyDisplayedHero.build.ivs.bane === 1 && this.currentlyDisplayedHero.build.merges === 0}">HP: {{this.currentlyDisplayedHeroStats.hp}}</td>
                             <td style="background-color:#df7dff">
                                 <div class="skill_box">
                                     <div class="skill_container_small">
@@ -109,7 +120,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>ATK: {{this.currentlyDisplayedHeroStats.atk}}</td>
+                            <td [ngClass]="{'bold_boon': this.currentlyDisplayedHero.build.ivs.boon === 2, 'bold_bane': this.currentlyDisplayedHero.build.ivs.bane === 2 && this.currentlyDisplayedHero.build.merges === 0}">ATK: {{this.currentlyDisplayedHeroStats.atk}}</td>
                             <td>
                                 <div class="skill_box">
                                     <div class="skill_container_small">
@@ -122,7 +133,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>SPD: {{this.currentlyDisplayedHeroStats.spd}}</td>
+                            <td [ngClass]="{'bold_boon': this.currentlyDisplayedHero.build.ivs.boon === 3, 'bold_bane': this.currentlyDisplayedHero.build.ivs.bane === 3 && this.currentlyDisplayedHero.build.merges === 0}">SPD: {{this.currentlyDisplayedHeroStats.spd}}</td>
                             <td>
                                 <div class="skill_box">
                                     <div class="skill_container_small">
@@ -135,7 +146,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>DEF: {{this.currentlyDisplayedHeroStats.def}}</td>
+                            <td [ngClass]="{'bold_boon': this.currentlyDisplayedHero.build.ivs.boon === 4, 'bold_bane': this.currentlyDisplayedHero.build.ivs.bane === 4 && this.currentlyDisplayedHero.build.merges === 0}">DEF: {{this.currentlyDisplayedHeroStats.def}}</td>
                             <td>
                                 <div class="skill_box">
                                     <div class="skill_container_small">
@@ -148,7 +159,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>RES: {{this.currentlyDisplayedHeroStats.res}}</td>
+                            <td [ngClass]="{'bold_boon': this.currentlyDisplayedHero.build.ivs.boon === 5, 'bold_bane': this.currentlyDisplayedHero.build.ivs.bane === 5 && this.currentlyDisplayedHero.build.merges === 0}">RES: {{this.currentlyDisplayedHeroStats.res}}</td>
                             <td>
                                 <div class="skill_box">
                                     <div class="skill_container_small">

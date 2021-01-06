@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatTableModule, MatTableDataSource, MatFormFieldModule, MatInputModule, MatDividerModule, MatRippleModule, MatSnackBarModule, MatCardModule, MatSelectModule, MatOptionModule, MatAutocompleteModule, MatTooltipModule, MatCheckboxModule, MatProgressSpinnerModule, MatGridListModule, MatTabsModule, MatDialogModule, MatExpansionPanel, MatExpansionModule, MatPaginatorModule, MatStepperModule, MatButtonToggleModule } from '@angular/material';
+import { MatButtonModule, MatTableModule, MatTableDataSource, MatFormFieldModule, MatInputModule, MatDividerModule, MatRippleModule, MatSnackBarModule, MatCardModule, MatSelectModule, MatOptionModule, MatAutocompleteModule, MatTooltipModule, MatCheckboxModule, MatProgressSpinnerModule, MatGridListModule, MatTabsModule, MatDialogModule, MatExpansionPanel, MatExpansionModule, MatPaginatorModule, MatStepperModule, MatButtonToggleModule, MatIconModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SkillInfoDialog } from './pages/skill-info-dialog/skill-info-dialog';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
@@ -25,6 +25,7 @@ import { ARBuilderSaveDialog } from './pages/ar-builder/ar-builder-save-dialog/a
 import { ConfirmDialog } from './pages/confirm-dialog/confirm-dialog';
 import { ARURLShareDialog } from './pages/ar-builder/ar-url-share-dialog/ar-url-share-dialog';
 import { ErrorDialog } from './pages/error-dialog/error-dialog';
+import { ARSettingsDialog } from './pages/ar-builder/ar-settings-dialog/ar-settings-dialog';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ErrorDialog } from './pages/error-dialog/error-dialog';
     ContributionsDialog,
     ConfirmDialog,
     ARURLShareDialog,
-    ErrorDialog
+    ErrorDialog,
+    ARSettingsDialog
   ],
   imports: [
     ReactiveFormsModule,
@@ -76,10 +78,11 @@ import { ErrorDialog } from './pages/error-dialog/error-dialog';
     MatStepperModule,
     HttpClientModule,
     DragDropModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatIconModule
   ],
   providers: [Title],
   bootstrap: [AppComponent],
-  entryComponents: [ErrorDialog, SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, ARBuilderTerrainDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog, ARBuilderSaveDialog, ConfirmDialog, ARURLShareDialog]
+  entryComponents: [ARSettingsDialog, ErrorDialog, SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, ARBuilderTerrainDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog, ARBuilderSaveDialog, ConfirmDialog, ARURLShareDialog]
 })
 export class AppModule { }

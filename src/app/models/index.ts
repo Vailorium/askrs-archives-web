@@ -8,3 +8,4 @@ export * from "./Enums";
 export * from './HeroInfoModel';
 export * from './BuildModel';
 export * from './SaveDataModel';
+export * from './ARSettingsModel';
