@@ -34,15 +34,13 @@
         <div class="ar_builder_left_container ar_builder_child_container">
             <div class="ar_builder_map_container">
                 <canvas id="dangerRange" height="600" width="450" #rangeCanvas></canvas>
-                <canvas id="dragRange" height="600" width="450" #dragCanvas></canvas>
-                <canvas id="mapGrid" height="600" width="450" #gridCanvas></canvas>
                 <img class="ar_builder_map" [src]="'assets/maps/AR/'+this.currentMap+'.png'">
                 <div class="ar_builder_overlay"> <!-- AR Defense Map -->
                     <ng-container *ngFor="let tile of map; let i = index">
-                        <div class="map-item" cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="{item:tile, index:i}" (cdkDropListDropped)="drop($event)" (cdkDropListEntered)="dragEnter(tile, i)" (cdkDropListExited)="dragExit(tile, i)" (click)="openDescription(tile)">
+                        <div class="map-item" cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="{item:tile, index:i}" (cdkDropListDropped)="drop($event)" (click)="openDescription(tile)">
                             <div class="inner" cdkDrag [cdkDragDisabled]="tile.type === 'blank'">
                                 <div class="placeholder" *cdkDragPlaceholder></div>
-                                <img [src]="'assets/'+tile.folder+'/'+tile.image+'.png'" class="ar_building"  (mousedown)="startDragRange(tile, i)" (mouseup)="stopDragRange()">
+                                <img [src]="'assets/'+tile.folder+'/'+tile.image+'.png'" class="ar_building">
                             </div>
                         </div>
                     </ng-container>

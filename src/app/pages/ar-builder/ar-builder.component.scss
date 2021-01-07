@@ -54,17 +54,6 @@
     z-index: 1;
 }
 
-#dragRange{
-    position: absolute;
-    z-index: 1;
-}
-
-#mapGrid{
-    position: absolute;
-    z-index: 1;
-}
-
-
 .ar_builder_data{
     background-color: white;
     width: 100%;
@@ -284,15 +273,6 @@ mat-button-toggle div{
                     height: 460px;
                 }
                 #dangerRange{
-                    width: 345px;
-                    height: 460px;
-                }
-
-                #dragRange{
-                    width: 345px;
-                    height: 460px;
-                }
-                #mapGrid{
                     width: 345px;
                     height: 460px;
                 }
