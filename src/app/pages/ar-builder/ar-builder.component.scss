@@ -96,24 +96,6 @@
     z-index: 3;
 }
 
-.ar_building_unit_type{
-    z-index: 4;
-    height: 25px;
-    width: 25px;
-    position: absolute;
-    left: 2px;
-    top: 2px;
-}
-
-.ar_building_movement_type{
-    z-index: 4;
-    height: 25px;
-    width: 25px;
-    position: absolute;
-    bottom: 2px;
-    right: 2px;
-}
-
 .ar_builder_buildings{
     width: 525px;
     display: flex;

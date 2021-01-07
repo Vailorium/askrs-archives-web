@@ -80,12 +80,6 @@ div.page_content{
     align-items: center;
 }
 
-.dragonflower_box{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .movement_icon_small{
     height: 28px;
     width: 28px;
@@ -139,11 +133,6 @@ div.page_content{
 
 .ar_building[src$="blank.png"]{
     cursor: default;
-}
-
-.dragonflower_icon{
-    height: 30px;
-    // vertical-align: center;
 }
 
 @media only screen and (max-width: 600px){
