@@ -1,3 +1,3 @@
 export interface ARSettingsModel{
-    t: number;
+    grid: boolean;
 }

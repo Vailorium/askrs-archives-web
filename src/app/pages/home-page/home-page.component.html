@@ -1,0 +1,8 @@
+<div class="page_content">
+    <mat-card *ngFor="let article of articles" [id]="article.id">
+        <mat-card-title>{{article.title}}</mat-card-title>
+        <mat-card-subtitle>{{article.timestamp|date:'medium'}}</mat-card-subtitle>
+        <img mat-card-image [src]="'assets/articles/'+article.img">
+        <mat-card-content [innerHTML]="article.text"></mat-card-content>
+    </mat-card>
+</div>

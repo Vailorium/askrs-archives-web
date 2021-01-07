@@ -44,7 +44,7 @@
                 <div class="ar_builder_overlay"> <!-- AR Defense Map -->
                     <ng-container *ngFor="let tile of map; let i = index">
                         <div class="map-item" cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="{item:tile, index:i}" (cdkDropListDropped)="drop($event)" (cdkDropListEntered)="dragEnter(tile, i)" (cdkDropListExited)="dragExit(tile, i)" (click)="openDescription(tile)">
-                            <div class="inner" cdkDrag [cdkDragDisabled]="tile.type === 'blank'" (pointerdown)="startDragRange(tile, i)" (pointerup)="stopDragRange()">
+                            <div class="inner" cdkDrag cdkDragBoundary=".ar_builder_map_container" [cdkDragDisabled]="tile.type === 'blank'" (pointerdown)="startDragRange(tile, i)" (pointerup)="stopDragRange()">
                                 <div class="placeholder" *cdkDragPlaceholder></div>
                                 <img [src]="'assets/ui/weapon/'+getWeaponType(tile.uid)+'.png'" class="ar_building_unit_type" *ngIf="tile.type === 'hero'">
                                 <img [src]="'assets/ui/movement/'+getMovementType(tile.uid)+'.png'" class="ar_building_movement_type" *ngIf="tile.type === 'hero'">
