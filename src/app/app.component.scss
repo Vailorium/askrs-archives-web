@@ -55,10 +55,9 @@ footer{
     }
 }
 header {
-    display: flex;
-    align-items: center;
     box-sizing: border-box;
     button{
+        margin-top: 7px;
         color: white;
         float: left;
         margin-left: 10px;

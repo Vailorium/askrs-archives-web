@@ -145,11 +145,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     try{
       this.settings = JSON.parse(localStorage.getItem("ar-settings"));
     } catch(e) {
-      this.settings = {grid: true};
-    }
-
-    if(!this.settings){
-      this.settings = {grid: true};
+      this.settings = {t: 0};
     }
     this.season.valueChanges.subscribe((data) => {
       for(let i = 0; i < this.units.length; i++){
@@ -175,11 +171,8 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     this.gridCtx.lineWidth = this.gridLineWidth;
     this.gridCtx.strokeStyle = this.gridColor;
 
-    if(this.settings.grid === true){
-      this.showGrid();
-    } else {
-      this.hideGrid();
-    }
+    this.showGrid();
+    // this.hideGrid();
   }
 
   showGrid(){
@@ -631,17 +624,6 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   // Settings Dialog
   openSettingsDialog(){
     let settingsDialog = this.dialog.open(ARSettingsDialog, {data: this.settings, width: '450px', height: '80%'});
-  
-    settingsDialog.afterClosed().subscribe((val: ARSettingsModel) => {
-      this.settings = val;
-      localStorage.setItem('ar-settings', JSON.stringify(this.settings));
-
-      if(this.settings.grid){
-        this.showGrid();
-      } else {
-        this.hideGrid();
-      }
-    });
   }
 
   // Getters for movement/unit type icons
@@ -654,7 +636,4 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     let hero = this.units.find(x => x.uid === uid);
     return MovementType[hero.movement_type];
   }
-
-  // Save image dialog
-  
 }
