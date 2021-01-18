@@ -12,7 +12,7 @@ import { ReportBugDialog } from './pages/report-bug-dialog/report-bug-dialog';
 export class AppComponent {
   title = 'Askrs Archives';
 
-  version = "0.1.1";
+  version = "0.1.2";
 
   constructor(private dialog: MatDialog){
   }
