@@ -1,0 +1,27 @@
+<!--
+    SETTINGS:
+    - Show mov type icon
+    - Show weapon type icon
+    - Show weapon builds (to the side)
+    - Show season
+    - Show lift loss
+    - Show grid (?)
+    - Show threat range (eventually)
+    - show sharable link?
+-->
+<span id="dialog_close" (click)="this.close()" class="material-icons">close</span>
+<div class="settings_container">
+    <h2 style="font-family: 'Fire_Emblem_Heroes_Font'">Save Image</h2>
+    <hr />
+    <form [formGroup]="options">
+        <mat-checkbox formControlName="movement">Movement Type Icon</mat-checkbox>
+        <mat-checkbox formControlName="weapons">Weapon Type Icon</mat-checkbox>
+        <mat-checkbox formControlName="builds">Hero Builds</mat-checkbox>
+        <mat-checkbox formControlName="season">Season</mat-checkbox>
+        <mat-checkbox formControlName="lift">Lift Loss</mat-checkbox>
+    </form>
+    <a mat-raised-button color="primary" download="ar-d.png" [disabled]="!this.imageData" [href]='this.imageData'>Save</a>
+    <h3>Preview</h3>
+    <hr />
+</div>
+<canvas #previewCanvas height="600" width="450"></canvas>

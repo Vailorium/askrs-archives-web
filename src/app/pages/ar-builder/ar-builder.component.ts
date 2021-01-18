@@ -18,6 +18,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ARURLShareDialog } from './ar-url-share-dialog/ar-url-share-dialog';
 import { ErrorDialog } from '../error-dialog/error-dialog';
 import { ARSettingsDialog } from './ar-settings-dialog/ar-settings-dialog';
+import { ARSaveImageDialog } from './ar-save-image-dialog/ar-save-image-dialog';
 
 interface ARStructureData{
   image: string;
@@ -656,5 +657,9 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   }
 
   // Save image dialog
-  
+  openSaveImageDialog(){
+    let saveImage = this.dialog.open(ARSaveImageDialog, 
+      {data: {mapName: this.currentMap, map: this.map, units: this.units}, panelClass: 'save-image-dialog-panel', maxHeight: "80%", maxWidth: "810px"}
+    );
+  }
 }
