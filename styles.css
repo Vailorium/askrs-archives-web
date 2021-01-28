@@ -623,6 +623,11 @@ div.page_content.tab {
   display: flex;
   align-items: center;
 }
+.dragonflower_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .movement_icon_small {
   height: 28px;
   width: 28px;
@@ -667,8 +672,18 @@ div.page_content.tab {
 .ar_building[src$="blank.png"] {
   cursor: default;
 }
+.dragonflower_icon {
+  height: 30px;
+}
 @media only screen and (max-width: 600px) {
   div.page_content {
     padding-bottom: 0px;
   }
+}
+@font-face {
+  font-family: "Fire_Emblem_Heroes_Font";
+  src: url('Fire_Emblem_Heroes_Font.woff2'), url('Fire_Emblem_Heroes_Font.woff'), url('Fire_Emblem_Heroes_Font.ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: normal;
 }
