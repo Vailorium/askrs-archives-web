@@ -194,7 +194,7 @@ export class ARDService{
                 var heroData: HeroDataModel, uid, loc, merges, df, rarity, resplendent, boon, bane, refined, weapon, assist, special, a, b, c, seal;
                 
                 let heroesData: HeroInfoModel[] = [];
-                for(let i = 0; i < 6; i++){
+                for(let i = 0; i < 7; i++){
                     if(data[0] === "$") data.splice(0,1);
                     if(data.length === 0){
                         break;
