@@ -150,6 +150,10 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
       this.settings = {grid: true, movement: true, weapon: true};
     }
 
+    if(localStorage.getItem('ar-settings') === null){
+      this.settings = {grid: true, movement: true, weapon: true};
+    }
+
     if(!this.settings.grid){
       this.settings = {grid: true, movement: true, weapon: true};
     }
@@ -163,6 +167,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     if(this.settings.weapon === undefined){
       this.settings.weapon = true;
     }
+
     this.season.valueChanges.subscribe((data) => {
       for(let i = 0; i < this.units.length; i++){
         if(!this.units[i].blessing){
