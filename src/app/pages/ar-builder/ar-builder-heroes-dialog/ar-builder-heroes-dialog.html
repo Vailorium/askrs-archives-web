@@ -1,6 +1,6 @@
 <span id="dialog_close" (click)="this.close()" class="material-icons">close</span>
 <div class="selected_heroes_container">
-    <div class="selected_hero" *ngFor="let i of [0,1,2,3,4,5]">
+    <div class="selected_hero" *ngFor="let i of [0,1,2,3,4,5, 6]">
         <img src="assets/ui/hero-selector.png">
         <img class="hero" [src]="'assets/units/'+this.selectedHeroes[i].image+'.png'" *ngIf="this.selectedHeroes.length > i">
         <img class="remove_icon" src="assets/ui/x.png" *ngIf="this.selectedHeroes.length > i" (click)="removeHero(i)">

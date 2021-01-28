@@ -75,7 +75,7 @@ export class ARBuilderHeroesDialog {
         if(this.selectedHeroes.length < 6){
             let baseBuild: BuildModel = {blessing: hero.blessing, rarity: 5, merges: 0, skills: {}, resplendent: false, ivs: {boon: IVS.neutral, bane: IVS.neutral}, dragonflowers: 0};
             this.selectedHeroes.push({...hero, ...{build: baseBuild, uid: short.generate()}});
-        } else if(this.hasARExtra() && this.selectedHeroes.length < 7) {
+        } else if((this.hasARExtra() || (hero.ar_extra === true && hero.blessing === this.season)) && this.selectedHeroes.length < 7) {
             let baseBuild: BuildModel = {blessing: hero.blessing, rarity: 5, merges: 0, skills: {}, resplendent: false, ivs: {boon: IVS.neutral, bane: IVS.neutral}, dragonflowers: 0};
             this.selectedHeroes.push({...hero, ...{build: baseBuild, uid: short.generate()}});
         } else if(this.hasARExtra()){
