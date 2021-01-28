@@ -19,13 +19,14 @@ export class ARBuilderHeroesDialog {
     unfilteredList: HeroDataModel[];
 
     heroFilter: FormGroup;
-
+    season: number;
     pageNumber: number = 0;
 
     selectedHeroes: HeroInfoModel[] = [];
     
-    constructor(public dialogRef: MatDialogRef<ARBuilderHeroesDialog>, private heroes: UnitFinderService, private fb: FormBuilder, private snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: HeroInfoModel[]){
-        this.selectedHeroes = data;
+    constructor(public dialogRef: MatDialogRef<ARBuilderHeroesDialog>, private heroes: UnitFinderService, private fb: FormBuilder, private snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: {units: HeroInfoModel[], season: number}){
+        this.selectedHeroes = data.units;
+        this.season = data.season;
         this.heroFilter = this.fb.group({
             name: [''],
             blessing: ['0']
@@ -74,9 +75,23 @@ export class ARBuilderHeroesDialog {
         if(this.selectedHeroes.length < 6){
             let baseBuild: BuildModel = {blessing: hero.blessing, rarity: 5, merges: 0, skills: {}, resplendent: false, ivs: {boon: IVS.neutral, bane: IVS.neutral}, dragonflowers: 0};
             this.selectedHeroes.push({...hero, ...{build: baseBuild, uid: short.generate()}});
+        } else if(this.hasARExtra() && this.selectedHeroes.length < 7) {
+            let baseBuild: BuildModel = {blessing: hero.blessing, rarity: 5, merges: 0, skills: {}, resplendent: false, ivs: {boon: IVS.neutral, bane: IVS.neutral}, dragonflowers: 0};
+            this.selectedHeroes.push({...hero, ...{build: baseBuild, uid: short.generate()}});
+        } else if(this.hasARExtra()){
+            this.snackBar.open("Max of 7 heroes allowed", "Close", {duration: 2000});
         } else {
-            this.snackBar.open("Max of 6 heroes allowed", "Close", {duration: 2000});
+            this.snackBar.open("7th hero requires AR Extra mythic hero", "Close", {duration: 2000});
         }
+    }
+
+    hasARExtra(): boolean{
+        for(let i = 0; i < this.selectedHeroes.length; i++){
+            if(this.selectedHeroes[i].ar_extra === true && this.selectedHeroes[i].blessing === this.season){
+                return true;
+            }
+        }
+        return false;
     }
 
     removeHero(index: number){

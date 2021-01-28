@@ -46,9 +46,9 @@
                         <div class="map-item" cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="{item:tile, index:i}" (cdkDropListDropped)="drop($event)" (cdkDropListEntered)="dragEnter(tile, i)" (cdkDropListExited)="dragExit(tile, i)" (click)="openDescription(tile)">
                             <div class="inner" cdkDrag cdkDragBoundary=".ar_builder_map_container" [cdkDragDisabled]="tile.type === 'blank'" (pointerdown)="startDragRange(tile, i)" (pointerup)="stopDragRange()">
                                 <div class="placeholder" *cdkDragPlaceholder></div>
-                                <img [src]="'assets/ui/weapon/'+getWeaponType(tile.uid)+'.png'" class="ar_building_unit_type" *ngIf="tile.type === 'hero'">
-                                <img [src]="'assets/ui/movement/'+getMovementType(tile.uid)+'.png'" class="ar_building_movement_type" *ngIf="tile.type === 'hero'">
-                                <img [src]="'assets/'+tile.folder+'/'+tile.image+'.png'" class="ar_building">
+                                <img [src]="'assets/ui/weapon/'+getWeaponType(tile.uid)+'.png'" class="ar_building_unit_type" *ngIf="tile.type === 'hero' && settings.weapon === true">
+                                <img [src]="'assets/ui/movement/'+getMovementType(tile.uid)+'.png'" class="ar_building_movement_type" *ngIf="tile.type === 'hero' && settings.movement === true">
+                                <img [src]="getImage(tile)" class="ar_building">
                             </div>
                         </div>
                     </ng-container>
@@ -64,7 +64,7 @@
             <mat-card class="hero_info_card" *ngIf="this.currentlyDisplayedHero" style="margin-bottom: 10px;">
                 <div class="hero_info_title">
                     <div class="hero_info_title_image">
-                        <img [src]="'assets/units/'+this.currentlyDisplayedHero.image+'.png'">
+                        <img [src]="portrait.getIcon(this.currentlyDisplayedHero)">
                     </div>
                     <div class="hero_info_title_title">
                         <mat-card-title>{{this.currentlyDisplayedHero.name}}: {{this.currentlyDisplayedHero.title}}</mat-card-title>

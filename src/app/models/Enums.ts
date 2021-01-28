@@ -114,3 +114,10 @@ export enum Maps{
     bright_grassland,
     lava_floes
 }
+
+export enum Kind{
+    none,
+    blessed,
+    duo,
+    harmonic
+}

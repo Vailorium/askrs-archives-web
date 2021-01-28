@@ -28,6 +28,7 @@ import { ErrorDialog } from './pages/error-dialog/error-dialog';
 import { ARSettingsDialog } from './pages/ar-builder/ar-settings-dialog/ar-settings-dialog';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ARSaveImageDialog } from './pages/ar-builder/ar-save-image-dialog/ar-save-image-dialog';
+import { TitleCasePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,7 @@ import { ARSaveImageDialog } from './pages/ar-builder/ar-save-image-dialog/ar-sa
     MatButtonToggleModule,
     MatIconModule
   ],
-  providers: [Title],
+  providers: [Title, TitleCasePipe],
   bootstrap: [AppComponent],
   entryComponents: [ARSaveImageDialog, ARSettingsDialog, ErrorDialog, SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, ARBuilderTerrainDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog, ARBuilderSaveDialog, ConfirmDialog, ARURLShareDialog]
 })

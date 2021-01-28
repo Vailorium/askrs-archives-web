@@ -68,7 +68,7 @@ export class EditBuild implements OnInit, AfterViewInit{
             merges: [this.heroData.build.merges, Validators.required],
             rarity: [this.heroData.build.rarity, Validators.required],
             dragonflowers: [this.heroData.build.dragonflowers, Validators.required],
-            resplendent: [{value: false, disabled: !this.heroData.resplendent}, Validators.required],
+            resplendent: [{value: this.heroData.build.resplendent, disabled: !this.heroData.resplendent}, Validators.required],
             blessing: [{value: this.heroData.blessing === 0 ? this.heroData.build.blessing : this.heroData.blessing, disabled: (!this.settings.blessingEnabled || this.heroData.blessing !== 0)}, Validators.required],
             boon: [this.heroData.build.ivs.boon, Validators.required],
             bane: [{value: this.heroData.build.ivs.bane, disabled: this.heroData.build.merges > 0}, Validators.required],

@@ -21,6 +21,7 @@ h2, h3{
 
 .settings_container{
     padding: 24px;
+    padding-bottom: 0px;
 }
 
 
@@ -28,5 +29,24 @@ form{
     width: 402px;
     flex-wrap: wrap;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: left;
+    mat-checkbox{
+        margin-right: 5px;
+    }
+}
+
+.options_container{
+    width: 402px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    // a{
+    //     height: 100%;
+    // }
+}
+
+.options_container_container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
 }

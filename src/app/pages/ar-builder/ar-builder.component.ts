@@ -19,6 +19,7 @@ import { ARURLShareDialog } from './ar-url-share-dialog/ar-url-share-dialog';
 import { ErrorDialog } from '../error-dialog/error-dialog';
 import { ARSettingsDialog } from './ar-settings-dialog/ar-settings-dialog';
 import { ARSaveImageDialog } from './ar-save-image-dialog/ar-save-image-dialog';
+import { PortraitService } from 'src/app/services/portrait.service';
 
 interface ARStructureData{
   image: string;
@@ -42,7 +43,7 @@ const STRUCTURE_DATA: Dictionary<ARStructureData> = {"fortress":{image:"fortress
 export class ArBuilderComponent implements OnInit, AfterViewInit {
 
   // AR Settings
-  private settings: ARSettingsModel;
+  public settings: ARSettingsModel;
 
   // AR Map Data
   public map: ARTile[] = [{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:true,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:true,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:true,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false}];
@@ -87,7 +88,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   public readonly dragRangeColor = "rgba(0, 0, 255, 0.3)";
   public readonly dragRangeEnteredColor = "rgba(0, 0, 255, 0.7)";
 
-  constructor(private router: Router, private dialog: MatDialog, private mapFinder: MapFinderService, private stat: StatsCalcualator, private titleService: Title, private ard: ARDService, private route: ActivatedRoute) {
+  constructor(public portrait: PortraitService, private router: Router, private dialog: MatDialog, private mapFinder: MapFinderService, private stat: StatsCalcualator, private titleService: Title, private ard: ARDService, private route: ActivatedRoute) {
 
   }
 
@@ -146,11 +147,21 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     try{
       this.settings = JSON.parse(localStorage.getItem("ar-settings"));
     } catch(e) {
-      this.settings = {grid: true};
+      this.settings = {grid: true, movement: true, weapon: true};
     }
 
-    if(!this.settings){
-      this.settings = {grid: true};
+    if(!this.settings.grid){
+      this.settings = {grid: true, movement: true, weapon: true};
+    }
+
+    if(this.settings.grid === undefined){
+      this.settings.grid = true;
+    }
+    if(this.settings.movement === undefined){
+      this.settings.movement = true;
+    }
+    if(this.settings.weapon === undefined){
+      this.settings.weapon = true;
     }
     this.season.valueChanges.subscribe((data) => {
       for(let i = 0; i < this.units.length; i++){
@@ -388,7 +399,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
       width: '450px',
       height: '800px',
       maxHeight: '80%',
-      data: this.units
+      data: {units: this.units, season: parseInt(this.season.value)}
     });
 
     heroesDialog.afterClosed().subscribe((res: HeroInfoModel[]) => {
@@ -472,14 +483,17 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     let max = this.MAX_LIFT_LOSS;
     let numMythics = 0;
     let numBlessed = 0;
-    for(let unit of this.units){
-      if(this.season.value == unit.blessing){ // == as season.value is string, unit.blessing is int
-        max -= unit.build.merges;
-        if(numMythics < 2){
-          numMythics += 1;
+    for(let i = 0; i < 6; i++){
+      let unit = this.units[i];
+      if(unit){
+        if(this.season.value == unit.blessing){ // == as season.value is string, unit.blessing is int
+          max -= unit.build.merges;
+          if(numMythics < 2){
+            numMythics += 1;
+          }
+        } else if(unit.build.blessing == this.season.value){
+          numBlessed += 1;
         }
-      } else if(unit.build.blessing == this.season.value){
-        numBlessed += 1;
       }
     }
     max -= numMythics * numBlessed * 5;
@@ -631,7 +645,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   
   // Settings Dialog
   openSettingsDialog(){
-    let settingsDialog = this.dialog.open(ARSettingsDialog, {data: this.settings, width: '450px', height: '80%'});
+    let settingsDialog = this.dialog.open(ARSettingsDialog, {data: this.settings, width: '450px', maxHeight: '80%'});
   
     settingsDialog.afterClosed().subscribe((val: ARSettingsModel) => {
       this.settings = val;
@@ -659,7 +673,23 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   // Save image dialog
   openSaveImageDialog(){
     let saveImage = this.dialog.open(ARSaveImageDialog, 
-      {data: {mapName: this.currentMap, map: this.map, units: this.units}, panelClass: 'save-image-dialog-panel', maxHeight: "80%", maxWidth: "810px"}
+      {data: {mapName: this.currentMap, map: this.map, units: this.units, season: [parseInt(this.season.value)]}, panelClass: 'save-image-dialog-panel', maxHeight: "98%", maxWidth: "810px"}
     );
+  }
+
+  getImage(tile: ARTile){
+    if(tile.type === "hero"){
+      return this.portrait.getIcon(this.getHeroByUID(tile.uid));
+    } else {
+      return 'assets/'+tile.folder+'/'+tile.image+'.png';
+    }
+  }
+
+  getHeroByUID(uid: string): HeroInfoModel{
+    for(let unit of this.units){
+      if(unit.uid === uid){
+        return unit;
+      }
+    }
   }
 }

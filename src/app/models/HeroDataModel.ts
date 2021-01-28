@@ -19,4 +19,7 @@ export interface HeroDataModel{
     skills: string[][];
     game: number[];
     refresher: boolean;
+    pair_up: boolean;
+    ar_extra: boolean;
+    special_kind: number;
 }

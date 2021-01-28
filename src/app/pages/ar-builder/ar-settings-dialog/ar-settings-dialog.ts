@@ -14,11 +14,13 @@ export class ARSettingsDialog {
 
     constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<ARSettingsDialog>, @Inject(MAT_DIALOG_DATA) public data: ARSettingsModel){
         this.settings = this.fb.group({
-            grid: [data.grid]
+            grid: [data.grid],
+            movement: [data.movement],
+            weapon: [data.weapon]
         });
         
         this.dialogRef.beforeClosed().subscribe(() =>{
-            this.dialogRef.close({grid: this.settings.value['grid']});
+            this.dialogRef.close(this.settings.value);
         });
     }
 

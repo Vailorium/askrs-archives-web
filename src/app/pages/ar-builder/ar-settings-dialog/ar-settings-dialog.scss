@@ -15,3 +15,11 @@ h2{
 ::ng-deep mat-dialog-container{
     position: relative !important;
 }
+
+form{
+    display: flex;
+    justify-content: space-evenly;
+    // mat-checkbox{
+    //     margin-right: 20px;
+    // }
+}
