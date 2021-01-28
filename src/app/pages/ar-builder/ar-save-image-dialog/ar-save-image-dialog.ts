@@ -166,11 +166,13 @@ export class ARSaveImageDialog implements AfterViewInit {
             this.width = "402px";
         }
         
-        if(this.options.value['season_lift_loss'] === true || this.units.length === 7){
+        if(this.options.value['season_lift_loss'] === true || (this.units.length === 7 && this.options.value['builds'] === true)){
             this.previewCanvas.nativeElement.height = 700;
             
             let bg = await this.loadImage('assets/ui/save_image_bg.png');
             this.ctx.drawImage(bg, 0, 600);
+        } else {
+            this.previewCanvas.nativeElement.height = 600;
         }
         
         if(this.options.value['season_lift_loss'] === true){
