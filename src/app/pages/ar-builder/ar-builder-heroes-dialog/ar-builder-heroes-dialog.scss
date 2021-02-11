@@ -89,10 +89,6 @@ h2.title{
     overflow: visible;
 }
 
-mat-button-toggle{
-    // line-height: 40px;
-
-}
 mat-button-toggle img{
     height: 35px;
 }
@@ -106,4 +102,39 @@ mat-button-toggle div{
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
+}
+
+@media only screen and (max-width: 450px){
+    .selected_hero{
+        height: 40px;
+        width: 40px;
+        p{
+            font-size: 10px;
+            width: 40px;
+            line-height: 40px;
+        }
+        img{
+            height: 40px;
+            width: 40px;
+        }
+        img.selected_hero_icon{
+            height: 36px;
+            width: 36px;
+            left: 2px;
+            top: 2px;
+        }
+        img.blessing_background{
+            top: 5px;
+            left: 5px;
+            height: 30px;
+            width: 30px;
+        }
+    
+        img.remove_hero_icon{
+            height: 15px;
+            width: 15px;
+            top: -3px;
+            right: -3px;
+        }
+    }
 }
