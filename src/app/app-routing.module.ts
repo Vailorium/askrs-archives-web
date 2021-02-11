@@ -8,7 +8,6 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 
 const routes: Routes = [
   { path: 'ar-builder', component: ArBuilderComponent},
-  // { path: 'edit-build-debug', component: EditBuild},
   { path: '', component: HomePageComponent},
   { path: '**', pathMatch: 'full', component: NotFoundComponent}
 ];

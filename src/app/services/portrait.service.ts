@@ -24,4 +24,8 @@ export class PortraitService {
         st += ".png";
         return st;
     }
+
+    // public preloadAllIcons(): void{
+
+    // }
 }

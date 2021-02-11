@@ -402,8 +402,8 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   openHeroesDialog(){
     let heroesDialog = this.dialog.open(ARBuilderHeroesDialog, {
       width: '450px',
-      height: '800px',
-      maxHeight: '80%',
+      // maxHeight: '80%',
+      height: '320px',
       data: {units: this.units, season: parseInt(this.season.value)}
     });
 
@@ -545,7 +545,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   }
 
   deleteCurrentData(){
-    let confirm = this.dialog.open(ConfirmDialog, {data: {message: "Are you sure you want to clear the current map?", title: "Confirm Clearing", default: false, options: [{display: "Cancel", color: "", value: false}, {display: "Yes", color: "warn", value: true}]}});
+    let confirm = this.dialog.open(ConfirmDialog, {data: {message: "Are you sure you want to clear the current map?", title: "Confirm Clearing", default: false, options: [{display: "Cancel", color: "", value: false}, {display: "Clear", color: "warn", value: true}]}});
   
     confirm.afterClosed().subscribe((res) => {
       if(res){

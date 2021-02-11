@@ -50,3 +50,19 @@ form{
     width: 100%;
     justify-content: center;
 }
+
+.loading_modal{
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    p{
+        color: white;
+        font-family: 'Fire_Emblem_Heroes_Font', 'Roboto';
+    }
+    // mat-spinner{
+    //     margin: auto auto auto auto;
+    // }
+}
