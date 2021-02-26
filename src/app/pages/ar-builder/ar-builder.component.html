@@ -6,14 +6,23 @@
                 <hr />
                 <p>Click/tap structures/heroes to bring up their info</p>
                 <hr />
-                <p>Map: Springwater</p>
+            </mat-card>
+            <mat-card style="margin-top: 10px;">
                 <p>Defense Structures: {{this.counts.defense}}/6</p>
                 <p>Traps: {{this.counts.traps}}/4</p>
                 <p>Decorations: {{this.counts.decorations}}/4</p>
                 <p>Heroes: {{this.units.length}}/7</p>
                 <p>Max Lift Loss: -{{this.currentLiftLoss}}</p>
-                <hr />
-                <p>Defense Season: 
+            </mat-card>
+            <mat-card style="margin-top: 10px;">
+                <p style="margin-bottom: 0px;">Map:
+                    <mat-form-field>
+                        <mat-select id="selectMap" (selectionChange)="selectChangeMap($event)" value="springwater">
+                            <mat-option *ngFor="let map of this.mapNames" [value]="map"><img [src]="'assets/ui/ar_preview/'+map+'.png'">{{mapDisplay[map]}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </p>
+                <p style="margin-top: 0px;">Season: 
                     <mat-button-toggle-group aria-label="Blessing" value="6" [formControl]="season">
                         <mat-button-toggle value="6" matTooltip="Dark Season"><img src="assets/ui/dark_blessing.png"></mat-button-toggle>
                         <mat-button-toggle value="8" matTooltip="Anima Season"><img src="assets/ui/anima_blessing.png"></mat-button-toggle>
@@ -57,7 +66,8 @@
             <mat-card>
                 <button mat-raised-button color="primary" (click)="openHeroesDialog()">Add Heroes</button>
                 <button mat-raised-button color="primary" (click)="openStructuresDialog()">Edit Structures</button>
-                <button mat-raised-button color="primary" (click)="openTerrainDialog()">Change Terrain</button>
+                <button mat-raised-button color="primary" (click)="openHelpMenuDialog()"><mat-icon>help_outline</mat-icon> Help</button>
+                <!-- <button mat-raised-button color="primary" (click)="openTerrainDialog()">Change Terrain</button> -->
             </mat-card>
         </div>
         <div class="ar_builder_right_container ar_builder_child_container">

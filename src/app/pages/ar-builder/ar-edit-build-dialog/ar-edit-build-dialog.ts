@@ -26,5 +26,9 @@ export class AREditBuildDialog {
     close() {
         this.dialogRef.close();
     }
+
+    updateCanvas(e){
+        console.log(e);
+    }
     
 }

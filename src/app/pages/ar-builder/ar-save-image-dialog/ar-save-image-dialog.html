@@ -19,13 +19,15 @@
                 <mat-checkbox color="primary" formControlName="movement" matTooltip="Shows movement type of hero on their icon">Movement Icon</mat-checkbox>
                 <mat-checkbox color="primary" formControlName="weapons" matTooltip="Shows weapon type of hero on their icon">Weapon Icon</mat-checkbox>
                 <mat-checkbox color="primary" formControlName="builds" matTooltip="Shows hero's builds">Hero Builds</mat-checkbox>
-                <!-- <mat-checkbox formControlName="season">Season</mat-checkbox>
-                <mat-checkbox formControlName="lift">Lift Loss</mat-checkbox> -->
                 <mat-checkbox color="primary" formControlName="mythics" matTooltip="Adds on-season mythic bonus stats to heroes">+Mythic Stats</mat-checkbox>
                 <mat-checkbox color="primary" formControlName="season_lift_loss" matTooltip="Shows the season and the max lift loss of the defense">Season/Max Loss</mat-checkbox>
                 <mat-checkbox color="primary" formControlName="watermark" matTooltip="Shows watermark in bottom left (optional)">Watermark</mat-checkbox>
+                <mat-button-toggle-group aria-label="Blessing" value="6" formControlName="season">
+                    <mat-button-toggle value="6" matTooltip="Dark Season"><img src="assets/ui/dark_blessing.png"></mat-button-toggle>
+                    <mat-button-toggle value="8" matTooltip="Anima Season"><img src="assets/ui/anima_blessing.png"></mat-button-toggle>
+                </mat-button-toggle-group>
             </form>
-            <a mat-raised-button style="margin-top: 5px;" color="primary" download="ar-d.png" [disabled]="!this.imageData" [href]='this.imageData'>Save</a>    
+            <button mat-raised-button style="margin-top: 5px;" color="primary" (click)="saveImage()">Save</button>    
         </div>
     </div>
     <!-- <p *ngIf="fontFix" style="font-family: Fire_Emblem_Heroes_Font; font-size: 1px;">.</p> -->
@@ -36,4 +38,16 @@
     <mat-spinner diameter="60" color="accent"></mat-spinner>
     <p>{{loadingMessage}}</p>
 </div>
-<canvas [style.display]="getWidth() >= 810 ? 'initial' : 'none'" #previewCanvas [width]="totalWidth" [height]="totalHeight" [ngStyle]="{'height': totalHeight + 'px', 'width': totalWidth + 'px'}"></canvas>
+<div class="save_image_canvases" [ngStyle]="{'height': totalHeight + 'px', 'width': totalWidth + 'px'}" [style.display]="getWidth() >= 810 ? 'initial' : 'none'">
+    <img id="mapImage" height="600" width="450" [src]="'assets/maps/AR/'+mapName+'.png'" #mapImage>
+    <canvas id="tileCanvas" height="600" width="450" #tileCanvas></canvas>
+    <canvas [style.display]="movVisible === true ? 'block' : 'none'" id="movCanvas" height="600" width="450" #movCanvas></canvas>
+    <canvas [style.display]="wepVisible === true ? 'block' : 'none'" id="wepCanvas" height="600" width="450" #wepCanvas></canvas>
+    <canvas [style.display]="buildsVisible === true ? 'block' : 'none'" id="buildsCanvas" height="700" width="810" #buildsCanvas></canvas>
+    <canvas [style.display]="buildsVisible === true ? 'block' : 'none'" id="statsCanvas" height="700" width="810" #statsCanvas></canvas>
+    <canvas [style.display]="bottomVisible === true ? 'block' : 'none'" id="bottomCanvas" height="700" width="810" #bottomCanvas></canvas>
+    <canvas [style.display]="seasonMaxLossVisible === true ? 'block' : 'none'" id="seasonMaxLossCanvas" height="700" width="450" #seasonMaxLossCanvas></canvas>
+    <canvas [style.display]="watermarkVisible === true ? 'block' : 'none'" id="watermarkCanvas" height="700" width="450" #watermarkCanvas></canvas>
+</div>
+<p>Hello world</p>
+<canvas style="display:none" [width]="totalWidth" [height]="totalHeight" #combinedCanvas></canvas>

@@ -7,6 +7,8 @@
             cursor: pointer;
             border: 3px solid transparent;
             margin: 1px;
+            height: 60px;
+            width: 60px;
         }
         .ar_building_checkmark{
             position: absolute;
@@ -16,6 +18,10 @@
             left: -7px;
         }
     }
+}
+
+h2{
+    font-size: 1.2em;
 }
 
 @media only screen and (max-width: 600px){

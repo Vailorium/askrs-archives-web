@@ -62,7 +62,49 @@ form{
         color: white;
         font-family: 'Fire_Emblem_Heroes_Font', 'Roboto';
     }
-    // mat-spinner{
-    //     margin: auto auto auto auto;
-    // }
+}
+
+.save_image_canvases{
+    position: relative;
+    height: 700px;
+    width: 450px;
+    canvas{
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    img{
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    #bottomCanvas{
+        z-index: 1;
+    }
+    #buildsCanvas{
+        z-index: 2;
+    }
+    #mapImage{
+        z-index: 2;
+    }
+    #statsCanvas{
+        z-index: 2;
+    }
+    #watermarkCanvas{
+        z-index: 3;
+    }
+    #seasonMaxLossCanvas{
+        z-index: 3;
+    }
+    #tileCanvas{
+        z-index: 3;
+    }
+    #movCanvas{
+        z-index: 4;
+    }
+    #wepCanvas{
+        z-index: 4;
+    }
+
 }
