@@ -4,11 +4,28 @@ h2, h3{
 
 #dialog_close{
     position: absolute;
-    top: 5px;
-    right: 5px;
-    border-radius: 24px;
+    line-height: 40px;
+    text-align: center;
+    width: 40px;
+}
+
+
+.dialog-close{
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    background-color: #3f51b5;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(30%, -30%);
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    color: white;
     &:hover{
-        background-color: lightgrey;
+        background-color: #616eb6;
     }
 }
 
@@ -16,6 +33,7 @@ h2, h3{
     mat-dialog-container{
         position: relative !important;
         padding: 0 !important;
+        overflow: visible;
     }
 }
 
@@ -29,7 +47,7 @@ form{
     width: 402px;
     flex-wrap: wrap;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     mat-checkbox{
         margin-right: 5px;
     }
@@ -49,4 +67,63 @@ form{
     display: flex;
     width: 100%;
     justify-content: center;
+}
+
+.loading_modal{
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    p{
+        color: white;
+        font-family: 'Fire_Emblem_Heroes_Font', 'Roboto';
+    }
+}
+
+.save_image_canvases{
+    position: relative;
+    // height: 700px;
+    // width: 450px;
+    display: block !important;
+    canvas{
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    img{
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    #bottomCanvas{
+        z-index: 1;
+    }
+    #buildsCanvas{
+        z-index: 2;
+    }
+    #mapImage{
+        z-index: 2;
+    }
+    #statsCanvas{
+        z-index: 2;
+    }
+    #watermarkCanvas{
+        z-index: 3;
+    }
+    #seasonMaxLossCanvas{
+        z-index: 3;
+    }
+    #tileCanvas{
+        z-index: 3;
+    }
+    #movCanvas{
+        z-index: 4;
+    }
+    #wepCanvas{
+        z-index: 4;
+    }
+
 }

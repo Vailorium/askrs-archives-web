@@ -1,32 +1,43 @@
-<span id="dialog_close" (click)="this.close()" class="material-icons">close</span>
-<div class="selected_heroes_container">
-    <div class="selected_hero" *ngFor="let i of [0,1,2,3,4,5, 6]">
-        <img src="assets/ui/hero-selector.png">
-        <img class="hero" [src]="'assets/units/'+this.selectedHeroes[i].image+'.png'" *ngIf="this.selectedHeroes.length > i">
-        <img class="remove_icon" src="assets/ui/x.png" *ngIf="this.selectedHeroes.length > i" (click)="removeHero(i)">
-    </div>
-</div>
-<hr />
-<form [formGroup]="heroFilter">
-    <mat-form-field>
-        <input matInput name="name" formControlName="name" placeholder="Hero Name" (keyup)="updateFilter()">
-    </mat-form-field>
-    <br />
-    <mat-button-toggle-group formControlName="blessing" value="0" aria-label="Blessing" (change)="updateFilter()">
-        <mat-button-toggle value="0" matTooltip="No Blessing"><div class="blank_filler"></div></mat-button-toggle>
-        <mat-button-toggle value="6" matTooltip="Dark Mythic"><img src="assets/ui/dark_blessing.png"></mat-button-toggle>
-        <mat-button-toggle value="8" matTooltip="Anima Mythic"><img src="assets/ui/anima_blessing.png"></mat-button-toggle>
-        <mat-button-toggle value="2" matTooltip="Water Legendary"><img src="assets/ui/water_blessing.png"></mat-button-toggle>
-        <mat-button-toggle value="3" matTooltip="Wind Legendary"><img src="assets/ui/wind_blessing.png"></mat-button-toggle>
-        <mat-button-toggle value="4" matTooltip="Earth Legendary"><img src="assets/ui/earth_blessing.png"></mat-button-toggle>
-        <mat-button-toggle value="1" matTooltip="Fire Legendary"><img src="assets/ui/fire_blessing.png"></mat-button-toggle>
-    </mat-button-toggle-group>
-</form>
-<div class="hero_icons_container">
-    <div class="hero_icons">
-        <div *ngFor="let hero of heroList[pageNumber]">
-            <img [src]="'assets/units/'+hero.image+'.png'" [matTooltip]='hero.name + ": " + hero.title' (click)="addHero(hero)">
+<div class="dialog-close"><span id="dialog_close" (click)="this.close()" class="material-icons">close</span></div>
+<div class="mat-dialog-content" (click)="unselect()">
+    <h2 class="title">Add Heroes</h2>
+    <hr />
+    <div class="selected_heroes" cdkDropList cdkDropListOrientation='horizontal' (cdkDropListDropped)="drop($event)">
+        <div class="selected_hero" [ngStyle]="{'background-color': selectedIndex === i ? '#81ff79' : 'transparent'}" *ngFor="let i of [0,1,2,3,4,5]" (click)="select($event, i)" cdkDrag [cdkDragDisabled]="selectedHeroes[i] === undefined">
+            <p *ngIf="this.selectedHeroes[i] === undefined">Empty</p>
+            <img *ngIf="this.selectedHeroes[i] !== undefined" class="selected_hero_icon" [src]="'assets/units/'+this.selectedHeroes[i].image+'.png'" [matTooltip]="this.selectedHeroes[i].name + ': '+ this.selectedHeroes[i].title">
+            <img src="assets/ui/hero-selector.png">
+            <img *ngIf="this.selectedHeroes[i] !== undefined" src="assets/ui/x.png" class="remove_hero_icon" (click)="remove($event, i)">
+        </div>
+        <div class="selected_hero extra_hero" [ngStyle]="{'background-color': selectedIndex === 6 && hasARExtra() ? '#81ff79' : 'transparent'}" (click)="select($event, 6)" cdkDrag [cdkDragDisabled]="selectedHeroes[6] === undefined">
+            <img [src]="'assets/ui/blessings/'+blessingEnum[season]+'_default_small.png'" class="blessing_background">
+            <p *ngIf="this.selectedHeroes[6] === undefined">Empty</p>
+            <img *ngIf="this.selectedHeroes[6] !== undefined" class="selected_hero_icon" [src]="'assets/units/'+this.selectedHeroes[6].image+'.png'" [matTooltip]="this.selectedHeroes[6].name + ': '+ this.selectedHeroes[6].title">
+            <img src="assets/ui/hero-selector.png">
+            <img *ngIf="this.selectedHeroes[6] !== undefined" src="assets/ui/x.png" class="remove_hero_icon" (click)="remove($event, 6)">
         </div>
     </div>
-    <mat-paginator (page)="changePage($event)" [pageIndex]="pageNumber" [length]="baseList.length" pageSize="25"></mat-paginator>
+    <hr />
+    <form [formGroup]="hero_select" class="hero_select">
+        <mat-form-field appearance="fill">
+            <mat-label>Add Hero</mat-label>
+            <mat-select formControlName="hero">
+                <mat-option>
+                    <ngx-mat-select-search [formControl]="hero_name_filter" placeholderLabel="Search" noEntriesFoundLabel="No Heroes Found"></ngx-mat-select-search>
+                </mat-option>
+                <mat-option *ngFor="let unit of filteredList | stringFilterBy:hero_name_filter.value:'name'" [value]="unit.id">
+                    <img class="unit_icon_mat-select" [src]="'assets/units/'+unit.image+'.png'"> {{unit.name}}: {{unit.title}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+    <form [formGroup]="heroFilter" class="hero_filter">
+        <mat-button-toggle-group formControlName="blessing" value="0" aria-label="Blessing" (change)="updateFilter()">
+            <mat-button-toggle value="0" matTooltip="All Heroes"><div class="blank_filler"></div></mat-button-toggle>
+            <mat-button-toggle value="6" matTooltip="Dark Mythic"><img src="assets/ui/blessings/dark_default_small.png"></mat-button-toggle>
+            <mat-button-toggle value="8" matTooltip="Anima Mythic"><img src="assets/ui/blessings/anima_default_small.png"></mat-button-toggle>
+            <mat-button-toggle value="2" matTooltip="Duo Hero"><img src="assets/ui/blessings/duo_default_small.png"></mat-button-toggle>
+            <mat-button-toggle value="3" matTooltip="Harmonic Hero"><img src="assets/ui/blessings/harmonized_default_small.png"></mat-button-toggle>
+        </mat-button-toggle-group>
+    </form>
 </div>

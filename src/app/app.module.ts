@@ -16,7 +16,6 @@ import { ArBuilderComponent } from './pages/ar-builder/ar-builder.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ARBuilderStructuresDialog } from './pages/ar-builder/ar-builder-structures-dialog/ar-builder-structures-dialog';
 import { ARBuilderHeroesDialog } from './pages/ar-builder/ar-builder-heroes-dialog/ar-builder-heroes-dialog';
-import { ARBuilderTerrainDialog } from './pages/ar-builder/ar-builder-terrain-dialog/ar-builder-terrain-dialog';
 import { AREditBuildDialog } from './pages/ar-builder/ar-edit-build-dialog/ar-edit-build-dialog';
 import { EditBuild } from './pages/edit-build/edit-build';
 import { ReportBugDialog } from './pages/report-bug-dialog/report-bug-dialog';
@@ -29,6 +28,7 @@ import { ARSettingsDialog } from './pages/ar-builder/ar-settings-dialog/ar-setti
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ARSaveImageDialog } from './pages/ar-builder/ar-save-image-dialog/ar-save-image-dialog';
 import { TitleCasePipe } from '@angular/common';
+import { ARHelpMenuDialog } from './pages/ar-builder/ar-help-menu-dialog/ar-help-menu-dialog';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,6 @@ import { TitleCasePipe } from '@angular/common';
     ArBuilderComponent,
     ARBuilderStructuresDialog,
     ARBuilderHeroesDialog,
-    ARBuilderTerrainDialog,
     AREditBuildDialog,
     ARBuilderSaveDialog,
     EditBuild,
@@ -52,7 +51,8 @@ import { TitleCasePipe } from '@angular/common';
     ErrorDialog,
     ARSettingsDialog,
     HomePageComponent,
-    ARSaveImageDialog
+    ARSaveImageDialog,
+    ARHelpMenuDialog
   ],
   imports: [
     ReactiveFormsModule,
@@ -88,6 +88,6 @@ import { TitleCasePipe } from '@angular/common';
   ],
   providers: [Title, TitleCasePipe],
   bootstrap: [AppComponent],
-  entryComponents: [ARSaveImageDialog, ARSettingsDialog, ErrorDialog, SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, ARBuilderTerrainDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog, ARBuilderSaveDialog, ConfirmDialog, ARURLShareDialog]
+  entryComponents: [ARHelpMenuDialog, ARSaveImageDialog, ARSettingsDialog, ErrorDialog, SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog, ARBuilderSaveDialog, ConfirmDialog, ARURLShareDialog]
 })
 export class AppModule { }
