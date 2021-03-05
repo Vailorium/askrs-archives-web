@@ -16,7 +16,7 @@ export class EditBuild implements OnInit, AfterViewInit{
 
     @Input() public heroData: HeroInfoModel;
     @Input() public settings: {heroEnabled: boolean, blessingEnabled: boolean, summonerSupportEnabled: boolean, allySupportEnabled: boolean} = {heroEnabled: true, blessingEnabled: true, summonerSupportEnabled: true, allySupportEnabled: true};
-    // @Output() public heroDataChange = new EventEmitter<HeroInfoModel>();
+    @Output() public heroDataChange = new EventEmitter<HeroInfoModel>();
 
     dragonflowers: number[];
 
@@ -90,7 +90,7 @@ export class EditBuild implements OnInit, AfterViewInit{
             this.heroData = {...this.unitsDic[data.hero], uid: uid, build: build};
 
             this.stats = this.statCalculator.calculateAllStats(this.heroData);
-            // this.heroDataChange.emit(this.heroData);
+            this.heroDataChange.emit(this.heroData);
         });
     }
 

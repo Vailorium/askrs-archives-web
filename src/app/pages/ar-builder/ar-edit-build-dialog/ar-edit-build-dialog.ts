@@ -14,6 +14,7 @@ export class AREditBuildDialog {
     constructor(public dialogRef: MatDialogRef<AREditBuildDialog>, @Inject(MAT_DIALOG_DATA) public data: HeroInfoModel){
         this.dialogRef.beforeClosed().subscribe( // overwrites default exiting behaviour - important if user clicks outside of dialog to close
             () => {
+                console.log(this.data);
                 this.dialogRef.close(this.data);
             }
         );
