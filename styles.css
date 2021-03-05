@@ -554,6 +554,7 @@ mat-footer-row,mat-header-row,mat-row,td.mat-cell,td.mat-footer-cell,th.mat-head
 .mat-nested-tree-node,.mat-tree-node{color:rgba(0,0,0,.87)}
 .mat-snack-bar-container{color:rgba(255,255,255,.7);background:#323232;box-shadow:0 3px 5px -1px rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12)}
 .mat-simple-snackbar-action{color:#ff4081}
+/* Body */
 html, body {
   height: 100%;
 }
@@ -575,23 +576,21 @@ div.page_content {
 div.page_content.tab {
   min-height: 100%;
 }
-.unit_full_medium {
-  height: 300px;
-  width: 250px;
-}
-.unit_full_fill {
-  height: 100%;
-  width: auto;
-}
+/* Unit icons */
 .unit_icon_tiny {
   height: 30px;
   width: 30px;
+  vertical-align: middle;
+}
+.unit_icon_mat-select {
+  height: 48px;
   vertical-align: middle;
 }
 .unit_icon_small {
   height: 50px;
   width: 50px;
 }
+/* Skill icons */
 .skill_icon_tiny {
   height: 20px;
   width: 20px;
@@ -623,6 +622,7 @@ div.page_content.tab {
   display: flex;
   align-items: center;
 }
+/* Dragonflowers */
 .dragonflower_box {
   display: flex;
   align-items: center;
