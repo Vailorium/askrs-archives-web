@@ -1,76 +1,27 @@
-mat-button-toggle img{
-    height: 30px;
-}
-
-mat-button-toggle div{
-    height: 30px;
-    width: 30px;
-}
-
-.hero_icons_container{
-    .hero_icons{
-        margin-top: 30px;
-        display: flex;
-        flex-wrap: wrap;
-        div{
-            height: 45px;
-            width: 45px;
-            margin: 3px;
-            img{
-                height: 45px;
-                width: 45px;
-                // box-sizing: border-box;
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 600px){
-    mat-button-toggle{
-        height: 35px;
-        width: 35px;
-    }
-
-    ::ng-deep .mat-button-toggle-label-content {
-        line-height: 35px !important;
-        padding: 0 7.5px !important;
-    }
-
-    mat-button-toggle button{
-        height: 35px;
-        width: 35px;
-    }
-    mat-button-toggle img{
-        width: 20px;
-        height: auto;
-    }
-    
-    mat-button-toggle div{
-        height: 20px;
-        width: 20px;
-    }
-
-    .hero_icons_container{
-        .hero_icons{
-            div{
-                height: 40px;
-                width: 40px;
-                margin: 3px;
-                img{
-                    height: 40px;
-                    width: 40px;
-                    // box-sizing: border-box;
-                }
-            }
-        }
-    }
-}
-
 #dialog_close{
     position: absolute;
-    top: 5px;
-    right: 5px;
-    border-radius: 24px;
+    // top: -20px;
+    // right: -20px;
+    // background-color: white;
+    line-height: 40px;
+    text-align: center;
+    width: 40px;
+}
+
+.dialog-close{
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    background-color: #3f51b5;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(30%, -30%);
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    color: white;
     &:hover{
         background-color: lightgrey;
     }
@@ -78,36 +29,132 @@ mat-button-toggle div{
 
 ::ng-deep mat-dialog-container{
     position: relative !important;
+    overflow: visible !important;
+}
+
+h2.title{
+    margin: 5px;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.hero_select{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
-.selected_heroes_container{
+.selected_heroes{
     display: flex;
-    // flex-flow: row nowrap;
-    width: 100%;
-    div{
-        width: 16.67%;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.selected_hero{
+    position: relative;
+    height: 55px;
+    width: 55px;
+    margin-bottom: 5px;
+    p{
+        z-index: 2;
+        position: absolute;
+        font-family: "Fire_Emblem_Heroes_Font";
+        font-size: 12px;
+        text-align: center;
+        color: white;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        width: 55px;
+        line-height: 55px;
+        margin: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    img{
+        z-index: 1;
         position: relative;
-        margin: 5px;
+        height: 55px;
+        width: 55px;
+    }
+    img.selected_hero_icon{
+        z-index: 3;
+        position: absolute;
+        height: 51px;
+        width: 51px;
+        left: 2px;
+        top: 2px;
+    }
+    img.blessing_background{
+        position: absolute;
+        z-index: 0;
+        top: 5px;
+        left: 5px;
+        height: 45px;
+        width: 45px;
+    }
+
+    img.remove_hero_icon{
+        z-index: 4;
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        top: -5px;
+        right: -5px;
+    }
+}
+
+.mat-dialog-content{
+    max-height: 100%;
+    overflow: visible;
+}
+
+mat-button-toggle img{
+    height: 35px;
+}
+
+mat-button-toggle div{
+    height: 35px;
+    width: 35px;
+}
+
+.hero_filter{
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 450px){
+    .selected_hero{
+        height: 40px;
+        width: 40px;
+        p{
+            font-size: 10px;
+            width: 40px;
+            line-height: 40px;
+        }
         img{
-            width: 100%;
-            // position: absolute;
+            height: 40px;
+            width: 40px;
         }
-        img.hero{
-            position: absolute;
-            left: 5%;
-            top: 5%;
-            z-index: 1;
-            width: 90%;
-            border-radius: 3px;
+        img.selected_hero_icon{
+            height: 36px;
+            width: 36px;
+            left: 2px;
+            top: 2px;
         }
-        img.remove_icon{
-            position: absolute;
-            right: -2px;
-            top: -2px;
-            height: 20px;
-            width: 20px;
-            z-index: 2;
+        img.blessing_background{
+            top: 5px;
+            left: 5px;
+            height: 30px;
+            width: 30px;
+        }
+    
+        img.remove_hero_icon{
+            height: 15px;
+            width: 15px;
+            top: -3px;
+            right: -3px;
         }
     }
 }

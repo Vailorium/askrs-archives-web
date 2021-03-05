@@ -151,6 +151,33 @@
     z-index: 2;
 }
 
+// mat-select#mapSelect{
+    
+// }
+mat-option{
+    padding: 0;
+    align-items: initial;
+    background-color: black;
+    img{
+        width: 100%;
+        position: absolute;
+    }
+    span{
+        position: absolute;
+        z-index: 2;
+        text-align: center;
+        width: 100%;
+        font-size: 16px;
+        color: white;
+        // font-weight: bold;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        font-family: 'Fire_Emblem_Heroes_Font';
+    }
+    &:hover img{
+        filter: brightness(80%);
+    }
+}
+
 .map-item{
     position: relative;
     // background-color: red;

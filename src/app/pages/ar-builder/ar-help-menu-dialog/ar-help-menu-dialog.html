@@ -1,0 +1,10 @@
+<div class="dialog-close"><span id="dialog_close" (click)="this.close()" class="material-icons">close</span></div>
+<div class="ar_help_menu_container">
+    <div class="ar_help_menu_sections">
+        <div class="section" *ngFor="let section of this.helpSections" matRipple (click)="selectedSection=section">{{section.title}}</div>
+    </div>
+    <div class="ar_help_menu_section">
+        <h2>{{selectedSection.title}}</h2>
+        <div [innerHTML]="selectedSection.content"></div>
+    </div>
+</div>

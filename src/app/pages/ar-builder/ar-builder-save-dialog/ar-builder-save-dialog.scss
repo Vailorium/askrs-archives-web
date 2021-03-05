@@ -10,6 +10,7 @@
 
 ::ng-deep mat-dialog-container{
     position: relative !important;
+    overflow: auto !important;
 }
 
 h2{

@@ -1,7 +1,7 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialog, MatDialogRef, MatGridTileFooterCssMatStyler } from '@angular/material';
+import { MatDialog, MatDialogRef, MatGridTileFooterCssMatStyler, MatSelectChange } from '@angular/material';
 import { Title } from '@angular/platform-browser';
 import { ARSettingsModel, ARTile, Blessing, Dictionary, MovementType, SaveDataModel, Stats, WeaponType } from 'src/app/models';
 import { HeroInfoModel } from 'src/app/models/HeroInfoModel';
@@ -12,7 +12,6 @@ import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
 import { ARBuilderHeroesDialog } from './ar-builder-heroes-dialog/ar-builder-heroes-dialog';
 import { ARBuilderSaveDialog } from './ar-builder-save-dialog/ar-builder-save-dialog';
 import { ARBuilderStructuresDialog } from './ar-builder-structures-dialog/ar-builder-structures-dialog';
-import { ARBuilderTerrainDialog } from './ar-builder-terrain-dialog/ar-builder-terrain-dialog';
 import { AREditBuildDialog } from './ar-edit-build-dialog/ar-edit-build-dialog';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ARURLShareDialog } from './ar-url-share-dialog/ar-url-share-dialog';
@@ -20,6 +19,7 @@ import { ErrorDialog } from '../error-dialog/error-dialog';
 import { ARSettingsDialog } from './ar-settings-dialog/ar-settings-dialog';
 import { ARSaveImageDialog } from './ar-save-image-dialog/ar-save-image-dialog';
 import { PortraitService } from 'src/app/services/portrait.service';
+import { ARHelpMenuDialog } from './ar-help-menu-dialog/ar-help-menu-dialog';
 
 interface ARStructureData{
   image: string;
@@ -58,6 +58,10 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   // Season Toggle
   public season: FormControl = new FormControl("6");
 
+  // Map Select
+  public mapNames: string[] = this.mapFinder.getMapIds();
+  public mapDisplay: Dictionary<string> = this.mapFinder.getMapDisplayNames();
+
   // All Map Data Storage
   public maps: Dictionary<ARTile[]>;
 
@@ -93,7 +97,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle("AR-D Builder")
+    this.titleService.setTitle("AR-D Builder");
     this.maps = this.mapFinder.getARMaps();
 
     let data = this.route.snapshot.queryParams['data'];
@@ -327,7 +331,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   openStructuresDialog() {
     let structuresDialog = this.dialog.open(ARBuilderStructuresDialog, {
       width: '450px',
-      height: '80%',
+      maxHeight: '80%',
       data: this.map.filter(a => a.display !== "").map(b => b.image)
     });
 
@@ -402,8 +406,8 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   openHeroesDialog(){
     let heroesDialog = this.dialog.open(ARBuilderHeroesDialog, {
       width: '450px',
-      height: '800px',
-      maxHeight: '80%',
+      // maxHeight: '80%',
+      height: '320px',
       data: {units: this.units, season: parseInt(this.season.value)}
     });
 
@@ -428,22 +432,10 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
     });
   }
 
-  openTerrainDialog(){
-    let terrainDialog = this.dialog.open(ARBuilderTerrainDialog, {
-      width: '450px',
-      height: '80%',
-      data: this.currentMap
-    });
-
-    terrainDialog.afterClosed().subscribe((res: string) => {
-      this.changeMap(res);
-    });
-  }
-
   openEditBuildDialog(){
     let editBuildDialog = this.dialog.open(AREditBuildDialog, {
       width: '450px',
-      height: '80%',
+      maxHeight: '80%',
       data: this.currentlyDisplayedHero
     });
 
@@ -545,7 +537,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   }
 
   deleteCurrentData(){
-    let confirm = this.dialog.open(ConfirmDialog, {data: {message: "Are you sure you want to clear the current map?", title: "Confirm Clearing", default: false, options: [{display: "Cancel", color: "", value: false}, {display: "Yes", color: "warn", value: true}]}});
+    let confirm = this.dialog.open(ConfirmDialog, {data: {message: "Are you sure you want to clear the current map?", title: "Confirm Clearing", default: false, options: [{display: "Cancel", color: "", value: false}, {display: "Clear", color: "warn", value: true}]}});
   
     confirm.afterClosed().subscribe((res) => {
       if(res){
@@ -678,7 +670,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   // Save image dialog
   openSaveImageDialog(){
     let saveImage = this.dialog.open(ARSaveImageDialog, 
-      {data: {mapName: this.currentMap, map: this.map, units: this.units, season: [parseInt(this.season.value)]}, panelClass: 'save-image-dialog-panel', maxHeight: "98%", maxWidth: "810px"}
+      {data: {mapName: this.currentMap, map: this.map, units: this.units, season: [parseInt(this.season.value)]}, panelClass: 'save-image-dialog-panel', maxHeight: "98%", maxWidth: "min(calc(100% - 20px), 810px)"}
     );
   }
 
@@ -696,5 +688,14 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
         return unit;
       }
     }
+  }
+
+  // help menu dialog
+  openHelpMenuDialog(){
+    this.dialog.open(ARHelpMenuDialog, { height: "400px", panelClass: 'ar-help-dialog-panel', maxWidth: "min(calc(100% - 20px), 810px)", minWidth: "375px"})
+  }
+
+  selectChangeMap(e: MatSelectChange){
+    this.changeMap(e.value);
   }
 }

@@ -2,6 +2,7 @@
 
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
 
+/* Body */
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -15,26 +16,21 @@ div.page_content{
     box-sizing: border-box;
     min-height: calc(100% - 50px);
     width: 100%;
-    // overflow: hidden;
     padding-bottom: 75px;
     &.tab{
         min-height: 100%;
     }
 }
 
-.unit_full_medium{
-    height: 300px;
-    width: 250px;
-}
-
-.unit_full_fill{
-    height: 100%;
-    width: auto;
-}
-
+/* Unit icons */
 .unit_icon_tiny{
     height: 30px;
     width: 30px;
+    vertical-align: middle;
+}
+
+.unit_icon_mat-select{
+    height: 48px;
     vertical-align: middle;
 }
 
@@ -43,6 +39,7 @@ div.page_content{
     width: 50px;
 }
 
+/* Skill icons */
 .skill_icon_tiny{
     height: 20px;
     width: 20px;
@@ -80,6 +77,7 @@ div.page_content{
     align-items: center;
 }
 
+/* Dragonflowers */
 .dragonflower_box{
     display: flex;
     align-items: center;
