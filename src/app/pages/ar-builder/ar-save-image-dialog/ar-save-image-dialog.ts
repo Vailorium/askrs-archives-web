@@ -90,8 +90,7 @@ export class ARSaveImageDialog implements AfterViewInit {
             builds: [false],
             mythics: [false],
             season_lift_loss: [false],
-            watermark: [this.getWidth() >= 810],
-            season: [data.season]
+            watermark: [this.getWidth() >= 810]
         });
 
         // this.options.controls['builds'].valueChanges
@@ -107,7 +106,7 @@ export class ARSaveImageDialog implements AfterViewInit {
             this.buildsVisible = val;
             if(val === true){
                 this.totalWidth = 810;
-                this.dialogRef.updateSize("810px", "700px");
+                // this.dialogRef.updateSize("810px", "700px");
                 if(this.units.length === 7){
                     this.bottomVisible = true;
                     this.totalHeight = 700;
@@ -285,11 +284,12 @@ export class ARSaveImageDialog implements AfterViewInit {
         this.loadingMessage = "Saving..."
         this.combinedCtx.clearRect(0, 0, 810, 700);
 
-        if(this.options.value['builds'] === true){
-            this.combinedCtx.drawImage(await this.loadImage(this.buildsCanvas.nativeElement.toDataURL()), 0, 0)
-        }
         if(this.totalHeight === 700){
-            this.combinedCtx.drawImage(await this.loadImage(this.bottomCanvas.nativeElement.toDataURL()), 0, 0)
+            this.combinedCtx.drawImage(await this.loadImage(this.bottomCanvas.nativeElement.toDataURL()), 0, 0);
+        }
+        if(this.options.value['builds'] === true){
+            this.combinedCtx.drawImage(await this.loadImage(this.buildsCanvas.nativeElement.toDataURL()), 0, 0);
+            this.combinedCtx.drawImage(await this.loadImage(this.statsCanvas.nativeElement.toDataURL()), 0, 0);
         }
         this.combinedCtx.drawImage(this.mapImage.nativeElement, 0, 0);
         this.combinedCtx.drawImage(await this.loadImage(this.tileCanvas.nativeElement.toDataURL()), 0, 0);
@@ -370,7 +370,7 @@ export class ARSaveImageDialog implements AfterViewInit {
             
             let hero = this.units[i];
             if(hero !== undefined){
-                this.buildsCtx.drawImage(await this.loadImage(this.portrait.getBtlDefault(hero)), 150, 0, 326, 300, 450, 100 * i, 108, 100);
+                this.buildsCtx.drawImage(await this.loadImage(this.portrait.getBtlDefault(hero)), 50, 0, 109, 100, 450, 100 * i, 108, 100);
             }
             
             this.buildsCtx.drawImage(await this.loadImage('assets/ui/build/front-base.png'), 450, 100 * i, 360, 100);

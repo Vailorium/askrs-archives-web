@@ -97,7 +97,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle("AR-D Builder")
+    this.titleService.setTitle("AR-D Builder");
     this.maps = this.mapFinder.getARMaps();
 
     let data = this.route.snapshot.queryParams['data'];
@@ -435,7 +435,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   openEditBuildDialog(){
     let editBuildDialog = this.dialog.open(AREditBuildDialog, {
       width: '450px',
-      height: '80%',
+      maxHeight: '80%',
       data: this.currentlyDisplayedHero
     });
 
@@ -670,7 +670,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   // Save image dialog
   openSaveImageDialog(){
     let saveImage = this.dialog.open(ARSaveImageDialog, 
-      {data: {mapName: this.currentMap, map: this.map, units: this.units, season: [parseInt(this.season.value)]}, panelClass: 'save-image-dialog-panel', maxHeight: "98%", height: "1100px", maxWidth: "810px"}
+      {data: {mapName: this.currentMap, map: this.map, units: this.units, season: [parseInt(this.season.value)]}, panelClass: 'save-image-dialog-panel', maxHeight: "98%", maxWidth: "min(calc(100% - 20px), 810px)"}
     );
   }
 
@@ -692,7 +692,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
 
   // help menu dialog
   openHelpMenuDialog(){
-    this.dialog.open(ARHelpMenuDialog, { height: "50%", panelClass: 'ar-help-dialog-panel', maxWidth: "810px", minWidth: "450px"})
+    this.dialog.open(ARHelpMenuDialog, { height: "400px", panelClass: 'ar-help-dialog-panel', maxWidth: "min(calc(100% - 20px), 810px)", minWidth: "375px"})
   }
 
   selectChangeMap(e: MatSelectChange){
