@@ -1,7 +1,25 @@
 <header>
-    <p>Askrs Archives</p>
+    <p routerLink="/">Askrs Archives</p>
     <button mat-button routerLink="/">Home</button>
     <button mat-button routerLink="/ar-builder">AR-D Builder</button>
+    <button mat-button>Community Build Database</button>
+    <button mat-button (click)="openLoginDialog()" *ngIf="auth.role === undefined">Login</button>
+    <button mat-button *ngIf="auth.role !== undefined">My Heroes</button>
+    <button mat-button *ngIf="auth.role !== undefined">My AR-D</button>
+    <!-- <button mat-button style="margin-left: auto">Profile</button> -->
+    <!-- <button mat-button (click)="logout()">Log out</button> -->
+    <button mat-button *ngIf="auth.role !== undefined" [matMenuTriggerFor]="menu" style="margin-left: auto">{{auth.username}} <mat-icon>arrow_drop_down</mat-icon></button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>Profile</button>
+        <button mat-menu-item>Sign out</button>
+    </mat-menu>
+        <!-- <p *ngIf="auth.role !== undefined">Welcome, {{auth.username}} <mat-icon>arrow_drop_down</mat-icon></p> -->
+    <!-- <div class="header-bottom">
+        <button mat-button>My Heroes</button>
+        <button mat-button>My AR-D</button>
+        <button mat-button style="margin-left: auto">Profile</button>
+        <button mat-button (click)="logout()">Log out</button>
+    </div> -->
 </header>
 <router-outlet></router-outlet>
 <footer>

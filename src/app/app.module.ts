@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatTableModule, MatTableDataSource, MatFormFieldModule, MatInputModule, MatDividerModule, MatRippleModule, MatSnackBarModule, MatCardModule, MatSelectModule, MatOptionModule, MatAutocompleteModule, MatTooltipModule, MatCheckboxModule, MatProgressSpinnerModule, MatGridListModule, MatTabsModule, MatDialogModule, MatExpansionPanel, MatExpansionModule, MatPaginatorModule, MatStepperModule, MatButtonToggleModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatTableModule, MatTableDataSource, MatFormFieldModule, MatInputModule, MatDividerModule, MatRippleModule, MatSnackBarModule, MatCardModule, MatSelectModule, MatOptionModule, MatAutocompleteModule, MatTooltipModule, MatCheckboxModule, MatProgressSpinnerModule, MatGridListModule, MatTabsModule, MatDialogModule, MatExpansionPanel, MatExpansionModule, MatPaginatorModule, MatStepperModule, MatButtonToggleModule, MatIconModule, MatMenuModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SkillInfoDialog } from './pages/skill-info-dialog/skill-info-dialog';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
@@ -29,6 +29,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ARSaveImageDialog } from './pages/ar-builder/ar-save-image-dialog/ar-save-image-dialog';
 import { TitleCasePipe } from '@angular/common';
 import { ARHelpMenuDialog } from './pages/ar-builder/ar-help-menu-dialog/ar-help-menu-dialog';
+import { LoginDialog } from './pages/login-register-dialogs/login-dialog/login-dialog';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ARHelpMenuDialog } from './pages/ar-builder/ar-help-menu-dialog/ar-help
     ARSettingsDialog,
     HomePageComponent,
     ARSaveImageDialog,
-    ARHelpMenuDialog
+    ARHelpMenuDialog,
+    LoginDialog
   ],
   imports: [
     ReactiveFormsModule,
@@ -84,10 +86,11 @@ import { ARHelpMenuDialog } from './pages/ar-builder/ar-help-menu-dialog/ar-help
     HttpClientModule,
     DragDropModule,
     MatButtonToggleModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
   ],
   providers: [Title, TitleCasePipe],
   bootstrap: [AppComponent],
-  entryComponents: [ARHelpMenuDialog, ARSaveImageDialog, ARSettingsDialog, ErrorDialog, SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog, ARBuilderSaveDialog, ConfirmDialog, ARURLShareDialog]
+  entryComponents: [LoginDialog, ARHelpMenuDialog, ARSaveImageDialog, ARSettingsDialog, ErrorDialog, SkillInfoDialog, ARBuilderStructuresDialog, ARBuilderHeroesDialog, AREditBuildDialog, ReportBugDialog, ContributionsDialog, ARBuilderSaveDialog, ConfirmDialog, ARURLShareDialog]
 })
 export class AppModule { }
