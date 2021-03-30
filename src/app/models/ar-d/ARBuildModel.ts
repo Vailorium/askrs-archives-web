@@ -1,6 +1,6 @@
-import { SkillModel } from './SkillModel';
+import { SkillModel } from '../skill/SkillModel';
 
-export interface BuildModel{
+export interface ARBuildModel{
     rarity: number;
     merges: number;
     skills: { weapon?: SkillModel, assist?: SkillModel, special?: SkillModel, a?: SkillModel, b?: SkillModel, c?: SkillModel, s?: SkillModel};

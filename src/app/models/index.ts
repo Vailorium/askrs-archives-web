@@ -1,11 +1,8 @@
-export * from './SkillModel';
-export * from './HeroModel';
-export * from './HeroTableModel';
+export * from './skill';
+export * from './hero';
+export * from './ar-d';
+export * from './build';
+
 export * from './Dictionary';
 export * from "./Generic";
-export * from './HeroDataModel';
 export * from "./Enums";
-export * from './HeroInfoModel';
-export * from './BuildModel';
-export * from './SaveDataModel';
-export * from './ARSettingsModel';

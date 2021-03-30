@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IVS, Stats } from '../models';
-import { HeroInfoModel } from '../models/HeroInfoModel';
+import { ARHeroInfoModel, HeroInfoModel } from '../models/HeroInfoModel';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +10,7 @@ export class StatsCalcualator{
 
     rarityGrowths: number[] = [86, 93, 100, 107, 114];
 
-    calculateAllStats(hero: HeroInfoModel, settings?: {season?: number[], allies?: HeroInfoModel[]}): Stats{
+    calculateAllStats(hero: ARHeroInfoModel, settings?: {season?: number[], allies?: ARHeroInfoModel[]}): Stats{
 
         // if no hero, return empty stat spread
         if(!hero){

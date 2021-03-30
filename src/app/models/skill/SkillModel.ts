@@ -1,5 +1,4 @@
-import { Dictionary } from '.';
-import { HeroModel } from './HeroModel';
+import { Dictionary } from '..';
 
 export class SkillModel{
     name: string;
@@ -16,4 +15,5 @@ export class SkillModel{
     cooldown: number; // for special skills only
     stats: Dictionary<number>;
     base?: string;
+    idNum: number;
 }

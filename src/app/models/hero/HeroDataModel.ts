@@ -1,5 +1,5 @@
-import { Stats } from '.';
-import { Blessings, HeroAvailability, HeroRarity, MovementType, Origin, WeaponType } from './';
+import { Stats } from '..';
+import { Blessings, HeroAvailability, HeroRarity, MovementType, Origin, WeaponType } from '..';
 
 // Model for grabbing data from JSON files
 export interface HeroDataModel{

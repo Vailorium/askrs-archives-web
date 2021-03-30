@@ -30,6 +30,7 @@ import { ARSaveImageDialog } from './pages/ar-builder/ar-save-image-dialog/ar-sa
 import { TitleCasePipe } from '@angular/common';
 import { ARHelpMenuDialog } from './pages/ar-builder/ar-help-menu-dialog/ar-help-menu-dialog';
 import { LoginDialog } from './pages/login-register-dialogs/login-dialog/login-dialog';
+import { HeroesComponent } from './pages/my-heroes/heroes.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { LoginDialog } from './pages/login-register-dialogs/login-dialog/login-d
     HomePageComponent,
     ARSaveImageDialog,
     ARHelpMenuDialog,
-    LoginDialog
+    LoginDialog,
+    HeroesComponent
   ],
   imports: [
     ReactiveFormsModule,

@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-card-title>My Heroes</mat-card-title>
+    <mat-form-field>
+        <input matInput [formControl]="filter" type="text" placeholder="Filter">
+    </mat-form-field>
+    <table border=1>
+        <tr *ngFor="let build of builds">
+            <td><img [src]="'assets/units/'+build.image+'.png'"></td>
+            <td>{{build.build.buildName}}</td>
+            <td>{{build.name}}</td>
+        </tr>
+    </table>
+</mat-card>

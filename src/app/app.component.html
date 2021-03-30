@@ -4,7 +4,7 @@
     <button mat-button routerLink="/ar-builder">AR-D Builder</button>
     <button mat-button>Community Build Database</button>
     <button mat-button (click)="openLoginDialog()" *ngIf="auth.role === undefined">Login</button>
-    <button mat-button *ngIf="auth.role !== undefined">My Heroes</button>
+    <button mat-button routerLink="/heroes" *ngIf="auth.role !== undefined">My Heroes</button>
     <button mat-button *ngIf="auth.role !== undefined">My AR-D</button>
     <!-- <button mat-button style="margin-left: auto">Profile</button> -->
     <!-- <button mat-button (click)="logout()">Log out</button> -->

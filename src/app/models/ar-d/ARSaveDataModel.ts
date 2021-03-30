@@ -1,6 +1,7 @@
-import { ARTile, HeroInfoModel } from ".";
+import { ARTile, HeroInfoModel } from "..";
 
-export interface SaveDataModel {
+//TODO: Deprecated
+export interface ARSaveDataModel {
     map: string;
     mapData: ARTile[];
     unitData: HeroInfoModel[];
