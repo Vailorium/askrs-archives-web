@@ -5,14 +5,14 @@
     <div class="selected_heroes" cdkDropList cdkDropListOrientation='horizontal' (cdkDropListDropped)="drop($event)">
         <div class="selected_hero" [ngStyle]="{'background-color': selectedIndex === i ? '#81ff79' : 'transparent'}" *ngFor="let i of [0,1,2,3,4,5]" (click)="select($event, i)" cdkDrag [cdkDragDisabled]="selectedHeroes[i] === undefined">
             <p *ngIf="this.selectedHeroes[i] === undefined">Empty</p>
-            <img *ngIf="this.selectedHeroes[i] !== undefined" class="selected_hero_icon" [src]="'assets/units/'+this.selectedHeroes[i].image+'.png'" [matTooltip]="this.selectedHeroes[i].name + ': '+ this.selectedHeroes[i].title">
+            <img *ngIf="this.selectedHeroes[i] !== undefined" class="selected_hero_icon" [src]="portrait.getIcon(this.selectedHeroes[i])" [matTooltip]="'Reinhardt' + ': '+ this.selectedHeroes[i].title">
             <img src="assets/ui/hero-selector.png">
             <img *ngIf="this.selectedHeroes[i] !== undefined" src="assets/ui/x.png" class="remove_hero_icon" (click)="remove($event, i)">
         </div>
         <div class="selected_hero extra_hero" [ngStyle]="{'background-color': selectedIndex === 6 && hasARExtra() ? '#81ff79' : 'transparent'}" (click)="select($event, 6)" cdkDrag [cdkDragDisabled]="selectedHeroes[6] === undefined">
             <img [src]="'assets/ui/blessings/'+blessingEnum[season]+'_default_small.png'" class="blessing_background">
             <p *ngIf="this.selectedHeroes[6] === undefined">Empty</p>
-            <img *ngIf="this.selectedHeroes[6] !== undefined" class="selected_hero_icon" [src]="'assets/units/'+this.selectedHeroes[6].image+'.png'" [matTooltip]="this.selectedHeroes[6].name + ': '+ this.selectedHeroes[6].title">
+            <img *ngIf="this.selectedHeroes[6] !== undefined" class="selected_hero_icon" [src]="portrait.getIcon(this.selectedHeroes[6])" [matTooltip]="'Reinhardt' + ': '+ this.selectedHeroes[6].title">
             <img src="assets/ui/hero-selector.png">
             <img *ngIf="this.selectedHeroes[6] !== undefined" src="assets/ui/x.png" class="remove_hero_icon" (click)="remove($event, 6)">
         </div>
@@ -26,7 +26,7 @@
                     <ngx-mat-select-search [formControl]="hero_name_filter" placeholderLabel="Search" noEntriesFoundLabel="No Heroes Found"></ngx-mat-select-search>
                 </mat-option>
                 <mat-option *ngFor="let unit of filteredList | stringFilterBy:hero_name_filter.value:'name'" [value]="unit.id">
-                    <img class="unit_icon_mat-select" [src]="'assets/units/'+unit.image+'.png'"> {{unit.name}}: {{unit.title}}
+                    <img class="unit_icon_mat-select" [src]="portrait.getIconDirect(unit)"> Reinhardt: {{unit.title}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

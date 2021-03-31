@@ -6,6 +6,7 @@ import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 import { Blessing, HeroDataModel, HeroTableModel, IVS } from 'src/app/models';
 import { BuildModel } from 'src/app/models/BuildModel';
 import { HeroInfoModel } from 'src/app/models/HeroInfoModel';
+import { PortraitService } from 'src/app/services/portrait.service';
 import { UnitFinderService } from 'src/app/services/unit-finder.service';
 const short = require('short-uuid');
 
@@ -34,7 +35,7 @@ export class ARBuilderHeroesDialog {
 
     blessingEnum = Blessing;
     
-    constructor(public dialogRef: MatDialogRef<ARBuilderHeroesDialog>, private heroes: UnitFinderService, private fb: FormBuilder, private snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: {units: HeroInfoModel[], season: number}){
+    constructor(public portrait: PortraitService, public dialogRef: MatDialogRef<ARBuilderHeroesDialog>, private heroes: UnitFinderService, private fb: FormBuilder, private snackBar: MatSnackBar, @Inject(MAT_DIALOG_DATA) public data: {units: HeroInfoModel[], season: number}){
         this.selectedHeroes = data.units.concat(new Array(7 - data.units.length));
         this.season = data.season;
 

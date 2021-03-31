@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Blessing, HeroInfoModel, Kind } from '../models';
+import { Blessing, BuildModel, HeroInfoModel, Kind } from '../models';
 
 @Injectable({
     providedIn: 'root'
@@ -8,7 +8,7 @@ export class PortraitService {
     constructor(){}
 
     public getIcon(hero: HeroInfoModel): string{
-        let st = "assets/units/" + hero.image;
+        let st = "assets/units/" + "reinhardt_1";
         if(hero.build.resplendent === true){
             st += "_resplendent";
         }
@@ -16,8 +16,14 @@ export class PortraitService {
         return st;
     }
 
+    public getIconDirect(hero: BuildModel){
+        let st = "assets/units/" + "reinhardt_1";
+        st += ".png";
+        return st;
+    }
+
     public getBtlDefault(hero: HeroInfoModel): string{
-        let st = "assets/units_btl/" + hero.image;
+        let st = "assets/units_btl/" + "reinhardt_1";
         if(hero.build.resplendent === true){
             st += "_resplendent";
         }

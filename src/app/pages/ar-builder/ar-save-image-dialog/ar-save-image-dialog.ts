@@ -418,8 +418,8 @@ export class ARSaveImageDialog implements AfterViewInit {
                 this.buildsCtx.drawImage(await this.loadImage('assets/ui/a.png'), 736, 16 + (100 * i), 13, 13);
                 
                 // Hero Name
-                this.buildsCtx.strokeText(hero.name, 573, 19 + (100 * i));
-                this.buildsCtx.fillText(hero.name, 573, 19 + (100 * i));
+                this.buildsCtx.strokeText("Reinhardt", 573, 19 + (100 * i));
+                this.buildsCtx.fillText("Reinhardt", 573, 19 + (100 * i));
                 
                 // Level
                 let level = "40";

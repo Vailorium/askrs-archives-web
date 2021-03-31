@@ -1,6 +1,6 @@
 <div class="hero_info_title">
     <div class="hero_info_title_title">
-        <mat-card-title>Edit Build - {{this.heroData.name}}: {{this.heroData.title}}</mat-card-title>
+        <mat-card-title>Edit Build - Reinhardt: {{this.heroData.title}}</mat-card-title>
         <img [src]="'assets/ui/star_'+i+'.png'" *ngFor="let i of rarities[this.heroData.build.rarity]">
     </div>
 </div>
@@ -13,7 +13,7 @@
                 <ngx-mat-select-search [formControl]="hero_name_filter" placeholderLabel="Search" noEntriesFoundLabel="No Heroes Found"></ngx-mat-select-search>
             </mat-option>
             <mat-option *ngFor="let unit of units | stringFilterBy:hero_name_filter.value:'name'" [value]="unit.id">
-                {{unit.name}}: {{unit.title}}
+                Reinhardt: {{unit.title}}
             </mat-option>
         </mat-select>
     </mat-form-field>
