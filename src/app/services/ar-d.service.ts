@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { exception } from "console";
-import { ARTile, Buildings, Decorations, Dictionary, HeroDataModel, HeroInfoModel, IVS, Maps, SkillModel, Traps } from "../models";
+import { ARTile, Buildings, Decorations, Dictionary, HeroDataModel, ARHeroInfoModel, IVS, Maps, SkillModel, Traps } from "../models";
 import { MapFinderService } from "./map-finder.service";
 import { SkillsService } from "./skills.service";
 import { SystemService } from "./system.service";
@@ -52,7 +52,7 @@ export class ARDService{
         return this.structures[id];
     }
 
-    getLink(mapName: string, map: ARTile[], units: HeroInfoModel[], season: number): string{
+    getLink(mapName: string, map: ARTile[], units: ARHeroInfoModel[], season: number): string{
         //TODO: highest encodable number with two characters is 1295 (i.e. 1296 options) - needs to be increased to 3 digits if hero count ever doubles and i still do this
         let link = "";
 
@@ -193,21 +193,20 @@ export class ARDService{
 
                 var heroData: HeroDataModel, uid, loc, merges, df, rarity, resplendent, boon, bane, refined, weapon, assist, special, a, b, c, seal;
                 
-                let heroesData: HeroInfoModel[] = [];
+                let heroesData: ARHeroInfoModel[] = [];
                 for(let i = 0; i < 7; i++){
                     if(data[0] === "$") data.splice(0,1);
                     if(data.length === 0){
                         break;
                     }
                     if(heroData){
-                        heroesData.push({...heroData, uid: uid, build: {rarity: rarity, merges: merges, dragonflowers: df, resplendent: resplendent ? true : false,
+                        heroesData.push({...heroData, uid: uid, build: {unitId: "", summonerSupport: 0, allySupport: {rank: 0}, rarity: rarity, merges: merges, dragonflowers: df, resplendent: resplendent ? true : false,
                         ivs: {boon: boon ? boon : 0, bane: bane ? bane : 0}, blessing: heroData.blessing ? heroData.blessing : parseInt(season), skills: {
                             weapon: weapon, assist: assist, special: special, a: a, b: b, c: c, s: seal
                         }}});
                         map[loc] = {slot: i - 1, uid: uid, image: heroData.image, display: heroData.name + ": " + heroData.title, folder: "units", type: "hero", permanent: false, isSchool: false};
                         heroData = uid = loc = merges = df = rarity = resplendent = boon = bane = refined = weapon = assist = special = a = b = c = seal = undefined;    
                     }
-                    //{"slot":0,"uid":"8qQ2HRfeGiJ3VcG8kapPHQ","image":"bernadetta_2","display":"Bernadetta: Frosty Shut-In","folder":"units","type":"hero","permanent":false,"isSchool":false}
 
                     heroData = this.heroes[this.system.base36Decode(data.splice(0, 2).join(''))];
                     uid = short.generate();
@@ -260,9 +259,15 @@ export class ARDService{
                 }
                 if(heroData){
                     heroesData.push({...heroData, uid: uid, build: {rarity: rarity, merges: merges, dragonflowers: df, resplendent: resplendent ? true : false,
-                    ivs: {boon: boon ? boon : 0, bane: bane ? bane : 0}, blessing: heroData.blessing ? heroData.blessing : parseInt(season), skills: {
+                    ivs: {boon: boon ? boon : 0, bane: bane ? bane : 0},
+                    blessing: heroData.blessing ? heroData.blessing : parseInt(season),
+                    skills: {
                         weapon: weapon, assist: assist, special: special, a: a, b: b, c: c, s: seal
-                    }}});
+                    },
+                    unitId: "",
+                    allySupport: {rank: 0},
+                    summonerSupport: 0
+                }});
                     map[loc] = {slot: heroesData.length, uid: uid, image: heroData.image, display: heroData.name + ": " + heroData.title, folder: "units", type: "hero", permanent: false, isSchool: false};
                 }
 

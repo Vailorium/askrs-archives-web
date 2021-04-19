@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { HeroInfoModel } from 'src/app/models/HeroInfoModel';
+import { ARHeroInfoModel } from 'src/app/models';
 
 @Component({
     selector: 'ar-edit-build-dialog',
@@ -11,7 +11,7 @@ export class AREditBuildDialog {
 
     public settings: {heroEnabled: boolean, blessingEnabled: boolean, summonerSupportEnabled: boolean, allySupportEnabled: boolean} = {heroEnabled: false, blessingEnabled: false, summonerSupportEnabled: false, allySupportEnabled: false};
 
-    constructor(public dialogRef: MatDialogRef<AREditBuildDialog>, @Inject(MAT_DIALOG_DATA) public data: HeroInfoModel){
+    constructor(public dialogRef: MatDialogRef<AREditBuildDialog>, @Inject(MAT_DIALOG_DATA) public data: ARHeroInfoModel){
         this.dialogRef.beforeClosed().subscribe( // overwrites default exiting behaviour - important if user clicks outside of dialog to close
             () => {
                 console.log(this.data);

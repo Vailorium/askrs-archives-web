@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Inject, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { ARTile, Blessing, Dictionary, HeroInfoModel, IVS, Kind, MovementType, WeaponType } from "src/app/models";
+import { ARHeroInfoModel, ARTile, Blessing, Dictionary, HeroInfoModel, IVS, Kind, MovementType, WeaponType } from "src/app/models";
 // const path = require('path');
 import { join } from 'path';
 import { FormBuilder, FormGroup } from "@angular/forms";
@@ -28,7 +28,7 @@ export class ARSaveImageDialog implements AfterViewInit {
     // Vars
     public mapName: string;
     private map: ARTile[];
-    private units: HeroInfoModel[];
+    private units: ARHeroInfoModel[];
     
     public imageData: string = "";
     
@@ -83,7 +83,7 @@ export class ARSaveImageDialog implements AfterViewInit {
     @ViewChild('combinedCanvas') combinedCanvas: ElementRef<HTMLCanvasElement>;
     combinedCtx: CanvasRenderingContext2D;
     
-    constructor(private titlecase: TitleCasePipe, private skill: SkillsService, private stats: StatsCalcualator, private portrait: PortraitService, private cdr: ChangeDetectorRef, private fb: FormBuilder, public dialogRef: MatDialogRef<ARSaveImageDialog>, @Inject(MAT_DIALOG_DATA) public data: {mapName: string, map: ARTile[], units: HeroInfoModel[], season: number[]}){
+    constructor(private titlecase: TitleCasePipe, private skill: SkillsService, private stats: StatsCalcualator, private portrait: PortraitService, private cdr: ChangeDetectorRef, private fb: FormBuilder, public dialogRef: MatDialogRef<ARSaveImageDialog>, @Inject(MAT_DIALOG_DATA) public data: {mapName: string, map: ARTile[], units: ARHeroInfoModel[], season: number[]}){
         this.options = this.fb.group({
             movement: [false],
             weapons: [false],
@@ -231,10 +231,10 @@ export class ARSaveImageDialog implements AfterViewInit {
         }
     }
     
-    getHeroByUID(uid: string): HeroInfoModel{
+    getHeroByUID(uid: string): ARHeroInfoModel{
         for(let unit of this.units){
             if(unit.uid === uid){
-            return unit;
+                return unit;
             }
         }
     }

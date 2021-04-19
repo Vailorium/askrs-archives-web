@@ -1,6 +1,6 @@
 import { Component, Inject, ViewChild } from "@angular/core";
 import { MatDialog, MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from "@angular/material";
-import { ARTile, HeroInfoModel, SaveDataModel } from "src/app/models";
+import { ARTile, HeroInfoModel, ARSaveDataModel } from "src/app/models";
 import { ConfirmDialog } from "../../confirm-dialog/confirm-dialog";
 
 @Component({
@@ -12,11 +12,11 @@ export class ARBuilderSaveDialog{
 
     @ViewChild("fileInput") fileInput;
 
-    saveData: SaveDataModel[] = [];
+    saveData: ARSaveDataModel[] = [];
     
-    currentData: SaveDataModel;
+    currentData: ARSaveDataModel;
 
-    constructor(private dialog: MatDialog, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<ARBuilderSaveDialog>, @Inject(MAT_DIALOG_DATA) data: SaveDataModel){
+    constructor(private dialog: MatDialog, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<ARBuilderSaveDialog>, @Inject(MAT_DIALOG_DATA) data: ARSaveDataModel){
         this.dialogRef.afterClosed().subscribe(
             () => {
                 this.dialogRef = null
@@ -100,7 +100,7 @@ export class ARBuilderSaveDialog{
         this.dialogRef.close();
     }
 
-    close(data?: SaveDataModel): void {
+    close(data?: ARSaveDataModel): void {
         this.dialogRef.close(data);
     }
 }

@@ -3,8 +3,8 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatGridTileFooterCssMatStyler, MatSelectChange } from '@angular/material';
 import { Title } from '@angular/platform-browser';
-import { ARSettingsModel, ARTile, Blessing, Dictionary, MovementType, SaveDataModel, Stats, WeaponType } from 'src/app/models';
-import { HeroInfoModel } from 'src/app/models/HeroInfoModel';
+import { ARHeroInfoModel, ARSettingsModel, ARTile, Blessing, Dictionary, MovementType, Stats, WeaponType } from 'src/app/models';
+import { HeroInfoModel, ARSaveDataModel } from 'src/app/models';
 import { ARDService } from 'src/app/services/ar-d.service';
 import { MapFinderService } from 'src/app/services/map-finder.service';
 import { StatsCalcualator } from 'src/app/services/stats-calculator.service';
@@ -48,7 +48,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
   // AR Map Data
   public map: ARTile[] = [{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:true,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:true,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:true,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false},{image:"blank",display:"",folder:"aether_raids",type:"blank",permanent:false,isSchool:false}];
   public currentMap: string = "springwater";
-  public units: HeroInfoModel[] = [];
+  public units: ARHeroInfoModel[] = [];
 
   // AR Map Metadata
   public readonly MAX_LIFT_LOSS = 100;
@@ -67,7 +67,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
 
   // Description Box Data
   public currentlyDisplayedStructure: ARStructureData;
-  public currentlyDisplayedHero: HeroInfoModel;
+  public currentlyDisplayedHero: ARHeroInfoModel;
   public currentlyDisplayedHeroStats: Stats = {hp: 0, atk: 0, def: 0, spd: 0, res: 0};
 
   // Enum
@@ -411,7 +411,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
       data: {units: this.units, season: parseInt(this.season.value)}
     });
 
-    heroesDialog.afterClosed().subscribe((res: HeroInfoModel[]) => {
+    heroesDialog.afterClosed().subscribe((res: ARHeroInfoModel[]) => {
       this.hideRange();
       let heroes = [];
       for(let i = 0; i < res.length; i++){
@@ -439,7 +439,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
       data: this.currentlyDisplayedHero
     });
 
-    editBuildDialog.afterClosed().subscribe((res: HeroInfoModel) => {
+    editBuildDialog.afterClosed().subscribe((res: ARHeroInfoModel) => {
       this.currentlyDisplayedHero = res;
       for(let i = 0; i < this.units.length; i++){
         if(this.units[i].uid === res.uid){
@@ -519,7 +519,7 @@ export class ArBuilderComponent implements OnInit, AfterViewInit {
       data: {map: this.currentMap, mapData: this.map, unitData: this.units, season: this.season.value}
     });
 
-    save.afterClosed().subscribe((res?: SaveDataModel) => {
+    save.afterClosed().subscribe((res?: ARSaveDataModel) => {
       save = null;
       if(res){
         this.currentMap = res.map;

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { SkillModel, HeroModel } from 'src/app/models';
+import { SkillModel } from 'src/app/models';
 import { UnitFinderService } from 'src/app/services/unit-finder.service';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
-import { SaveDataModel } from 'src/app/models';
-import { HeroInfoModel } from 'src/app/models/HeroInfoModel';
+import { ARSaveDataModel } from 'src/app/models';
+import { HeroInfoModel } from 'src/app/models';
 import { ARDService } from 'src/app/services/ar-d.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class ARURLShareDialog {
 
     @ViewChild('copy') copy: ElementRef<HTMLInputElement>;
 
-    constructor(public dialogRef: MatDialogRef<ARURLShareDialog>, private ard: ARDService, private snackbar: MatSnackBar, @Inject(MAT_DIALOG_DATA) data: SaveDataModel){
+    constructor(public dialogRef: MatDialogRef<ARURLShareDialog>, private ard: ARDService, private snackbar: MatSnackBar, @Inject(MAT_DIALOG_DATA) data: ARSaveDataModel){
         this.link = window.location.origin + "/ar-builder?data=" + this.ard.getLink(data.map, data.mapData, data.unitData, data.season);
     }
     

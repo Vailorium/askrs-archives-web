@@ -3,9 +3,9 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MatSnackBar, MatTableDataSource, MAT_DIALOG_DATA, PageEvent } from '@angular/material';
 import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
-import { Blessing, HeroDataModel, HeroTableModel, IVS } from 'src/app/models';
-import { ARBuildModel } from 'src/app/models/ar-d/ARBuildModel';
-import { HeroInfoModel } from 'src/app/models/HeroInfoModel';
+import { Blessing, HeroDataModel, IVS } from 'src/app/models';
+import { BuildModel } from 'src/app/models';
+import { HeroInfoModel } from 'src/app/models';
 import { UnitFinderService } from 'src/app/services/unit-finder.service';
 const short = require('short-uuid');
 
@@ -75,7 +75,7 @@ export class ARBuilderHeroesDialog {
 
     
     addHero(hero: HeroDataModel){
-        let baseBuild: ARBuildModel = {blessing: hero.blessing, rarity: 5, merges: 0, skills: {}, resplendent: false, ivs: {boon: IVS.neutral, bane: IVS.neutral}, dragonflowers: 0};
+        let baseBuild: BuildModel = {blessing: hero.blessing, rarity: 5, merges: 0, skills: {}, resplendent: false, ivs: {boon: IVS.neutral, bane: IVS.neutral}, dragonflowers: 0, allySupport: {rank: 0}, summonerSupport: 0, unitId: ""};
         let heroData: HeroInfoModel = {...hero, ...{build: baseBuild, uid: short.generate()}};
 
         let max = this.hasARExtra() || (hero.ar_extra === true && hero.blessing === this.season) ? 7 : 6;

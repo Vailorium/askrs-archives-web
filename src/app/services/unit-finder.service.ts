@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HeroModel, HeroTableModel, Dictionary, HeroDataModel } from '../models';
+import { Dictionary, HeroDataModel } from '../models';
 
 const HERO_LIST: HeroDataModel[] = require('../data/units/hero_list.json');
 

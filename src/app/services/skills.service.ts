@@ -63,4 +63,6 @@ export class SkillsService {
       data: skill
     });
   }
+
+  public static BLANK_SKILL: SkillModel = Object.freeze({name: "", description: "", image: "", id: "", fodder: [[], [], [], [], []], inheritable: false, refined: false, might: 0, restrictedTo: {moveType: [], weaponType: []}, sp: 0, score: 0, cooldown: 0, stats: {hp: 0, atk: 0, def: 0, spd: 0, res: 0}, idNum: null});
 }

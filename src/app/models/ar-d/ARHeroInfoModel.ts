@@ -1,7 +1,7 @@
-import { ARBuildModel } from ".";
+import { BuildModel } from "..";
 import { HeroDataModel } from "..";
 
 export interface ARHeroInfoModel extends HeroDataModel{
-    build: ARBuildModel;
+    build: BuildModel;
     uid: string;
 }

@@ -1,5 +1,4 @@
-import { Stats } from '..';
-import { Blessings, HeroAvailability, HeroRarity, MovementType, Origin, WeaponType } from '..';
+import { Stats, HeroAvailability } from '..';
 
 // Model for grabbing data from JSON files
 export interface HeroDataModel{
@@ -22,4 +21,5 @@ export interface HeroDataModel{
     pair_up: boolean;
     ar_extra: boolean;
     special_kind: number;
+    idNum: number;
 }

@@ -1,13 +1,40 @@
-<mat-card>
-    <mat-card-title>My Heroes</mat-card-title>
-    <mat-form-field>
-        <input matInput [formControl]="filter" type="text" placeholder="Filter">
-    </mat-form-field>
-    <table border=1>
-        <tr *ngFor="let build of builds">
-            <td><img [src]="'assets/units/'+build.image+'.png'"></td>
-            <td>{{build.build.buildName}}</td>
-            <td>{{build.name}}</td>
-        </tr>
-    </table>
-</mat-card>
+<div class="col-1">
+    <mat-card>
+        <mat-card-title>My Hero Builds</mat-card-title>
+        <hr />
+        <mat-form-field style="margin-right: 5px;" appearance="fill">
+            <input matInput [formControl]="filter" type="text" placeholder="Build Name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Hero</mat-label>
+            <mat-select>
+                <mat-option>Hello</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <table> <!--! try mat-table with sort headers -->
+            <tr>
+                <td></td>
+                <td></td>
+                <td matTooltip="Likes"><span class="material-icons">thumb_up</span></td>
+                <td matTooltip="Public"><span class="material-icons">public</span></td>
+                <td>Last Edited</td>
+                <td></td>
+                <td>{{builds.length}}/100 <button mat-raised-button color="primary" class="add-button">+</button></td>
+            </tr>
+            <tr *ngFor="let build of builds">
+                <td><img class="unit_icon_small" [src]="'assets/units/'+build.image+'.png'" [matTooltip]="build.name + ': ' + build.title"></td>
+                <td>{{build.name}}: {{build.build.buildName}}</td>
+                <td>103,260</td>
+                <td><mat-checkbox [checked]="build.build.visible" disabled></mat-checkbox></td>
+                <td [matTooltip]="time | date:'medium'">{{time | date:'mediumDate'}}</td>
+                <td><button mat-raised-button color="primary" matTooltip="Edit"><span class="material-icons">edit</span></button></td>
+                <td><button mat-raised-button color="warn" matTooltip="Delete"><span class="material-icons">delete</span></button></td>
+            </tr>
+        </table>
+        <!-- <mat-paginator [length]="100"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator> -->
+    </mat-card>
+    
+</div>

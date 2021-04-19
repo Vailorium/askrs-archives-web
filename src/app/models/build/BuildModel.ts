@@ -4,6 +4,7 @@ import { SkillModel } from "..";
 export interface BuildModel{
     buildName?: string;
     userName?: string; //! Never return UserID, always userName even if userName can change
+    buildId?: number;
     unitId: string; // unit PID
     visible?: boolean;
     rarity: number;
@@ -13,7 +14,6 @@ export interface BuildModel{
     ivs: {boon: number, bane: number};
     dragonflowers: number;
     blessing: number;
-    allySupport?: {rank: number, allyUnitId: string};
-    summonerSupport?: number;
-    bonusUnit?: boolean;
-}
+    allySupport: {rank: number, allyUnitId?: string};
+    summonerSupport: number;
+};

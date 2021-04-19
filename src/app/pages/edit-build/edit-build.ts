@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Blessing, Dictionary, HeroDataModel, HeroTableModel, IVS, SkillModel, Stats } from 'src/app/models';
-import { ARBuildModel } from 'src/app/models/ar-d/ARBuildModel';
-import { ARHeroInfoModel } from 'src/app/models/HeroInfoModel';
+import { Blessing, Dictionary, HeroDataModel, IVS, SkillModel, Stats } from 'src/app/models';
+import { BuildModel } from 'src/app/models';
+import { ARHeroInfoModel } from 'src/app/models';
 import { SkillsService } from 'src/app/services/skills.service';
 import { StatsCalcualator } from 'src/app/services/stats-calculator.service';
 import { UnitFinderService } from 'src/app/services/unit-finder.service';
@@ -85,7 +85,7 @@ export class EditBuild implements OnInit, AfterViewInit{
         this.heroBuild.patchValue({blessing: this.heroData.blessing === 0 ? this.heroData.build.blessing : this.heroData.blessing});
         this.heroBuild.valueChanges.subscribe((data) => {
             data = this.heroBuild.getRawValue();
-            let build: ARBuildModel = {rarity: data.rarity, merges: data.merges, resplendent: data.resplendent, ivs: {boon: data.boon, bane: data.bane}, dragonflowers: data.dragonflowers, blessing: data.blessing, skills: {weapon: data.refine ? this.skill.getSkillById(data.refine) : this.skill.getSkillById(data.weapon), assist: this.skill.getSkillById(data.assist), special: this.skill.getSkillById(data.special), a: this.skill.getSkillById(data.a), b: this.skill.getSkillById(data.b), c: this.skill.getSkillById(data.c), s: this.skill.getSkillById(data.seal)}};
+            let build: BuildModel = {unitId: "", allySupport: {rank: 0}, summonerSupport: 0, rarity: data.rarity, merges: data.merges, resplendent: data.resplendent, ivs: {boon: data.boon, bane: data.bane}, dragonflowers: data.dragonflowers, blessing: data.blessing, skills: {weapon: data.refine ? this.skill.getSkillById(data.refine) : this.skill.getSkillById(data.weapon), assist: this.skill.getSkillById(data.assist), special: this.skill.getSkillById(data.special), a: this.skill.getSkillById(data.a), b: this.skill.getSkillById(data.b), c: this.skill.getSkillById(data.c), s: this.skill.getSkillById(data.seal)}};
             let uid = this.heroData.uid;
             this.heroData = {...this.unitsDic[data.hero], uid: uid, build: build};
 

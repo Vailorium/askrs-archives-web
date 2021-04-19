@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IVS, Stats } from '../models';
-import { ARHeroInfoModel, HeroInfoModel } from '../models/HeroInfoModel';
+import { ARHeroInfoModel, HeroInfoModel } from '../models';
 
 @Injectable({
     providedIn: 'root'
