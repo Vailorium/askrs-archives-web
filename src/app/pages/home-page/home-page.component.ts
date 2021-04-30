@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomePageComponent implements OnInit {
 
   articles = [
+    {id: "version-0.3.5-update", title: "Version 0.3.5 Update - Legendary Hero Sigurd", img: "v035banner.png", text: "New content includes:<ul><li>New Hero (Sigurd)</li><li>New Skill (Atk/Def Catch 4)</li></ul>", timestamp: "1619766998214"},
     {id: "version-0.3.4-update", title: "Version 0.3.4 Update - Childhood Encounters", img: "v034banner.png", text: "New content includes:<ul><li>New Heroes (Eirika&Ephraim, Lyon, Tana, L'Arachel, Innes)</li><li>New Skills (Spd/Def Near Trace, Spd/Res Far Trace)</li><li>New Resplendent - Lilina</li></ul>", timestamp: "1618818817269"},
     {id: "version-0.3.3-update", title: "Version 0.3.3 Update - Bond of Trust", img:"v033banner.png", text: "New content includes:<ul><li>New Heroes (Erk, Louise, Pent, Sonia, Farina)</li><li>New Skills (G Duel Infantry 4, Atk/Spd Snag, Atk/Spd Ideal)</li><li>New refines (Berserk Armads, Flower Lance, Gáe Bolg, Grima's Truth, Shamshir)</li></ul>"},
     {id: "version-0.3.2-update", title: "Version 0.3.2 Update - Mythic Hero Dagr", img:"v032banner.png", text: "New content includes:<ul><li>New Hero - Mythic Hero Dagr</li><li>New Skills Added (Even Tempest)</li></ul>Also fixed a bug with Spring Duo Myrrhs image - she is now not invisible!", timestamp: "1617086350378"},
