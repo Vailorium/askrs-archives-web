@@ -21,14 +21,14 @@
                 <td></td>
                 <td>{{builds.length}}/100 <button mat-raised-button color="primary" class="add-button">+</button></td>
             </tr>
-            <tr *ngFor="let build of builds">
+            <tr *ngFor="let build of builds; let i = index;">
                 <td><img class="unit_icon_small" [src]="'assets/units/'+build.image+'.png'" [matTooltip]="build.name + ': ' + build.title"></td>
                 <td>{{build.name}}: {{build.build.buildName}}</td>
                 <td>103,260</td>
                 <td><mat-checkbox [checked]="build.build.visible" disabled></mat-checkbox></td>
                 <td [matTooltip]="time | date:'medium'">{{time | date:'mediumDate'}}</td>
                 <td><button mat-raised-button color="primary" matTooltip="Edit"><span class="material-icons">edit</span></button></td>
-                <td><button mat-raised-button color="warn" matTooltip="Delete"><span class="material-icons">delete</span></button></td>
+                <td><button mat-raised-button color="warn" matTooltip="Delete" (click)="deleteBuild(i)"><span class="material-icons">delete</span></button></td>
             </tr>
         </table>
         <!-- <mat-paginator [length]="100"
