@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomePageComponent implements OnInit {
 
   articles = [
+    {id:"version-0.3.7-update", title: "Version 0.3.7 Update - Bridal Grace", img: "v037banner.png", text: "New content includes:<ul><li>New Heroes (Shanna, Saul, Juno, Zelot, Catria)</li><li>New Skills (Atk/Def Far Trace, Atk/Def Near Trace, C Duel Cav)</li><li>New Resplendent - Nino</li></ul>", timestamp: "1621495204280"},
     {id: "version-0.3.6-update", title: "Version 0.3.6 Update - Forces of Will", img: "v036banner.png", text: "New content includes:<ul><li>New Heroes (Edelgard, Dimitri, Morgan M, Morgan F, Orson)</li><li>New Skills (Atk/Def Ideal, Atk/Res Menace, Atk/Def Menace)</li><li>New Resplendent - Leif</li><li>New Refines (Ragnell, Alondite, Gradivus, Raijinto, Siegfried)</li></ul>", timestamp: "1620290298160"},
     {id: "version-0.3.5-update", title: "Version 0.3.5 Update - Legendary Hero Sigurd", img: "v035banner.png", text: "New content includes:<ul><li>New Hero (Sigurd)</li><li>New Skill (Atk/Def Catch 4)</li></ul>", timestamp: "1619766998214"},
     {id: "version-0.3.4-update", title: "Version 0.3.4 Update - Childhood Encounters", img: "v034banner.png", text: "New content includes:<ul><li>New Heroes (Eirika&Ephraim, Lyon, Tana, L'Arachel, Innes)</li><li>New Skills (Spd/Def Near Trace, Spd/Res Far Trace)</li><li>New Resplendent - Lilina</li></ul>", timestamp: "1618818817269"},
