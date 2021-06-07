@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomePageComponent implements OnInit {
 
   articles = [
+    {id:"version-0.3.9-update", title: "Version 0.3.9 Update - Midpoint (Nott and More!)", img: "v039banner.png", text: "New content includes:<ul><li>New Heroes (Nott, Tatiana, Zeke, Palla, Fernand, Luthier)</li><li>New Skills (Def/Res Menace, Atk/Spd Menace, R Duel Flying 4)</li><li>New Refines (Vassal's Blade, Hoarfrost Knife, Muninn's Egg, Peshkatz, Skadi)</li><li>New Resplendent - Chrom</li></ul>", timestamp: "1623067081584"},
     {id:"version-0.3.8-update", title: "Version 0.3.8 Update - Mythic Hero Ashera", img: "v038banner.png", text: "New content includes:<ul><li>New Hero (Ashera)</li><li>New Skills (Atk/Res Ideal, Order's Restraint)</li></ul>", timestamp: "1622437931420"},
     {id:"version-0.3.7-update", title: "Version 0.3.7 Update - Bridal Grace", img: "v037banner.png", text: "New content includes:<ul><li>New Heroes (Shanna, Saul, Juno, Zelot, Catria)</li><li>New Skills (Atk/Def Far Trace, Atk/Def Near Trace, C Duel Cav)</li><li>New Resplendent - Nino</li></ul>", timestamp: "1621495204280"},
     {id: "version-0.3.6-update", title: "Version 0.3.6 Update - Forces of Will", img: "v036banner.png", text: "New content includes:<ul><li>New Heroes (Edelgard, Dimitri, Morgan M, Morgan F, Orson)</li><li>New Skills (Atk/Def Ideal, Atk/Res Menace, Atk/Def Menace)</li><li>New Resplendent - Leif</li><li>New Refines (Ragnell, Alondite, Gradivus, Raijinto, Siegfried)</li></ul>", timestamp: "1620290298160"},
