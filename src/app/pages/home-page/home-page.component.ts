@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomePageComponent implements OnInit {
 
   articles = [
+    {id: "version-0.3.12-update", title: "Version 0.3.12 Update - Summer's Dream", img: "v0312banner.png", text: "New content includes:<ul><li>New Heroes (Freyja, Norne, Caeda & Plumeria, Freyr, Ogma)</li><li>New Skills (Def/Res Catch, Dragonskin II, Laws of Sacae II, Flow Refresh, Threat. Spd/Def)</li><li>New Refines (Expiration, Blizzard, Huginn's Egg, Leiptr, Masking Axe, Stout Tomahawk)</li><li>New Resplendent - Merric", timestamp: "1625553272489"},
     {id:"version-0.3.11-update", title: "Version 0.3.11 Update - Legendary Hero Byleth", img: "v0311banner.png", text: "New content includes:<ul><li>New Hero (Byleth)</li></ul>", timestamp: "1625028966206"},
     {id:"version-0.3.10-update", title: "Version 0.3.10 Update - Summer Vibrance", img: "v0310banner.png", text: "New content includes:<ul><li>New Heroes(Hilda, Leonie, Mercedes, Caspar, Ashe)</li><li>New Skills (A/R Far Trace, B Duel Cav, Even Recovery)</li><li>New Resplendent - Celica</li></ul>", timestamp: "1624260257699"},
     {id:"version-0.3.9-update", title: "Version 0.3.9 Update - Midpoint (Nott and More!)", img: "v039banner.png", text: "New content includes:<ul><li>New Heroes (Nott, Tatiana, Zeke, Palla, Fernand, Luthier)</li><li>New Skills (Def/Res Menace, Atk/Spd Menace, R Duel Flying 4)</li><li>New Refines (Vassal's Blade, Hoarfrost Knife, Muninn's Egg, Peshkatz, Skadi)</li><li>New Resplendent - Chrom</li></ul>", timestamp: "1623067081584"},
