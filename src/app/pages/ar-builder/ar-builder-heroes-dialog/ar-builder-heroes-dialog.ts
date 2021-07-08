@@ -63,7 +63,6 @@ export class ARBuilderHeroesDialog {
 
         this.dialogRef.beforeClosed().subscribe( // overwrites default exiting behaviour - important if user clicks outside of dialog to close
             () => {
-                console.log(this.selectedHeroes.filter(a => a !== undefined));
                 this.dialogRef.close(this.selectedHeroes.filter(a => a !== undefined));
             }
         );
@@ -104,7 +103,6 @@ export class ARBuilderHeroesDialog {
         } else {
             this.filteredList = this.baseList;
         }
-        console.log(this.filteredList);
     }
 
     hasARExtra(): boolean{

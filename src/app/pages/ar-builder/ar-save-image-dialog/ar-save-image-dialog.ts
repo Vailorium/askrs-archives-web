@@ -364,7 +364,6 @@ export class ARSaveImageDialog implements AfterViewInit {
             maxCount = 7;
         }
         for(let i = 0; i < maxCount; i++){
-            console.log("drawn");
             // Character portrait
             this.buildsCtx.drawImage(await this.loadImage('assets/ui/build/back-base.jpg'), 450, 100 * i, 360, 100);
             
