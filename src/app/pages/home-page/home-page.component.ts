@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomePageComponent implements OnInit {
 
   articles = [
+    {id: "version-0.3.13-update", title: "Version 0.3.13 Update - Dawning Reality", img: "v0313banner.png", text: "New content includes:<ul><li>New Heroes (Charlotte, Nyx, Nifl, Benny, Arete, Orochi)</li><li>New Skills (AR-D Atk/Spd 4, Spd/Res Solo 4, Frenzy)</li><li>New Resplendent - Amelia</li></ul>", timestamp: "1626850876892"},
     {id: "version-0.3.12-update", title: "Version 0.3.12 Update - Summer's Dream", img: "v0312banner.png", text: "New content includes:<ul><li>New Heroes (Freyja, Norne, Caeda & Plumeria, Freyr, Ogma)</li><li>New Skills (Def/Res Catch, Dragonskin II, Laws of Sacae II, Flow Refresh, Threat. Spd/Def)</li><li>New Refines (Expiration, Blizzard, Huginn's Egg, Leiptr, Masking Axe, Stout Tomahawk)</li><li>New Resplendent - Merric", timestamp: "1625553272489"},
     {id:"version-0.3.11-update", title: "Version 0.3.11 Update - Legendary Hero Byleth", img: "v0311banner.png", text: "New content includes:<ul><li>New Hero (Byleth)</li></ul>", timestamp: "1625028966206"},
     {id:"version-0.3.10-update", title: "Version 0.3.10 Update - Summer Vibrance", img: "v0310banner.png", text: "New content includes:<ul><li>New Heroes(Hilda, Leonie, Mercedes, Caspar, Ashe)</li><li>New Skills (A/R Far Trace, B Duel Cav, Even Recovery)</li><li>New Resplendent - Celica</li></ul>", timestamp: "1624260257699"},
